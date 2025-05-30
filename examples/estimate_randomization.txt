@@ -1,0 +1,20 @@
+sage: test_5(2000)
+The algorithm is correct: True
+Among the 2000 iterations
+the number of cases where we needed to make N random choices to find v is given by:
+1 : 1992
+2 : 8
+
+sage: test_5(10000)
+The algorithm is correct: True
+Among the 10000 iterations
+the number of cases where we needed to make N random choices to find v is given by:
+1 : 9982
+2 : 18
+
+sage: test_5(100000)
+The algorithm is correct: True
+Among the 100000 iterations
+the number of cases where we needed to make N random choices to find v is given by:
+1 : 99815
+2 : 185
