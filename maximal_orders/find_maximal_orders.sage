@@ -1,6 +1,7 @@
 load("utilities/utilities.sage")
 load("maximal_orders/maximal_orders_utilities.sage")
 load("maximal_orders/minimal_ideals_from_magma.sage")
+load("maximal_orders/minimal_ideals_from_sage.sage")
 
 
 #------------------------------------------------------------------------------------------
@@ -46,7 +47,9 @@ def strictly_bigger_order(B, Zbasis_O, primes_disc=None):
             return Zbasis_Gamma
 
         # Test minimal non-zero ideals in A/Rad A
+        
         MinIdealsList = minimal_ideals_magma(C)
+
         for basis_K in MinIdealsList:
             D, pi_3 = quotient_algebra_ideal(C, basis_K)
 

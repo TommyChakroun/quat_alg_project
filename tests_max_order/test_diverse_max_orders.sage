@@ -400,3 +400,14 @@ def test_12():
     print("does L contain O : " +str(is_sub_lattice(B,Zbasis_O,Zbasis_L)))
     print("discriminant L : " + str(factor(discriminant(B,Zbasis_L))))
     print()
+
+
+def test_14(a,b,c,d):
+    A = QuaternionAlgebra(QQ, a, b)
+    B = QuaternionAlgebra(QQ, c, d)
+    Bop = opposite(B)
+    C = tensor(A, Bop)
+    Zbasis_O = left_order(C,C.basis())
+    
+    return C,Zbasis_O, max_order_containing_order(C,Zbasis_O)
+    

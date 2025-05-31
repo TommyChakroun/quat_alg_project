@@ -129,6 +129,6 @@ After loading the functions (via `load_all_files.sage` or individual modules), y
 
 
 ## Author
-
 Tommy Chakroun
+
 Developed as part of an M1 internship project (2025) at the math department of Virginia Tech supervised by Travis Morrison.

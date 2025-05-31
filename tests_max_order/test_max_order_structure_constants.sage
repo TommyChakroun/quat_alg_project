@@ -240,7 +240,7 @@ Zbasis_O_10 = left_order(A1, BA1, reduced=False)
 Zbasis_O_20 = left_order(A2, BA2, reduced=False)
 Zbasis_O_30 = left_order(A3, BA3, reduced=False)
 
-print("✓ ℤ-bases of left orders computed.\n")
+print("✓ Z-bases of left orders computed.\n")
 
 print("="*60)
 print(" Step 5: Apply LLL reduction to the Z-bases")

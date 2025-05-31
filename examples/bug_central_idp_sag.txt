@@ -1,0 +1,231 @@
+sage: Z
+Finite-dimensional algebra of degree 2 over Finite Field of size 2
+sage: Z.table()
+(
+[1 0]  [0 1]
+[0 1], [0 1]
+)
+sage: Z.category()
+Category of commutative finite dimensional semisimple algebras with basis over Finite Field of size 2
+sage: Z._orthogonal_decomposition()
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:1970, in sage.misc.cachefunc.CachedMethodCaller.__call__ (build/cythonized/sage/misc/cachefunc.c:13472)()
+   1969 try:
+-> 1970     return cache[k]
+   1971 except TypeError:  # k is not hashable
+
+KeyError: ((None,), ())
+
+During handling of the above exception, another exception occurred:
+
+TypeError                                 Traceback (most recent call last)
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:1019, in sage.misc.cachefunc.CachedFunction.__call__ (build/cythonized/sage/misc/cachefunc.c:8420)()
+   1018 try:
+-> 1019     return self.cache[k]
+   1020 except TypeError:  # k is not hashable
+
+File /usr/lib/python3.13/site-packages/sage/misc/weak_dict.pyx:707, in sage.misc.weak_dict.WeakValueDictionary.__getitem__ (build/cythonized/sage/misc/weak_dict.c:5384)()
+    706 """
+--> 707 cdef PyObject* wr = PyDict_GetItemWithError(self, k)
+    708 if wr == NULL:
+
+File /usr/lib/python3.13/site-packages/sage/sets/family.pyx:1300, in sage.sets.family.TrivialFamily.__hash__ (build/cythonized/sage/sets/family.c:15946)()
+   1299 """
+-> 1300 return hash(self._enumeration)
+   1301 
+
+TypeError: unhashable type: 'sage.algebras.finite_dimensional_algebras.finite_dimensional_algebra_element.FiniteDimensionalAlgebraElement'
+
+During handling of the above exception, another exception occurred:
+
+TypeError                                 Traceback (most recent call last)
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:573, in sage.misc.cachefunc.dict_key (build/cythonized/sage/misc/cachefunc.c:5360)()
+    572 try:
+--> 573     hash(o)
+    574 except TypeError:
+
+File /usr/lib/python3.13/site-packages/sage/sets/family.pyx:1300, in sage.sets.family.TrivialFamily.__hash__ (build/cythonized/sage/sets/family.c:15946)()
+   1299 """
+-> 1300 return hash(self._enumeration)
+   1301 
+
+TypeError: unhashable type: 'sage.algebras.finite_dimensional_algebras.finite_dimensional_algebra_element.FiniteDimensionalAlgebraElement'
+
+During handling of the above exception, another exception occurred:
+
+TypeError                                 Traceback (most recent call last)
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:613, in sage.misc.cachefunc.cache_key (build/cythonized/sage/misc/cachefunc.c:5652)()
+    612 try:
+--> 613     hash(o)
+    614 except TypeError:
+
+File /usr/lib/python3.13/site-packages/sage/sets/family.pyx:1300, in sage.sets.family.TrivialFamily.__hash__ (build/cythonized/sage/sets/family.c:15946)()
+   1299 """
+-> 1300 return hash(self._enumeration)
+   1301 
+
+TypeError: unhashable type: 'sage.algebras.finite_dimensional_algebras.finite_dimensional_algebra_element.FiniteDimensionalAlgebraElement'
+
+During handling of the above exception, another exception occurred:
+
+TypeError                                 Traceback (most recent call last)
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:613, in sage.misc.cachefunc.cache_key (build/cythonized/sage/misc/cachefunc.c:5652)()
+    612 try:
+--> 613     hash(o)
+    614 except TypeError:
+
+File /usr/lib/python3.13/site-packages/sage/sets/family.pyx:1300, in sage.sets.family.TrivialFamily.__hash__ (build/cythonized/sage/sets/family.c:15946)()
+   1299 """
+-> 1300 return hash(self._enumeration)
+   1301 
+
+TypeError: unhashable type: 'sage.algebras.finite_dimensional_algebras.finite_dimensional_algebra_element.FiniteDimensionalAlgebraElement'
+
+During handling of the above exception, another exception occurred:
+
+TypeError                                 Traceback (most recent call last)
+File /usr/lib/python3.13/site-packages/sage/structure/sage_object.pyx:436, in sage.structure.sage_object.SageObject._cache_key (build/cythonized/sage/structure/sage_object.c:5013)()
+    435 try:
+--> 436     hash(self)
+    437 except TypeError:
+
+File /usr/lib/python3.13/site-packages/sage/sets/family.pyx:1300, in sage.sets.family.TrivialFamily.__hash__ (build/cythonized/sage/sets/family.c:15946)()
+   1299 """
+-> 1300 return hash(self._enumeration)
+   1301 
+
+TypeError: unhashable type: 'sage.algebras.finite_dimensional_algebras.finite_dimensional_algebra_element.FiniteDimensionalAlgebraElement'
+
+During handling of the above exception, another exception occurred:
+
+TypeError                                 Traceback (most recent call last)
+Cell In[87], line 1
+----> 1 Z._orthogonal_decomposition()
+
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:1975, in sage.misc.cachefunc.CachedMethodCaller.__call__ (build/cythonized/sage/misc/cachefunc.c:13608)()
+   1973         return cache[k]
+   1974 except KeyError:
+-> 1975     w = self._instance_call(*args, **kwds)
+   1976     cache[k] = w
+   1977     return w
+
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:1851, in sage.misc.cachefunc.CachedMethodCaller._instance_call (build/cythonized/sage/misc/cachefunc.c:13056)()
+   1849         True
+   1850     """
+-> 1851     return self.f(self._instance, *args, **kwds)
+   1852 
+   1853 cdef fix_args_kwds(self, tuple args, dict kwds):
+
+File /usr/lib/python3.13/site-packages/sage/categories/finite_dimensional_semisimple_algebras_with_basis.py:197, in FiniteDimensionalSemisimpleAlgebrasWithBasis.Commutative.ParentMethods._orthogonal_decomposition(self, generators)
+    192 eigenspaces = phi.matrix().eigenspaces_right()
+    194 if len(eigenspaces) >= 2:
+    195     # Gotcha! Let's split the algebra according to the eigenspaces
+    196     subalgebras = [
+--> 197         self.submodule(map(self.from_vector, eigenspace.basis()),
+    198                        category=category)
+    199         for eigenvalue, eigenspace in eigenspaces]
+    201     # Decompose recursively each eigenspace
+    202     return tuple([idempotent.lift()
+    203                   for subalgebra in subalgebras
+    204                   for idempotent in subalgebra._orthogonal_decomposition()])
+
+File /usr/lib/python3.13/site-packages/sage/categories/modules_with_basis.py:914, in ModulesWithBasis.ParentMethods.submodule(self, gens, check, already_echelonized, unitriangular, support_order, category, submodule_class, *args, **opts)
+    912 if submodule_class is None:
+    913     from sage.modules.with_basis.subquotient import SubmoduleWithBasis as submodule_class
+--> 914 return submodule_class(gens, ambient=self,
+    915                        support_order=support_order,
+    916                        unitriangular=unitriangular,
+    917                        category=category, *args, **opts)
+
+File /usr/lib/python3.13/site-packages/sage/misc/classcall_metaclass.pyx:321, in sage.misc.classcall_metaclass.ClasscallMetaclass.__call__ (build/cythonized/sage/misc/classcall_metaclass.c:3191)()
+    319 """
+    320 if cls.classcall is not None:
+--> 321     return cls.classcall(cls, *args, **kwds)
+    322 else:
+    323     # Fast version of type.__call__(cls, *args, **kwds)
+
+File /usr/lib/python3.13/site-packages/sage/modules/with_basis/subquotient.py:222, in SubmoduleWithBasis.__classcall_private__(cls, basis, support_order, ambient, unitriangular, category, *args, **opts)
+    220     default_category = default_category.Filtered()
+    221 category = default_category.or_subcategory(category, join=True)
+--> 222 return super().__classcall__(cls, basis, tuple(support_order),
+    223                              ambient, unitriangular, category,
+    224                              *args, **opts)
+
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:1021, in sage.misc.cachefunc.CachedFunction.__call__ (build/cythonized/sage/misc/cachefunc.c:8459)()
+   1019         return self.cache[k]
+   1020     except TypeError:  # k is not hashable
+-> 1021         k = dict_key(k)
+   1022         return self.cache[k]
+   1023 except KeyError:
+
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:575, in sage.misc.cachefunc.dict_key (build/cythonized/sage/misc/cachefunc.c:5398)()
+    573     hash(o)
+    574 except TypeError:
+--> 575     o = (unhashable_key, cache_key_unhashable(o))
+    576 return o
+    577 
+
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:624, in sage.misc.cachefunc.cache_key_unhashable (build/cythonized/sage/misc/cachefunc.c:6098)()
+    622 """
+    623 if isinstance(o, tuple):
+--> 624     return tuple(cache_key(item) for item in o)
+    625 try:
+    626     k = o._cache_key()
+
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:624, in genexpr (build/cythonized/sage/misc/cachefunc.c:6003)()
+    622 """
+    623 if isinstance(o, tuple):
+--> 624     return tuple(cache_key(item) for item in o)
+    625 try:
+    626     k = o._cache_key()
+
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:615, in sage.misc.cachefunc.cache_key (build/cythonized/sage/misc/cachefunc.c:5690)()
+    613     hash(o)
+    614 except TypeError:
+--> 615     o = cache_key_unhashable(o)
+    616 return o
+    617 
+
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:624, in sage.misc.cachefunc.cache_key_unhashable (build/cythonized/sage/misc/cachefunc.c:6098)()
+    622 """
+    623 if isinstance(o, tuple):
+--> 624     return tuple(cache_key(item) for item in o)
+    625 try:
+    626     k = o._cache_key()
+
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:624, in genexpr (build/cythonized/sage/misc/cachefunc.c:6003)()
+    622 """
+    623 if isinstance(o, tuple):
+--> 624     return tuple(cache_key(item) for item in o)
+    625 try:
+    626     k = o._cache_key()
+
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:615, in sage.misc.cachefunc.cache_key (build/cythonized/sage/misc/cachefunc.c:5690)()
+    613     hash(o)
+    614 except TypeError:
+--> 615     o = cache_key_unhashable(o)
+    616 return o
+    617 
+
+File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:626, in sage.misc.cachefunc.cache_key_unhashable (build/cythonized/sage/misc/cachefunc.c:6157)()
+    624     return tuple(cache_key(item) for item in o)
+    625 try:
+--> 626     k = o._cache_key()
+    627 except AttributeError:
+    628     raise TypeError("unhashable type: {!r}".format(type(o).__name__))
+
+File /usr/lib/python3.13/site-packages/sage/structure/sage_object.pyx:438, in sage.structure.sage_object.SageObject._cache_key (build/cythonized/sage/structure/sage_object.c:5100)()
+    436     hash(self)
+    437 except TypeError:
+--> 438     raise TypeError("{} is not hashable and does not implement _cache_key()".format(type(self)))
+    439 else:
+    440     assert False, "_cache_key() must not be called for hashable elements"
+
+TypeError: <class 'sage.sets.family.TrivialFamily_with_category'> is not hashable and does not implement _cache_key()
+sage: 
+
+
+
+
+
