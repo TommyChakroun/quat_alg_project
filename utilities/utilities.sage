@@ -66,6 +66,19 @@ def dimension(A):
         return 4
 
 
+def change_matrix(B,basis_subspace):
+    """
+    Return the coordinate vector of x in the basis basis_subspace of a subspace of B, assume x lies in this subspace.
+    INPUT:
+        -- B -- an algebra with natural basis e1,..,en
+        -- basis_subspace -- a list of lineary independant element of B, f1,..,fr
+    OUTPUT :
+        -- mat -- with r rows and n columne such that rows[i] is the coordinates of fi in e1,..,en
+    """
+    F = B.base_ring()
+    mat = matrix(F, [vector(F, get_coefficients(b, B)) for b in basis_subspace])
+    return mat
+
 def coordinate(x, B, basis_subspace):
     """
     Return the coordinate vector of x in the basis basis_subspace of a subspace of B, assume x lies in this subspace.
@@ -73,12 +86,13 @@ def coordinate(x, B, basis_subspace):
         -- x -- an element of B
         -- B -- an algebra
         -- basis_subspace -- a list of lineary independant element of B.
+    OUTPUT :
+        -- coords -- a list of element of F such that x = sum coords[i]*basis_subspace[i]
     """
     F = B.base_ring()
-    n = len(basis_subspace)
-    mat = matrix(F, [vector(F, get_coefficients(b, B)) for b in basis_subspace]).transpose()
+    mat = change_matrix(B,basis_subspace)
     rhs = vector(F, get_coefficients(x, B))
-    return mat.solve_right(rhs)
+    return mat.solve_left(rhs)
 
 
 def evaluate(map_dict,A,B,x):

@@ -5,52 +5,58 @@ A SageMath implementation for working with quaternion algebras, including algori
 ## Project Structure
 
 ```
-quat_alg_project/
-├── README.md
-├── load_all_files.sage          # Loads all project functions
-├── core/                        # Core algorithms and functions
+.
+├── core
 │   ├── explicit_iso_matrix_ring.sage
 │   ├── explicit_iso_quat_alg.sage
 │   ├── identify_quaternion_algebra.sage
 │   ├── identify_standard_involution.sage
 │   ├── normalize_quadratic.sage
 │   └── rank_one.sage
-├── utilities/                   # Helper functions and utilities
-│   ├── algebra_type.sage
-│   ├── utilities.sage
-│   └── load_all_utilities.sage
-├── database/                    # Database generation and utilities
+├── database
 │   ├── database_utilities.sage
-│   ├── generate_iso_matrix_ring.sage
-│   ├── generate_iso_quat_alg.sage
 │   ├── db_iso_matrix_ring.txt
 │   ├── db_iso_quat_alg_from_tensor_iso.txt
-│   └── db_iso_quat_alg.txt
-├── maximal_orders/             # Maximal order computations
+│   ├── db_iso_quat_alg.txt
+│   ├── generate_iso_matrix_ring.sage
+│   ├── generate_iso_quat_alg.sage
+│   ├── max_order_M4Q.txt
+│   └── read_data_base.txt
+├── examples
+│   ├── bug_central_idp_sag.txt
+│   ├── estimate_randomization.txt
+│   ├── ex_1.txt
+│   ├── maximal_order_tensor_Bp_inf.txt
+│   ├── sage_vs_magma_may_29.txt
+│   ├── sage_vs_magma_may_31.txt
+│   ├── standard_test_M4Q_may_28.txt
+│   ├── standard_test_M4Q_may_30.txt
+│   ├── standard_test_M4Q_may_31.txt
+│   └── starting_order_M4Q.txt
+├── load_all_files.sage
+├── maximal_orders
 │   ├── find_maximal_orders.sage
 │   ├── maximal_orders_utilities.sage
 │   ├── minimal_ideals_from_magma.sage
 │   ├── minimal_ideals_from_sage.sage
 │   └── minimal_ideals_manually.sage
-├── tests/                      # Test files
+├── README.md
+├── tests
 │   ├── test_central_idempotents.sage
 │   ├── test_id_quat_alg.sage
 │   ├── test_iso_matrix_ring.sage
 │   ├── test_iso_quat_alg.sage
 │   ├── test_normalize_quadratic.sage
 │   └── test_randomization.sage
-├── tests_max_order/           # Specific tests for maximal orders
+├── tests_max_order
+│   ├── comments.pdf
 │   ├── test_diverse_max_orders.sage
-│   ├── test_max_order_in_tensor_quat_alg.sage
-│   ├── test_max_order_in_tensor_of_quat_alg.sage
-│   └── test_max_order_structure_constants.sage
-├── examples/                  # Usage examples and demonstrations
-│   ├── estimate_randomization.txt
-│   ├── ex_1.txt
-│   ├── max_order_in_tensor_quat_alg.txt
-│   ├── standard_test_M4Q.txt
-│   └── starting_order_M4Q.txt
-└── comments.pdf              # Additional documentation
+│   ├── test_given_max_order_in_quat_alg.sage
+│   ├── test_max_order_structure_constants.sage
+│   └── test_sage_vs_magma.sage
+└── utilities
+    ├── algebra_type.sage
+    └── utilities.sage
 ```
 
 ## Requirements

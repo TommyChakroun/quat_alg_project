@@ -1,0 +1,221 @@
+sage: %time test_11()
+==========================================  
+   STANDARD TEST M4(Q) WITH BASIS           
+==========================================
+
+[[   2   -2   -1    0]
+[   1    1 -1/2   -1]
+[   0  1/2  1/2    0]
+[   2  1/2    1    0], [  1   0   2 1/2]
+[  0   0   1  -1]
+[  0   2   0   0]
+[  0  -1   2   1], [ -1  -1 1/2   1]
+[  0   0  -1  -1]
+[ -1  -1   0  -1]
+[  0   1   2  -1], [ 1  2  0  1]
+[ 0  0 -1  0]
+[ 1  2  0 -2]
+[ 0 -1  0  1], [   0    1    0    0]
+[  -1    0    0    0]
+[  -2 -1/2   -1   -1]
+[   0 -1/2   -1   -2], [-1/2    0    1    2]
+[   0  1/2 -1/2    2]
+[   0    0    1    0]
+[   0    0  1/2   -2], [1/2   0   2   1]
+[  0   2   0   2]
+[  0   1   0   0]
+[  2  -1   2   0], [   0   -2    2  1/2]
+[ 1/2    1    1   -1]
+[-1/2    2    0    0]
+[   0    0    1   -1], [   1    0   -1    2]
+[   2 -1/2  1/2   -1]
+[-1/2   -1    0  1/2]
+[-1/2    0    1    0], [ 0  0  2 -2]
+[ 0  0  1  0]
+[ 0  0  0  0]
+[ 0  0  0  0], [   2    0 -1/2   -2]
+[   0    1    1    2]
+[  -1    0 -1/2   -2]
+[  -2    1    0   -1], [   0   -2  1/2    0]
+[   0    1    0 -1/2]
+[  -2   -2    0    0]
+[  -2   -1    0    1], [ 1  0  0 -1]
+[-1  0  1  0]
+[-1 -1  1  1]
+[ 0  1 -1  0], [ -2   1  -1   1]
+[  0   2  -1  -1]
+[  0  -2   0   0]
+[1/2   0   0   0], [-1/2   -1    1    1]
+[ 1/2    0    1   -1]
+[   0    0    0    1]
+[   1    0    0    0], [   0   -2 -1/2    0]
+[   0    0   -2  1/2]
+[  -1  1/2    1    2]
+[  -2    0   -1    0]]
+
+Compute left order  : 
+Done. 
+----------------------------------
+Discriminant of the left order O :
+116381293670819170360179740148735595018571697379826200261689928400239465316209470416148608377192808521130415063878407113701492870350056139498565272284245658465945885312305592441106564611232650229480599820523278559483590153799824167582236641865758630583385974636544000000000000000000000000000000
+----------------------------------
+
+==========================================
+ START COMPUTING A MAXIMAL ORDER CONTAINING O 
+==========================================
+
+
+discriminant = 2^88 * 3^90 * 5^30 * 13^30 * 438091^30
+[Timing] Discriminant computed in 0.028212308883666992 s
+[Timing] Factorization discriminant computed in 0.0008347034454345703 s
+[Info] Prime divisors of discriminant: [2, 3, 5, 13, 438091]
+[Info] Working at prime p = 2
+[Timing] Finite algebra and projection computed in 0.4305 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.1676 s
+[Timing] Zero ideal kernel computed in 0.0033 s
+[Timing] Left order computed in 0.2265 s
+[Result] Found strictly bigger order at prime 2 (zero ideal case).
+[Total Time] 0.8676 s
+
+discriminant = 2^58 * 3^90 * 5^30 * 13^30 * 438091^30
+[Timing] Discriminant computed in 0.05280280113220215 s
+[Timing] Factorization discriminant computed in 0.0004990100860595703 s
+[Info] Prime divisors of discriminant: [2, 3, 5, 13, 438091]
+[Info] Working at prime p = 2
+[Timing] Finite algebra and projection computed in 0.4345 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.1644 s
+[Timing] Zero ideal kernel computed in 0.0030 s
+[Timing] Left order computed in 0.2271 s
+[Result] Found strictly bigger order at prime 2 (zero ideal case).
+[Total Time] 0.8926 s
+
+discriminant = 2^28 * 3^90 * 5^30 * 13^30 * 438091^30
+[Timing] Discriminant computed in 0.05236363410949707 s
+[Timing] Factorization discriminant computed in 0.0005238056182861328 s
+[Info] Prime divisors of discriminant: [2, 3, 5, 13, 438091]
+[Info] Working at prime p = 2
+[Timing] Finite algebra and projection computed in 0.4404 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.1746 s
+[Timing] Zero ideal kernel computed in 0.0039 s
+[Timing] Left order computed in 0.2288 s
+[Result] Found strictly bigger order at prime 2 (zero ideal case).
+[Total Time] 0.9133 s
+
+discriminant = 2^10 * 3^90 * 5^30 * 13^30 * 438091^30
+[Timing] Discriminant computed in 0.06157660484313965 s
+[Timing] Factorization discriminant computed in 0.0004525184631347656 s
+[Info] Prime divisors of discriminant: [2, 3, 5, 13, 438091]
+[Info] Working at prime p = 2
+[Timing] Finite algebra and projection computed in 0.4304 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.1524 s
+[Timing] Zero ideal kernel computed in 0.0040 s
+[Timing] Left order computed in 0.2332 s
+[Timing] Minimal ideals list at p=2 computed in 0.0147 s
+[INFO] Number of minimal ideals : 3
+[Timing] Zero ideal kernel computed in 0.0134 s
+[Timing] Left order computed in 0.2390 s
+[Result] Found strictly bigger order at prime 2 (minimal ideal case).
+[Total Time] 1.1765 s
+
+discriminant = 2^6 * 3^90 * 5^30 * 13^30 * 438091^30
+[Timing] Discriminant computed in 0.05633378028869629 s
+[Timing] Factorization discriminant computed in 0.00048804283142089844 s
+[Info] Prime divisors of discriminant: [2, 3, 5, 13, 438091]
+[Info] Working at prime p = 2
+[Timing] Finite algebra and projection computed in 0.4201 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.1280 s
+[Timing] Zero ideal kernel computed in 0.0050 s
+[Timing] Left order computed in 0.2245 s
+[Timing] Minimal ideals list at p=2 computed in 0.0154 s
+[INFO] Number of minimal ideals : 2
+[Timing] Zero ideal kernel computed in 0.0219 s
+[Timing] Left order computed in 0.2395 s
+[Result] Found strictly bigger order at prime 2 (minimal ideal case).
+[Total Time] 1.1339 s
+
+discriminant = 3^90 * 5^30 * 13^30 * 438091^30
+[Timing] Discriminant computed in 0.05536532402038574 s
+[Timing] Factorization discriminant computed in 0.00046706199645996094 s
+[Info] Prime divisors of discriminant: [3, 5, 13, 438091]
+[Info] Working at prime p = 3
+[Timing] Finite algebra and projection computed in 0.4223 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0810 s
+[Timing] Zero ideal kernel computed in 0.0022 s
+[Timing] Left order computed in 0.2243 s
+[Result] Found strictly bigger order at prime 3 (zero ideal case).
+[Total Time] 0.7959 s
+
+discriminant = 3^60 * 5^30 * 13^30 * 438091^30
+[Timing] Discriminant computed in 0.0559539794921875 s
+[Timing] Factorization discriminant computed in 0.000522613525390625 s
+[Info] Prime divisors of discriminant: [3, 5, 13, 438091]
+[Info] Working at prime p = 3
+[Timing] Finite algebra and projection computed in 0.4231 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0779 s
+[Timing] Zero ideal kernel computed in 0.0022 s
+[Timing] Left order computed in 0.2222 s
+[Result] Found strictly bigger order at prime 3 (zero ideal case).
+[Total Time] 0.7919 s
+
+discriminant = 3^30 * 5^30 * 13^30 * 438091^30
+[Timing] Discriminant computed in 0.05804920196533203 s
+[Timing] Factorization discriminant computed in 0.00046181678771972656 s
+[Info] Prime divisors of discriminant: [3, 5, 13, 438091]
+[Info] Working at prime p = 3
+[Timing] Finite algebra and projection computed in 0.4440 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0803 s
+[Timing] Zero ideal kernel computed in 0.0021 s
+[Timing] Left order computed in 0.2258 s
+[Result] Found strictly bigger order at prime 3 (zero ideal case).
+[Total Time] 0.8205 s
+
+discriminant = 5^30 * 13^30 * 438091^30
+[Timing] Discriminant computed in 0.0552828311920166 s
+[Timing] Factorization discriminant computed in 0.00042438507080078125 s
+[Info] Prime divisors of discriminant: [5, 13, 438091]
+[Info] Working at prime p = 5
+[Timing] Finite algebra and projection computed in 0.4235 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0702 s
+[Timing] Zero ideal kernel computed in 0.0023 s
+[Timing] Left order computed in 0.3664 s
+[Result] Found strictly bigger order at prime 5 (zero ideal case).
+[Total Time] 0.9366 s
+
+discriminant = 13^30 * 438091^30
+[Timing] Discriminant computed in 0.09642148017883301 s
+[Timing] Factorization discriminant computed in 0.0006098747253417969 s
+[Info] Prime divisors of discriminant: [13, 438091]
+[Info] Working at prime p = 13
+[Timing] Finite algebra and projection computed in 0.7123 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0177 s
+[Timing] Zero ideal kernel computed in 0.0035 s
+[Timing] Left order computed in 0.3730 s
+[Result] Found strictly bigger order at prime 13 (zero ideal case).
+[Total Time] 1.2210 s
+
+discriminant = 438091^30
+[Timing] Discriminant computed in 0.09510421752929688 s
+[Timing] Factorization discriminant computed in 0.0006148815155029297 s
+[Info] Prime divisors of discriminant: [438091]
+[Info] Working at prime p = 438091
+[Timing] Finite algebra and projection computed in 0.7410 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0194 s
+[Timing] Zero ideal kernel computed in 0.0036 s
+[Timing] Left order computed in 0.3263 s
+[Result] Found strictly bigger order at prime 438091 (zero ideal case).
+[Total Time] 1.2041 s
+
+discriminant = 1
+[Timing] Discriminant computed in 0.07387542724609375 s
+[Timing] Factorization discriminant computed in 0.00015687942504882812 s
+[Info] Prime divisors of discriminant: []
+[Result] Order is already maximal.
+[Total Time] 0.0743 s
+Done.
+
+ Check dicriminant L is +-1 :
+discriminant = 1
+
+CPU times: user 12 s, sys: 109 ms, total: 12.1 s
+Wall time: 11.9 s
+sage: 

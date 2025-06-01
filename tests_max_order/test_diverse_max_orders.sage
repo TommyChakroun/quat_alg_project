@@ -244,7 +244,7 @@ def test_11():
     print(" START COMPUTING A MAXIMAL ORDER CONTAINING O ")
     print("==========================================\n")
     print()
-    Zbasis_L = max_order_containing_order(B,Zbasis_O)
+    Zbasis_L = max_order_containing_order_printers(B,Zbasis_O)
     print("Done.")
     print()
     print(" Check dicriminant L is +-1 :")
@@ -411,3 +411,4 @@ def test_14(a,b,c,d):
     
     return C,Zbasis_O, max_order_containing_order(C,Zbasis_O)
     
+

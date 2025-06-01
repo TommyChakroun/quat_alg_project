@@ -15,7 +15,7 @@ load("utilities/utilities.sage")
 # quat_alg_mixed_with_table(a,b,F,transformation = False)
 
 
-def structure_constants(A, basis_A):
+def structure_constants(A, basis_A,mat_inv = None):
     """
     INPUT: 
         -- A -- an algebra
@@ -26,12 +26,17 @@ def structure_constants(A, basis_A):
     F = A.base_ring()
     n = dimension(A)
 
+    if mat_inv == None :
+        mat_new_basis = change_matrix(A,basis_A)  # matrix of basis_A in the natural basis A.basis() of A
+        mat_inv = mat_new_basis.inverse()
+
     table = []
     for e in basis_A:
         rows = []
         for f in basis_A:
             product = f*e
-            coords = coordinate(product, A, basis_A)
+            rhs = vector(F, get_coefficients(product,A))
+            coords = rhs*mat_inv
             rows.append(coords)
         row_matrix = Matrix(F, rows)
         table.append(row_matrix)

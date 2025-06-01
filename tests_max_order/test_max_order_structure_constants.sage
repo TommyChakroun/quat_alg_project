@@ -235,10 +235,10 @@ print("="*60)
 print(" Step 4: Compute Z-basis of the left order of the canonical lattice")
 print("="*60)
 
-Zbasis_O_00 = left_order(A0, BA0, reduced=False)
-Zbasis_O_10 = left_order(A1, BA1, reduced=False)
-Zbasis_O_20 = left_order(A2, BA2, reduced=False)
-Zbasis_O_30 = left_order(A3, BA3, reduced=False)
+#Zbasis_O_00 = left_order(A0, BA0, reduced=False)
+#Zbasis_O_10 = left_order(A1, BA1, reduced=False)
+#Zbasis_O_20 = left_order(A2, BA2, reduced=False)
+#Zbasis_O_30 = left_order(A3, BA3, reduced=False)
 
 print("✓ Z-bases of left orders computed.\n")
 
@@ -246,9 +246,9 @@ print("="*60)
 print(" Step 5: Apply LLL reduction to the Z-bases")
 print("="*60)
 
-Zbasis_O_01 = lattice_LLL(A0, Zbasis_O_00)
-Zbasis_O_11 = lattice_LLL(A1, Zbasis_O_10)
-Zbasis_O_21 = lattice_LLL(A2, Zbasis_O_20)
-Zbasis_O_31 = lattice_LLL(A3, Zbasis_O_30)
+#Zbasis_O_01 = lattice_LLL(A0, Zbasis_O_00)
+#Zbasis_O_11 = lattice_LLL(A1, Zbasis_O_10)
+#Zbasis_O_21 = lattice_LLL(A2, Zbasis_O_20)
+#Zbasis_O_31 = lattice_LLL(A3, Zbasis_O_30)
 
 print("✓ LLL-reduced Z-bases computed.\n")

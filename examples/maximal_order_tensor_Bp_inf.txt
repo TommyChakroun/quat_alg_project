@@ -1,0 +1,505 @@
+sage: %time test_15(-2,-5,-8,-10)   # (-2,-5 | Q) = B_{5,infty}
+================================================================================
+STARTING test_max_order_tensor_quat_alg
+================================================================================
+
+Input A: Quaternion Algebra (-2, -5) with base ring Rational Field
+Input B: Quaternion Algebra (-8, -10) with base ring Rational Field
+Input Zbasis_O1: None
+Input Zbasis_O2: None
+
+
+Creating tensor product C = tensor(A, opposite(B))...
+C = Finite-dimensional algebra of degree 16 over Rational Field
+
+
+Getting basis of C...
+BC = Finite family {0: e0,  1: e1,  2: e2,  3: e3,  4: e4,  5: e5,  6: e6,  7: e7,  8: e8,  9: e9,  10: e10,  11: e11,  12: e12,  13: e13,  14: e14,  15: e15}
+Length of BC: 16
+
+
+================================================================================
+Zbasis_O1 is None, computing a maximal order in A...
+================================================================================
+
+Computed Zbasis_O1: [1/2 - 1/4*i - 1/4*k, 1/4*i - 1/2*j - 1/4*k, -1/4*i - 1/2*j + 1/4*k, 1/2 + 1/4*i + 1/4*k]
+
+
+================================================================================
+Zbasis_O2 is None, computing a maximal order in B...
+================================================================================
+Computed Zbasis_O2: [1/4*k, -1/8*i - 1/4*j + 1/8*k, 3/8*i - 1/4*j + 1/8*k, 1/2 - 1/4*i - 1/8*k]
+
+
+Zbasis_O1 has 4 elements
+Zbasis_O2 has 4 elements
+Expected tensor basis size: 4 × 4 = 16
+
+
+================================================================================
+Building a Z basis of O = O1⊗O2 in C
+================================================================================
+
+Zbasis_O = 
+[1/8*e3 - 1/16*e7 - 1/16*e15, -1/16*e1 - 1/8*e2 + 1/16*e3 + 1/32*e5 + 1/16*e6 - 1/32*e7 + 1/32*e13 + 1/16*e14 - 1/32*e15, 3/16*e1 - 1/8*e2 + 1/16*e3 - 3/32*e5 + 1/16*e6 - 1/32*e7 - 3/32*e13 + 1/16*e14 - 1/32*e15, 1/4*e0 - 1/8*e1 - 1/16*e3 - 1/8*e4 + 1/16*e5 + 1/32*e7 - 1/8*e12 + 1/16*e13 + 1/32*e15, 1/16*e7 - 1/8*e11 - 1/16*e15, -1/32*e5 - 1/16*e6 + 1/32*e7 + 1/16*e9 + 1/8*e10 - 1/16*e11 + 1/32*e13 + 1/16*e14 - 1/32*e15, 3/32*e5 - 1/16*e6 + 1/32*e7 - 3/16*e9 + 1/8*e10 - 1/16*e11 - 3/32*e13 + 1/16*e14 - 1/32*e15, 1/8*e4 - 1/16*e5 - 1/32*e7 - 1/4*e8 + 1/8*e9 + 1/16*e11 - 1/8*e12 + 1/16*e13 + 1/32*e15, -1/16*e7 - 1/8*e11 + 1/16*e15, 1/32*e5 + 1/16*e6 - 1/32*e7 + 1/16*e9 + 1/8*e10 - 1/16*e11 - 1/32*e13 - 1/16*e14 + 1/32*e15, -3/32*e5 + 1/16*e6 - 1/32*e7 - 3/16*e9 + 1/8*e10 - 1/16*e11 + 3/32*e13 - 1/16*e14 + 1/32*e15, -1/8*e4 + 1/16*e5 + 1/32*e7 - 1/4*e8 + 1/8*e9 + 1/16*e11 + 1/8*e12 - 1/16*e13 - 1/32*e15, 1/8*e3 + 1/16*e7 + 1/16*e15, -1/16*e1 - 1/8*e2 + 1/16*e3 - 1/32*e5 - 1/16*e6 + 1/32*e7 - 1/32*e13 - 1/16*e14 + 1/32*e15, 3/16*e1 - 1/8*e2 + 1/16*e3 + 3/32*e5 - 1/16*e6 + 1/32*e7 + 3/32*e13 - 1/16*e14 + 1/32*e15, 1/4*e0 - 1/8*e1 - 1/16*e3 + 1/8*e4 - 1/16*e5 - 1/32*e7 + 1/8*e12 - 1/16*e13 - 1/32*e15]
+
+================================================================================
+Discriminant Check :
+================================================================================
+discriminant(A, O1) = -25
+discriminant(B, O2) = -25
+discriminant(C, O) = 152587890625
+Expected discriminant relation: dO = dO1**4* dO2**4 = 152587890625
+Discriminant check: True
+
+
+================================================================================
+Computing maximal order L containing O...
+================================================================================
+discriminant = 5^16
+[Timing] Discriminant computed in 0.032097816467285156 s
+[Timing] Factorization discriminant computed in 0.00022077560424804688 s
+[Info] Prime divisors of discriminant: [5]
+[Info] Working at prime p = 5
+[Timing] Finite algebra and projection computed in 0.5897 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0217 s
+[Timing] Zero ideal kernel computed in 0.0054 s
+[Timing] Left order computed in 0.2614 s
+[Result] Found strictly bigger order at prime 5 (zero ideal case).
+[Total Time] 0.9283 s
+
+discriminant = 5^8
+[Timing] Discriminant computed in 0.03951430320739746 s
+[Timing] Factorization discriminant computed in 0.00023984909057617188 s
+[Info] Prime divisors of discriminant: [5]
+[Info] Working at prime p = 5
+[Timing] Finite algebra and projection computed in 0.6115 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0170 s
+[Timing] Zero ideal kernel computed in 0.0068 s
+[Timing] Left order computed in 0.2676 s
+[Timing] Minimal ideals list at p=5 computed in 0.0167 s
+[INFO] Number of minimal ideals : 2
+[Timing] Zero ideal kernel computed in 0.0150 s
+[Timing] Left order computed in 0.2767 s
+[Result] Found strictly bigger order at prime 5 (minimal ideal case).
+[Total Time] 1.2869 s
+
+discriminant = 1
+[Timing] Discriminant computed in 0.03841710090637207 s
+[Timing] Factorization discriminant computed in 0.00014972686767578125 s
+[Info] Prime divisors of discriminant: []
+[Result] Order is already maximal.
+[Total Time] 0.0388 s
+
+Zbasis_L = [-1/20*e11, 1/20*e15, -1/16*e7 - 1/40*e11 + 1/80*e15, 1/40*e3 + 1/32*e5 + 1/80*e6 - 1/32*e7 - 1/16*e9 - 1/40*e10 - 1/80*e11 - 1/32*e13 - 1/80*e14 + 1/160*e15, 1/40*e3 + 1/32*e5 + 1/80*e6 - 1/32*e7 + 1/16*e9 + 1/40*e10 + 1/80*e11 - 1/32*e13 - 1/80*e14 + 1/160*e15, -1/16*e1 - 1/40*e2 - 3/80*e3 + 1/32*e5 + 1/80*e6 - 1/160*e7 + 1/32*e13 + 1/80*e14 - 1/160*e15, -1/16*e1 - 1/40*e2 + 3/80*e3 - 1/32*e5 - 1/80*e6 - 1/160*e7 - 1/32*e13 - 1/80*e14 - 1/160*e15, 1/20*e3 + 1/16*e5 + 1/40*e6 + 1/40*e11 + 1/16*e13 + 1/40*e14 + 1/40*e15, -1/40*e3 + 1/20*e6 - 1/10*e8 + 1/40*e13, -1/16*e1 + 3/40*e2 + 1/80*e3 - 1/32*e5 + 3/80*e6 + 3/160*e7 + 1/40*e11 - 1/32*e13 + 3/80*e14 - 1/160*e15, -1/16*e1 + 3/40*e2 - 1/80*e3 + 1/32*e5 - 3/80*e6 + 3/160*e7 + 1/40*e11 + 1/32*e13 - 3/80*e14 - 1/160*e15, -1/32*e5 - 1/16*e6 + 1/32*e7 + 1/80*e9 + 1/40*e10 - 1/80*e11 - 1/10*e12 + 1/32*e13 - 3/80*e14 - 1/160*e15, 1/40*e3 - 1/20*e6 + 1/10*e10 + 1/40*e11 + 1/20*e14 - 1/40*e15, -1/40*e3 + 1/20*e6 + 1/10*e10 + 1/40*e11 - 1/20*e14 + 1/40*e15, 1/40*e3 + 1/8*e4 - 1/32*e5 + 1/80*e6 - 1/20*e8 - 1/80*e9 + 1/40*e10 - 1/40*e12 - 3/160*e13 - 1/80*e14, 1/4*e0 - 1/16*e1 + 1/40*e2 - 1/40*e7 + 1/20*e8 + 3/80*e9 + 1/40*e10 - 1/20*e12 - 1/80*e13 + 1/40*e14]
+Zbasis_L has 16 elements
+
+================================================================================
+Final discriminant check :
+================================================================================
+
+dGamma = 1 = 1
+
+================================================================================
+COMPLETED test_max_order_tensor_quat_alg
+================================================================================
+CPU times: user 3 s, sys: 9.33 ms, total: 3.01 s
+Wall time: 3.04 s
+sage: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+sage: %time test_15(-15,-17,-73,-80)  # (-15,-17| Q) = B_{5,infty}
+================================================================================
+STARTING test_max_order_tensor_quat_alg
+================================================================================
+
+Input A: Quaternion Algebra (-15, -17) with base ring Rational Field
+Input B: Quaternion Algebra (-73, -80) with base ring Rational Field
+Input Zbasis_O1: None
+Input Zbasis_O2: None
+
+
+Creating tensor product C = tensor(A, opposite(B))...
+C = Finite-dimensional algebra of degree 16 over Rational Field
+
+
+Getting basis of C...
+BC = Finite family {0: e0,  1: e1,  2: e2,  3: e3,  4: e4,  5: e5,  6: e6,  7: e7,  8: e8,  9: e9,  10: e10,  11: e11,  12: e12,  13: e13,  14: e14,  15: e15}
+Length of BC: 16
+
+
+================================================================================
+Zbasis_O1 is None, computing a maximal order in A...
+================================================================================
+
+Computed Zbasis_O1: [-1/17*j - 3/17*k, 1/6*i + 1/34*j - 4/51*k, 1/6*i - 9/34*j + 2/51*k, 1/2 + 3/17*j + 1/34*k]
+
+
+================================================================================
+Zbasis_O2 is None, computing a maximal order in B...
+================================================================================
+Computed Zbasis_O2: [-1/4*j, 1/4*k, 1/2 - 1/2*i + 1/8*j - 1/8*k, -1/2 - 1/2*i + 1/8*j + 1/8*k]
+
+
+Zbasis_O1 has 4 elements
+Zbasis_O2 has 4 elements
+Expected tensor basis size: 4 × 4 = 16
+
+
+================================================================================
+Building a Z basis of O = O1⊗O2 in C
+================================================================================
+
+Zbasis_O = 
+[1/68*e10 + 3/68*e14, -1/68*e11 - 3/68*e15, -1/34*e8 + 1/34*e9 - 1/136*e10 + 1/136*e11 - 3/34*e12 + 3/34*e13 - 3/136*e14 + 3/136*e15, 1/34*e8 + 1/34*e9 - 1/136*e10 - 1/136*e11 + 3/34*e12 + 3/34*e13 - 3/136*e14 - 3/136*e15, -1/24*e6 - 1/136*e10 + 1/51*e14, 1/24*e7 + 1/136*e11 - 1/51*e15, 1/12*e4 - 1/12*e5 + 1/48*e6 - 1/48*e7 + 1/68*e8 - 1/68*e9 + 1/272*e10 - 1/272*e11 - 2/51*e12 + 2/51*e13 - 1/102*e14 + 1/102*e15, -1/12*e4 - 1/12*e5 + 1/48*e6 + 1/48*e7 - 1/68*e8 - 1/68*e9 + 1/272*e10 + 1/272*e11 + 2/51*e12 + 2/51*e13 - 1/102*e14 - 1/102*e15, -1/24*e6 + 9/136*e10 - 1/102*e14, 1/24*e7 - 9/136*e11 + 1/102*e15, 1/12*e4 - 1/12*e5 + 1/48*e6 - 1/48*e7 - 9/68*e8 + 9/68*e9 - 9/272*e10 + 9/272*e11 + 1/51*e12 - 1/51*e13 + 1/204*e14 - 1/204*e15, -1/12*e4 - 1/12*e5 + 1/48*e6 + 1/48*e7 + 9/68*e8 + 9/68*e9 - 9/272*e10 - 9/272*e11 - 1/51*e12 - 1/51*e13 + 1/204*e14 + 1/204*e15, -1/8*e2 - 3/68*e10 - 1/136*e14, 1/8*e3 + 3/68*e11 + 1/136*e15, 1/4*e0 - 1/4*e1 + 1/16*e2 - 1/16*e3 + 3/34*e8 - 3/34*e9 + 3/136*e10 - 3/136*e11 + 1/68*e12 - 1/68*e13 + 1/272*e14 - 1/272*e15, -1/4*e0 - 1/4*e1 + 1/16*e2 + 1/16*e3 - 3/34*e8 - 3/34*e9 + 3/136*e10 + 3/136*e11 - 1/68*e12 - 1/68*e13 + 1/272*e14 + 1/272*e15]
+
+================================================================================
+Discriminant Check :
+================================================================================
+discriminant(A, O1) = -25
+discriminant(B, O2) = -532900
+discriminant(C, O) = 31502347339612539062500000000
+Expected discriminant relation: dO = dO1**4* dO2**4 = 31502347339612539062500000000
+Discriminant check: True
+
+
+================================================================================
+Computing maximal order L containing O...
+================================================================================
+discriminant = 2^8 * 5^16 * 73^8
+[Timing] Discriminant computed in 0.030262470245361328 s
+[Timing] Factorization discriminant computed in 0.0008244514465332031 s
+[Info] Prime divisors of discriminant: [2, 5, 73]
+[Info] Working at prime p = 2
+[Timing] Finite algebra and projection computed in 0.5730 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.2297 s
+[Timing] Zero ideal kernel computed in 0.0075 s
+[Timing] Left order computed in 0.3373 s
+[Timing] Minimal ideals list at p=2 computed in 0.0155 s
+[INFO] Number of minimal ideals : 1
+[Timing] Zero ideal kernel computed in 0.0255 s
+[Timing] Left order computed in 0.2600 s
+[Timing] All minimal ideals processed at p=2 in 0.2641 s
+[Info] Working at prime p = 5
+[Timing] Finite algebra and projection computed in 0.5698 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0996 s
+[Timing] Zero ideal kernel computed in 0.0061 s
+[Timing] Left order computed in 0.3076 s
+[Result] Found strictly bigger order at prime 5 (zero ideal case).
+[Total Time] 2.5118 s
+
+discriminant = 2^8 * 5^8 * 73^8
+[Timing] Discriminant computed in 0.037033796310424805 s
+[Timing] Factorization discriminant computed in 0.0005486011505126953 s
+[Info] Prime divisors of discriminant: [2, 5, 73]
+[Info] Working at prime p = 2
+[Timing] Finite algebra and projection computed in 0.5692 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.2394 s
+[Timing] Zero ideal kernel computed in 0.0073 s
+[Timing] Left order computed in 0.2813 s
+[Timing] Minimal ideals list at p=2 computed in 0.0176 s
+[INFO] Number of minimal ideals : 1
+[Timing] Zero ideal kernel computed in 0.0225 s
+[Timing] Left order computed in 0.2665 s
+[Timing] All minimal ideals processed at p=2 in 0.2706 s
+[Info] Working at prime p = 5
+[Timing] Finite algebra and projection computed in 0.5678 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0864 s
+[Timing] Zero ideal kernel computed in 0.0109 s
+[Timing] Left order computed in 0.2698 s
+[Timing] Minimal ideals list at p=5 computed in 0.0190 s
+[INFO] Number of minimal ideals : 2
+[Timing] Zero ideal kernel computed in 0.0166 s
+[Timing] Left order computed in 0.2804 s
+[Result] Found strictly bigger order at prime 5 (minimal ideal case).
+[Total Time] 2.7557 s
+
+discriminant = 2^8 * 73^8
+[Timing] Discriminant computed in 0.037878990173339844 s
+[Timing] Factorization discriminant computed in 0.0002586841583251953 s
+[Info] Prime divisors of discriminant: [2, 73]
+[Info] Working at prime p = 2
+[Timing] Finite algebra and projection computed in 0.5821 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.2425 s
+[Timing] Zero ideal kernel computed in 0.0073 s
+[Timing] Left order computed in 0.2812 s
+[Timing] Minimal ideals list at p=2 computed in 0.0164 s
+[INFO] Number of minimal ideals : 1
+[Timing] Zero ideal kernel computed in 0.0235 s
+[Timing] Left order computed in 0.2704 s
+[Timing] All minimal ideals processed at p=2 in 0.2744 s
+[Info] Working at prime p = 73
+[Timing] Finite algebra and projection computed in 0.5837 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0994 s
+[Timing] Zero ideal kernel computed in 0.0080 s
+[Timing] Left order computed in 0.2747 s
+[Timing] Minimal ideals list at p=73 computed in 0.0162 s
+[INFO] Number of minimal ideals : 1
+[Timing] Zero ideal kernel computed in 0.0222 s
+[Timing] Left order computed in 0.2683 s
+[Timing] All minimal ideals processed at p=73 in 0.2724 s
+[Result] Order is already maximal.
+[Total Time] 2.7975 s
+
+Zbasis_L = [1/68*e11 - 1/170*e15, 1/68*e10 - 1/170*e14, -1/120*e7 - 1/136*e11 - 7/510*e15, 1/120*e6 + 1/136*e10 + 7/510*e14, -1/60*e7 + 1/60*e15, -1/60*e6 + 1/60*e14, 1/40*e2 + 1/120*e6 - 1/136*e10 + 1/340*e11 - 11/2040*e14 + 3/340*e15, -1/40*e3 + 1/120*e6 + 1/120*e7 + 1/680*e10 - 1/136*e11 - 1/255*e14 - 11/2040*e15, 1/30*e4 + 1/30*e5 + 1/120*e6 - 1/120*e7 - 1/34*e8 + 1/34*e9 - 1/136*e10 + 1/136*e11 - 11/510*e12 - 23/510*e13 - 11/2040*e14 + 11/2040*e15, -1/20*e4 - 1/20*e5 - 1/80*e6 + 1/80*e7 - 3/68*e8 + 1/68*e9 + 1/272*e10 - 1/272*e11 + 3/170*e12 - 1/170*e13 - 1/680*e14 + 1/680*e15, -1/60*e4 + 1/20*e5 - 1/80*e6 - 1/80*e7 + 1/68*e8 - 3/68*e9 - 1/272*e10 - 1/272*e11 + 31/510*e12 + 3/170*e13 + 1/680*e14 + 1/680*e15, 1/20*e4 - 1/20*e5 + 1/80*e6 + 1/80*e7 - 3/68*e8 - 1/68*e9 + 1/272*e10 + 1/272*e11 + 3/170*e12 + 1/170*e13 - 1/680*e14 - 1/680*e15, 1/30*e4 + 1/30*e5 + 1/17*e9 - 1/136*e10 - 1/136*e11 + 1/15*e12 + 11/255*e13 + 1/340*e14 + 1/340*e15, -1/60*e4 + 1/20*e5 - 1/240*e6 - 1/240*e7 - 1/68*e8 - 1/68*e9 - 1/272*e10 - 1/272*e11 - 7/255*e12 + 9/85*e13 - 7/1020*e14 - 7/1020*e15, 1/4*e0 + 1/4*e1 + 1/80*e2 + 1/80*e3 - 1/30*e4 - 1/120*e6 - 1/34*e8 - 3/680*e10 - 1/170*e11 - 1/204*e12 + 1/20*e13 + 31/4080*e14 - 7/1360*e15, 1/4*e0 - 1/4*e1 - 1/80*e2 - 1/80*e3 - 1/30*e4 + 1/30*e5 + 1/120*e6 - 1/17*e9 - 1/340*e10 - 1/680*e11 - 1/60*e12 + 41/1020*e13 - 19/4080*e14 + 11/1360*e15]
+Zbasis_L has 16 elements
+
+================================================================================
+Final discriminant check :
+================================================================================
+
+dGamma = 206453783524884736 = 2^8 * 73^8
+The discriminant is not ±1 so A and B are not isomorphic and A⊗B^op is not isomorphic to M4(Q).
+Hence a maximal order has not necessarily discriminant 1, so it is not a problem
+
+================================================================================
+COMPLETED test_max_order_tensor_quat_alg
+================================================================================
+CPU times: user 9.34 s, sys: 26.9 ms, total: 9.37 s
+Wall time: 9.22 s
+sage: %time test_15(-15,-17,-135,-255)  # (-15,-17| Q) = B_{17,infty}
+================================================================================
+STARTING test_max_order_tensor_quat_alg
+================================================================================
+
+Input A: Quaternion Algebra (-15, -17) with base ring Rational Field
+Input B: Quaternion Algebra (-135, -255) with base ring Rational Field
+Input Zbasis_O1: None
+Input Zbasis_O2: None
+
+
+Creating tensor product C = tensor(A, opposite(B))...
+C = Finite-dimensional algebra of degree 16 over Rational Field
+
+
+Getting basis of C...
+BC = Finite family {0: e0,  1: e1,  2: e2,  3: e3,  4: e4,  5: e5,  6: e6,  7: e7,  8: e8,  9: e9,  10: e10,  11: e11,  12: e12,  13: e13,  14: e14,  15: e15}
+Length of BC: 16
+
+
+================================================================================
+Zbasis_O1 is None, computing a maximal order in A...
+================================================================================
+
+Computed Zbasis_O1: [1/6*i - 1/34*j - 4/51*k, 1/17*j - 3/17*k, -1/6*i - 9/34*j - 2/51*k, -1/2 - 2/17*j - 5/34*k]
+
+
+================================================================================
+Zbasis_O2 is None, computing a maximal order in B...
+================================================================================
+Computed Zbasis_O2: [1/45*k, -1/17*j - 2/255*k, 1/18*i - 1/51*j + 13/1530*k, -1/2 - 1/34*j - 1/255*k]
+
+
+Zbasis_O1 has 4 elements
+Zbasis_O2 has 4 elements
+Expected tensor basis size: 4 × 4 = 16
+
+
+================================================================================
+Building a Z basis of O = O1⊗O2 in C
+================================================================================
+
+Zbasis_O = 
+[1/270*e7 - 1/1530*e11 - 4/2295*e15, -1/102*e6 - 1/765*e7 + 1/578*e10 + 1/4335*e11 + 4/867*e14 + 8/13005*e15, 1/108*e5 - 1/306*e6 + 13/9180*e7 - 1/612*e9 + 1/1734*e10 - 13/52020*e11 - 2/459*e13 + 4/2601*e14 - 26/39015*e15, -1/12*e4 - 1/204*e6 - 1/1530*e7 + 1/68*e8 + 1/1156*e10 + 1/8670*e11 + 2/51*e12 + 2/867*e14 + 4/13005*e15, 1/765*e11 - 1/255*e15, -1/289*e10 - 2/4335*e11 + 3/289*e14 + 2/1445*e15, 1/306*e9 - 1/867*e10 + 13/26010*e11 - 1/102*e13 + 1/289*e14 - 13/8670*e15, -1/34*e8 - 1/578*e10 - 1/4335*e11 + 3/34*e12 + 3/578*e14 + 1/1445*e15, -1/270*e7 - 1/170*e11 - 2/2295*e15, 1/102*e6 + 1/765*e7 + 9/578*e10 + 3/1445*e11 + 2/867*e14 + 4/13005*e15, -1/108*e5 + 1/306*e6 - 13/9180*e7 - 1/68*e9 + 3/578*e10 - 13/5780*e11 - 1/459*e13 + 2/2601*e14 - 13/39015*e15, 1/12*e4 + 1/204*e6 + 1/1530*e7 + 9/68*e8 + 9/1156*e10 + 3/2890*e11 + 1/51*e12 + 1/867*e14 + 2/13005*e15, -1/90*e3 - 2/765*e11 - 1/306*e15, 1/34*e2 + 1/255*e3 + 2/289*e10 + 4/4335*e11 + 5/578*e14 + 1/867*e15, -1/36*e1 + 1/102*e2 - 13/3060*e3 - 1/153*e9 + 2/867*e10 - 13/13005*e11 - 5/612*e13 + 5/1734*e14 - 13/10404*e15, 1/4*e0 + 1/68*e2 + 1/510*e3 + 1/17*e8 + 1/289*e10 + 2/4335*e11 + 5/68*e12 + 5/1156*e14 + 1/1734*e15]
+
+================================================================================
+Discriminant Check :
+================================================================================
+discriminant(A, O1) = -25
+discriminant(B, O2) = -25
+discriminant(C, O) = 152587890625
+Expected discriminant relation: dO = dO1**4* dO2**4 = 152587890625
+Discriminant check: True
+
+
+================================================================================
+Computing maximal order L containing O...
+================================================================================
+discriminant = 5^16
+[Timing] Discriminant computed in 0.03577780723571777 s
+[Timing] Factorization discriminant computed in 0.0002911090850830078 s
+[Info] Prime divisors of discriminant: [5]
+[Info] Working at prime p = 5
+[Timing] Finite algebra and projection computed in 0.5720 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0977 s
+[Timing] Zero ideal kernel computed in 0.0079 s
+[Timing] Left order computed in 0.2980 s
+[Result] Found strictly bigger order at prime 5 (zero ideal case).
+[Total Time] 1.0274 s
+
+discriminant = 5^8
+[Timing] Discriminant computed in 0.04259371757507324 s
+[Timing] Factorization discriminant computed in 0.00031495094299316406 s
+[Info] Prime divisors of discriminant: [5]
+[Info] Working at prime p = 5
+[Timing] Finite algebra and projection computed in 0.5801 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0914 s
+[Timing] Zero ideal kernel computed in 0.0091 s
+[Timing] Left order computed in 0.4087 s
+[Timing] Minimal ideals list at p=5 computed in 0.0187 s
+[INFO] Number of minimal ideals : 2
+[Timing] Zero ideal kernel computed in 0.0174 s
+[Timing] Left order computed in 0.2743 s
+[Result] Found strictly bigger order at prime 5 (minimal ideal case).
+[Total Time] 1.4745 s
+
+discriminant = 1
+[Timing] Discriminant computed in 0.03821396827697754 s
+[Timing] Factorization discriminant computed in 0.000156402587890625 s
+[Info] Prime divisors of discriminant: []
+[Result] Order is already maximal.
+[Total Time] 0.0386 s
+
+Zbasis_L = [1/270*e7 - 1/1530*e11 - 4/2295*e15, -1/765*e11 + 1/255*e15, 1/510*e6 + 4/2295*e7 - 1/578*e10 - 1/4335*e11 + 14/4335*e14 - 41/39015*e15, -1/540*e5 + 1/1530*e6 + 11/9180*e7 + 1/612*e9 - 1/1734*e10 + 13/52020*e11 - 7/2295*e13 + 14/13005*e14 - 76/39015*e15, 1/306*e9 - 1/867*e10 - 11/5202*e11 + 1/765*e13 - 2/4335*e14 - 11/13005*e15, 1/306*e9 + 2/867*e10 + 5/5202*e11 + 1/765*e13 + 4/4335*e14 + 1/2601*e15, -1/289*e10 + 1/289*e11 - 2/1445*e14 + 2/1445*e15, 1/270*e5 - 1/765*e6 + 1/765*e7 - 1/1530*e11 - 1/270*e13 + 1/765*e14 + 1/1530*e15, -1/255*e6 + 1/4590*e7 - 1/1530*e11 + 1/255*e14 + 4/2295*e15, -1/180*e1 + 1/510*e2 + 11/3060*e3 + 1/540*e5 + 1/765*e6 + 1/1836*e7 + 1/1020*e9 - 1/1445*e10 - 49/52020*e11 + 7/9180*e13 - 31/26010*e14 - 41/31212*e15, -1/180*e1 - 1/255*e2 - 1/612*e3 + 1/765*e9 + 7/4335*e10 + 13/13005*e11 + 1/612*e13 - 4/4335*e14 - 71/52020*e15, 1/170*e2 - 1/170*e3 + 1/540*e5 + 1/765*e6 + 1/1836*e7 - 1/3060*e9 + 1/867*e10 - 77/52020*e11 - 2/2295*e13 + 29/26010*e14 - 31/15606*e15, -1/675*e7 - 1/34*e8 + 1/578*e10 - 14/13005*e11 - 1/85*e12 + 1/1445*e14 + 41/39015*e15, 1/60*e4 + 1/1020*e6 - 7/11475*e7 - 1/68*e8 - 1/1156*e10 + 41/13005*e11 + 7/255*e12 + 7/4335*e14 + 8/195075*e15, 1/30*e4 - 1/510*e6 - 23/22950*e7 - 1/1530*e11 - 1/30*e12 + 1/510*e14 - 1/675*e15, 1/4*e0 - 1/340*e2 - 2/765*e3 - 1/60*e4 - 1/1020*e6 - 1/7650*e7 - 1/68*e8 - 1/1530*e9 - 7/3468*e10 + 1/2601*e11 + 11/1020*e12 + 1/510*e13 - 31/17340*e14 + 1/43350*e15]
+Zbasis_L has 16 elements
+
+================================================================================
+Final discriminant check :
+================================================================================
+
+dGamma = 1 = 1
+
+================================================================================
+COMPLETED test_max_order_tensor_quat_alg
+================================================================================
+CPU times: user 3.69 s, sys: 16.1 ms, total: 3.7 s
+Wall time: 3.75 s
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sage: %time test_15(-19,-17,-171,-323)  # (-19,-17| Q) = B_{19,infty}
+================================================================================
+STARTING test_max_order_tensor_quat_alg
+================================================================================
+
+Input A: Quaternion Algebra (-19, -17) with base ring Rational Field
+Input B: Quaternion Algebra (-171, -323) with base ring Rational Field
+Input Zbasis_O1: None
+Input Zbasis_O2: None
+
+
+Creating tensor product C = tensor(A, opposite(B))...
+C = Finite-dimensional algebra of degree 16 over Rational Field
+
+
+Getting basis of C...
+BC = Finite family {0: e0,  1: e1,  2: e2,  3: e3,  4: e4,  5: e5,  6: e6,  7: e7,  8: e8,  9: e9,  10: e10,  11: e11,  12: e12,  13: e13,  14: e14,  15: e15}
+Length of BC: 16
+
+
+================================================================================
+Zbasis_O1 is None, computing a maximal order in A...
+================================================================================
+
+Computed Zbasis_O1: [3/17*j - 2/17*k, 4/17*j + 3/17*k, -1/2 - 2/17*j - 3/34*k, 1/2*i - 3/34*j + 1/17*k]
+
+
+================================================================================
+Zbasis_O2 is None, computing a maximal order in B...
+================================================================================
+Computed Zbasis_O2: [1/57*k, -1/17*j + 7/969*k, 1/6*i + 1/114*k, -1/2 + 1/34*j + 5/969*k]
+
+
+Zbasis_O1 has 4 elements
+Zbasis_O2 has 4 elements
+Expected tensor basis size: 4 × 4 = 16
+
+
+================================================================================
+Building a Z basis of O = O1⊗O2 in C
+================================================================================
+
+Zbasis_O = 
+[1/323*e11 - 2/969*e15, -3/289*e10 + 7/5491*e11 + 2/289*e14 - 14/16473*e15, 1/34*e9 + 1/646*e11 - 1/51*e13 - 1/969*e15, -3/34*e8 + 3/578*e10 + 5/5491*e11 + 1/17*e12 - 1/289*e14 - 10/16473*e15, 4/969*e11 + 1/323*e15, -4/289*e10 + 28/16473*e11 - 3/289*e14 + 7/5491*e15, 2/51*e9 + 2/969*e11 + 1/34*e13 + 1/646*e15, -2/17*e8 + 2/289*e10 + 20/16473*e11 - 3/34*e12 + 3/578*e14 + 5/5491*e15, -1/114*e3 - 2/969*e11 - 1/646*e15, 1/34*e2 - 7/1938*e3 + 2/289*e10 - 14/16473*e11 + 3/578*e14 - 7/10982*e15, -1/12*e1 - 1/228*e3 - 1/51*e9 - 1/969*e11 - 1/68*e13 - 1/1292*e15, 1/4*e0 - 1/68*e2 - 5/1938*e3 + 1/17*e8 - 1/289*e10 - 10/16473*e11 + 3/68*e12 - 3/1156*e14 - 5/10982*e15, 1/114*e7 - 1/646*e11 + 1/969*e15, -1/34*e6 + 7/1938*e7 + 3/578*e10 - 7/10982*e11 - 1/289*e14 + 7/16473*e15, 1/12*e5 + 1/228*e7 - 1/68*e9 - 1/1292*e11 + 1/102*e13 + 1/1938*e15, -1/4*e4 + 1/68*e6 + 5/1938*e7 + 3/68*e8 - 3/1156*e10 - 5/10982*e11 - 1/34*e12 + 1/578*e14 + 5/16473*e15]
+
+================================================================================
+Discriminant Check :
+================================================================================
+discriminant(A, O1) = -361
+discriminant(B, O2) = -361
+discriminant(C, O) = 288441413567621167681
+Expected discriminant relation: dO = dO1**4* dO2**4 = 288441413567621167681
+Discriminant check: True
+
+
+================================================================================
+Computing maximal order L containing O...
+================================================================================
+discriminant = 19^16
+[Timing] Discriminant computed in 0.03359031677246094 s
+[Timing] Factorization discriminant computed in 0.00030803680419921875 s
+[Info] Prime divisors of discriminant: [19]
+[Info] Working at prime p = 19
+[Timing] Finite algebra and projection computed in 0.5845 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.1021 s
+[Timing] Zero ideal kernel computed in 0.0066 s
+[Timing] Left order computed in 0.2983 s
+[Result] Found strictly bigger order at prime 19 (zero ideal case).
+[Total Time] 1.0418 s
+
+discriminant = 19^8
+[Timing] Discriminant computed in 0.03696465492248535 s
+[Timing] Factorization discriminant computed in 0.00023889541625976562 s
+[Info] Prime divisors of discriminant: [19]
+[Info] Working at prime p = 19
+[Timing] Finite algebra and projection computed in 0.5844 s
+[Timing] Radical and quotient A/Rad(A) computed in 0.0846 s
+[Timing] Zero ideal kernel computed in 0.0086 s
+[Timing] Left order computed in 0.2585 s
+[Timing] Minimal ideals list at p=19 computed in 0.0208 s
+[INFO] Number of minimal ideals : 2
+[Timing] Zero ideal kernel computed in 0.0182 s
+[Timing] Left order computed in 0.2699 s
+[Result] Found strictly bigger order at prime 19 (minimal ideal case).
+[Total Time] 1.3149 s
+
+discriminant = 1
+[Timing] Discriminant computed in 0.04008913040161133 s
+[Timing] Factorization discriminant computed in 0.0001685619354248047 s
+[Info] Prime divisors of discriminant: []
+[Result] Order is already maximal.
+[Total Time] 0.0406 s
+
+Zbasis_L = [-1/969*e11 + 1/323*e14, 1/323*e11 - 2/969*e15, 1/289*e10 + 9/5491*e11 + 10/5491*e14 - 1/16473*e15, -1/646*e6 - 5/1938*e7 - 1/578*e10 + 41/32946*e11 - 5/5491*e14 + 26/16473*e15, 1/646*e6 + 5/1938*e7 - 1/578*e10 + 41/32946*e11 - 5/5491*e14 + 26/16473*e15, -1/646*e2 - 5/1938*e3 + 1/1938*e9 - 1/1938*e11 + 5/1938*e13 + 1/646*e14, -1/323*e6 + 7/1938*e7 - 1/646*e11 + 1/969*e15, -1/228*e1 - 1/646*e2 + 7/3876*e3 + 1/1938*e9 + 10/5491*e10 - 1/1734*e11 - 7/3876*e13 - 1/578*e14 + 65/65892*e15, -1/228*e1 + 1/646*e2 - 7/3876*e3 - 1/1938*e9 + 10/5491*e10 - 1/1734*e11 + 7/3876*e13 - 1/578*e14 + 65/65892*e15, -1/646*e2 + 2/323*e3 + 1/1938*e9 - 1/646*e11 + 5/1938*e13 - 1/646*e14 - 1/646*e15, -1/646*e2 - 5/1938*e3 - 1/228*e5 + 1/323*e6 + 1/1292*e7 - 1/228*e9 - 1/3876*e11 - 1/646*e14 + 1/1938*e15, -1/646*e2 - 5/1938*e3 + 1/228*e5 + 1/323*e6 + 1/1292*e7 - 1/228*e9 + 1/3876*e11 + 1/646*e14 - 1/1938*e15, 1/76*e4 - 1/1292*e6 - 5/36822*e7 + 1/68*e8 - 1/1156*e10 - 5/32946*e11 + 5/646*e12 - 5/10982*e14 - 314/312987*e15, 1/76*e4 + 1/1292*e6 + 5/36822*e7 - 1/68*e8 - 1/1156*e10 - 5/32946*e11 - 5/646*e12 - 5/10982*e14 - 314/312987*e15, 1/2166*e7 - 1/1938*e11 - 1/38*e12 + 1/646*e14, 1/4*e0 - 3/1292*e2 + 1/1938*e3 - 1/228*e5 - 1/4332*e7 + 1/1292*e9 + 1/3876*e11 + 1/76*e12 - 1/1938*e13 - 1/1292*e14]
+Zbasis_L has 16 elements
+
+================================================================================
+Final discriminant check :
+================================================================================
+
+dGamma = 1 = 1
+
+================================================================================
+COMPLETED test_max_order_tensor_quat_alg
+================================================================================
+CPU times: user 3.28 s, sys: 6.62 ms, total: 3.28 s
+Wall time: 3.32 s
