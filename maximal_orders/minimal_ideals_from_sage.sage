@@ -12,6 +12,7 @@ load("utilities/utilities.sage")
 
 from sage.categories.finite_dimensional_semisimple_algebras_with_basis import FiniteDimensionalSemisimpleAlgebrasWithBasis
 
+
 def orthogonal_decomposition_perso(A, generators=None):
     if A.dimension() == 1:
         return A.basis().list()
@@ -24,8 +25,11 @@ def orthogonal_decomposition_perso(A, generators=None):
     # Searching for a good generator ...
     for gen in generators:
         # Computing the eigenspaces of the linear map x ↦ gen*x
+        print("HERE !")
         phi = A.module_morphism(on_basis=lambda i: gen * A.term(i), codomain=A)
         eigenspaces = phi.matrix().eigenspaces_right(format='galois')
+        print("EIgen sapce compute :")
+        print(eigenspaces)
 
         if len(eigenspaces) >= 2:
             # Split the algebra according to the eigenspaces

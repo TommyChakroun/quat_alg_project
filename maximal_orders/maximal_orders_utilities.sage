@@ -48,6 +48,7 @@ def Z_mod_span_by_rows(M):
     Zbasis = submod.basis()
     return [e/d for e in Zbasis]
 
+
 def intersection_Z_mod(list_mat):
     """
     INPUT:
@@ -166,6 +167,11 @@ def kernel_mod(M, d):
     return Zbasis_final
 
 
+
+
+
+
+
 ## Latices and left order 
 
 def lattice_LLL(B,Zbasis_I): 
@@ -186,6 +192,7 @@ def lattice_LLL(B,Zbasis_I):
     M = A.LLL()
     Zbasis_J = [ sum(M[i][k]*basis_B[k] for k in range(N)) for i in range(N)]
     return Zbasis_J
+
 
 def is_in_lattice(B,Zbasis_I,x):
     """
@@ -338,6 +345,12 @@ def left_order(B,Zbasis_I,reduced = True):
         
 
 
+
+
+
+
+
+
 ## Reduced trace and discriminant
 
 def reduced_trace(B,x):
@@ -389,6 +402,11 @@ def discriminant(B,Zbasis_I):
 
 
 
+
+
+
+
+
 ## Quotient of algebra and kernel of Z module map
 
 
@@ -402,12 +420,16 @@ def finite_algebra_from_order(B,Zbasis_O,p):
         -- A -- an instance of FiniteDimensional algebra representing the finite Fp-algebra A = Fp e1⊕... ⊕Fp eN with the multiplication from O
         -- pi -- a lambda function [0,..,N-1] -> A which represent pi : Z^n -> A the abelian group homomrohism O -> A : pi(i) = fi = ei in A
     """
+    mat_O_can = change_matrix(B,Zbasis_O)
+    mat_can_O = mat_O_can.inverse()
     table = []
     for e in Zbasis_O:
         rows = []
         for f in Zbasis_O:
-            coords = coordinate(e*f,B,Zbasis_O) # a priori coordinate in Q but in Z since O is an order
-            coords_mod_p = [GF(p)(a) for a in coords]
+            x = f*e
+            coords_can = vector(QQ,get_coefficients(x,B))
+            coords_O = coords_can*mat_can_O
+            coords_mod_p = [GF(p)(a) for a in coords_O]
             rows.append(coords_mod_p)
         M = Matrix(GF(p), rows)
         table.append(M)

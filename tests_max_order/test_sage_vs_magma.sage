@@ -111,7 +111,7 @@ def test_13(a, b, c, d):
     sage_start = time.time()
     
     print("• Computing maximal order using Sage...")
-    Zbasis_L_SAGE = max_order(C)
+    Zbasis_L_SAGE = max_order_parallel(C)
     
     sage_time = time.time() - sage_start
     

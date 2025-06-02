@@ -1,3 +1,5 @@
+sage: cat = Algebras(GF(2)).Commutative().FiniteDimensional().WithBasis().Semisimple()
+sage: Z = FiniteDimensionalAlgebra(GF(2),[Matrix([[1,0],[0,1]]),Matrix([[0,1],[0,1]])], category =cat)
 sage: Z
 Finite-dimensional algebra of degree 2 over Finite Field of size 2
 sage: Z.table()
@@ -100,7 +102,7 @@ TypeError: unhashable type: 'sage.algebras.finite_dimensional_algebras.finite_di
 During handling of the above exception, another exception occurred:
 
 TypeError                                 Traceback (most recent call last)
-Cell In[87], line 1
+Cell In[9], line 1
 ----> 1 Z._orthogonal_decomposition()
 
 File /usr/lib/python3.13/site-packages/sage/misc/cachefunc.pyx:1975, in sage.misc.cachefunc.CachedMethodCaller.__call__ (build/cythonized/sage/misc/cachefunc.c:13608)()
@@ -224,8 +226,5 @@ File /usr/lib/python3.13/site-packages/sage/structure/sage_object.pyx:438, in sa
 
 TypeError: <class 'sage.sets.family.TrivialFamily_with_category'> is not hashable and does not implement _cache_key()
 sage: 
-
-
-
 
 

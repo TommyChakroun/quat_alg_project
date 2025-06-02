@@ -38,7 +38,7 @@ load("tests/test_iso_quat_alg.sage")
 
 print("-Loading maximal order test scripts (except those with global constants)...")
 load("tests_max_order/test_diverse_max_orders.sage")
-load("tests_max_order/test_max_order_in_tensor_quat_alg.sage")
+load("tests_max_order/test_sage_vs_magma.sage")
 
 
 print("✓ All files loaded successfully!")

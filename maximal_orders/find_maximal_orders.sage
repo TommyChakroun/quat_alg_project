@@ -13,6 +13,10 @@ load("maximal_orders/minimal_ideals_from_sage.sage")
 import time
 
 
+
+## Strictly bigger Order
+
+
 def strictly_bigger_order_local(B, Zbasis_O, p):
     """
     INPUT :
@@ -169,6 +173,12 @@ def strictly_bigger_order_printers(B, Zbasis_O, primes_disc=None):
     return "Maximal"
 
 
+
+
+## Is maximal Order
+
+
+
 def is_maximal_order(B,Zbasis_O,primes_disc = None):
     """
     INPUT :
@@ -180,6 +190,32 @@ def is_maximal_order(B,Zbasis_O,primes_disc = None):
     """
     return strictly_bigger_order(B,Zbasis_O,primes_disc) == "Maximal"
 
+
+
+
+## Maximal Order Containing a given order
+
+
+
+
+def max_order_containing_order_loc(B,Zbasis_O,p):
+    """
+    INPUT :
+        -- B -- a central simple algebra over Q of dimension N
+        -- Zbasis_O -- a list e1,..,eN of element of B representing the lattice O := Ze1⊕... ⊕ZeN assume it is an Z-order.
+        -- p -- a prime 
+        -- prime_disc -- the list of prime factors of disc(O)
+    OUTPUT :
+        -- Zbasis_Gamma -- a list f1,..,fN of element of B representing the lattice Gamma = Zf1⊕... ⊕ZfN which is a maximal order at the prime p containing O 
+    """
+    Zbasis_max_O = Zbasis_O
+    go = True
+    while go:
+        previous = Zbasis_max_O
+        Zbasis_max_O = strictly_bigger_order_local(B,Zbasis_max_O,p)
+        if Zbasis_max_O == "Maximal loc":
+            go = False
+    return previous
 
 
 
@@ -206,6 +242,48 @@ def max_order_containing_order(B,Zbasis_O,primes_disc = None):
     return previous
 
 
+
+def max_order_containing_order_parallel(B,Zbasis_O,primes_disc = None):
+    """
+    INPUT :
+        -- B -- a central simple algebra over Q of dimension N
+        -- Zbasis_O -- a list e1,..,eN of element of B representing the lattice O := Ze1⊕... ⊕ZeN assume it is an Z-order.
+        -- prime_disc -- the list of prime factors of disc(O)
+    OUTPUT :
+        -- Zbasis_Gamma -- a list f1,..,fN of element of B representing the lattice Gamma = Zf1⊕... ⊕ZfN which is a maximal order containing O 
+    
+    ALGORITHM : 
+        For each prime p divinding disc(O) compute Op a Z order containing O which is maximal at p.
+        Then let the Z lattice L = sum Op. 
+        One can prove (it is not trivial) that L is well an order and since it contains each Op it is maximal at p.
+        So L is maximal order containing O.
+        To compute a Z-basis of L we use the inner function of SageMath to compute a Z-submodule generate by some vectors.
+    """
+    Zbasis_max_O = Zbasis_O
+    if primes_disc is None :
+        disc = discriminant(B, Zbasis_O)
+        factor_disc = factor(disc)
+        primes_disc = [p for p, _ in factor_disc]
+    go = True
+
+    list_Zbasis_max_loc = []
+    for p in primes_disc :
+        list_Zbasis_max_loc.append(max_order_containing_order_loc(B,Zbasis_O,p))
+
+    rows = []
+    for Zbasis_L in list_Zbasis_max_loc:
+        for e in Zbasis_L:
+            rows.append(get_coefficients(e,B))
+    M = Matrix(QQ,rows)
+
+    vectors = Z_mod_span_by_rows(M)
+    basis_B = B.basis()
+    N = dimension(B)
+    Zbasis_L = [ sum (x[i]*basis_B[i] for i in range(N)) for x in vectors]
+    
+    return Zbasis_L
+
+
 def max_order_containing_order_printers(B,Zbasis_O,primes_disc = None):
     """
     INPUT :
@@ -227,6 +305,10 @@ def max_order_containing_order_printers(B,Zbasis_O,primes_disc = None):
 
 
 
+
+
+## Maximal Order (start from the left order of the canonicla lattice of  B)
+
 def max_order(B):
     """
     INPUT :
@@ -239,6 +321,20 @@ def max_order(B):
     Zbasis_I = list(B.basis())
     Zbasis_O = left_order(B,Zbasis_I)
     return max_order_containing_order(B,Zbasis_O)
+
+
+def max_order_parallel(B):
+    """
+    INPUT :
+        -- B -- a central simple algebra over Q of dimension N
+    OUTPUT :
+        -- Zbasis_Gamma -- a list f1,..,fN of element of B representing the lattice Gamma = Zf1⊕... ⊕ZfN which is a maximal order of B
+
+    Rq : Start from the lattice I := Ze1⊕... ⊕ZeN where (ei) basis of B, compute the left order O of I and then compute a maximal order containing O.
+    """
+    Zbasis_I = list(B.basis())
+    Zbasis_O = left_order(B,Zbasis_I)
+    return max_order_containing_order_parallel(B,Zbasis_O)
 
 def max_order_printers(B):
     """
@@ -254,6 +350,9 @@ def max_order_printers(B):
     return max_order_containing_order_printers(B,Zbasis_O)
 
 
+
+
+## Maximal Order in A⊗Bop where A and B are quaternion algebra
 
 
 def max_order_tensor_quat_alg(A,B,Zbasis_O1=None,Zbasis_O2=None):
@@ -310,3 +409,6 @@ def max_order_tensor_quat_alg(A,B,Zbasis_O1=None,Zbasis_O2=None):
     Zbasis_Gamma = max_order_containing_order(B,Zbasis_O)
 
     return Zbasis_Gamma
+
+
+
