@@ -79,6 +79,7 @@ def change_matrix(B,basis_subspace):
     mat = matrix(F, [vector(F, get_coefficients(b, B)) for b in basis_subspace])
     return mat
 
+
 def coordinate(x, B, basis_subspace):
     """
     Return the coordinate vector of x in the basis basis_subspace of a subspace of B, assume x lies in this subspace.

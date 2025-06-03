@@ -29,6 +29,8 @@ A SageMath implementation for working with quaternion algebras, including algori
 │   ├── maximal_order_tensor_Bp_inf.txt
 │   ├── sage_vs_magma_may_29.txt
 │   ├── sage_vs_magma_may_31.txt
+│   ├── standard_test_M4Q_june_1.txt
+│   ├── standard_test_M4Q_june_2.txt
 │   ├── standard_test_M4Q_may_28.txt
 │   ├── standard_test_M4Q_may_30.txt
 │   ├── standard_test_M4Q_may_31.txt
@@ -36,7 +38,9 @@ A SageMath implementation for working with quaternion algebras, including algori
 ├── load_all_files.sage
 ├── maximal_orders
 │   ├── find_maximal_orders.sage
-│   ├── maximal_orders_utilities.sage
+│   └── maximal_orders_utilities.sage
+├── minimal_ideals
+│   ├── idempotent_to_ideals.sage
 │   ├── minimal_ideals_from_magma.sage
 │   ├── minimal_ideals_from_sage.sage
 │   └── minimal_ideals_manually.sage

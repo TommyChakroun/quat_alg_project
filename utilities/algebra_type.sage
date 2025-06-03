@@ -15,6 +15,8 @@ load("utilities/utilities.sage")
 # quat_alg_mixed_with_table(a,b,F,transformation = False)
 
 
+
+
 def structure_constants(A, basis_A,mat_inv = None):
     """
     INPUT: 

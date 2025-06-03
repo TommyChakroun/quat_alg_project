@@ -1,7 +1,8 @@
 load("utilities/utilities.sage")
 load("maximal_orders/maximal_orders_utilities.sage")
-load("maximal_orders/minimal_ideals_from_magma.sage")
-load("maximal_orders/minimal_ideals_from_sage.sage")
+load("minimal_ideals/minimal_ideals_from_magma.sage")
+load("minimal_ideals/minimal_ideals_from_sage.sage")
+load("minimal_ideals/minimal_ideals_manually.sage")
 
 
 #------------------------------------------------------------------------------------------
@@ -146,7 +147,7 @@ def strictly_bigger_order_printers(B, Zbasis_O, primes_disc=None):
 
         # Test minimal non-zero ideals in A/Rad A
         t0 = time.time()
-        MinIdealsList = minimal_ideals_magma(C)
+        MinIdealsList = minimal_ideals_perso(C)
         print(f"[Timing] Minimal ideals list at p={p} computed in {time.time() - t0:.4f} s")
         print(f"[INFO] Number of minimal ideals : {len(MinIdealsList)}")
         

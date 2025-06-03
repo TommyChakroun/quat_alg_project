@@ -1,6 +1,7 @@
 load("maximal_orders/maximal_orders_utilities.sage")
 load("utilities/algebra_type.sage")
 load("utilities/utilities.sage")
+load("minimal_ideals/idempotent_to_ideals.sage")
 
 
 #------------------------------------------------------------------------------------------
@@ -10,7 +11,9 @@ load("utilities/utilities.sage")
 #-----------------------------------------------------------------------------------------
 
 
-def central_orthogonal_idempotents_magma(A):
+## Central idempotents from Magma
+
+def central_idempotents_magma(A):
     """
     INPUT:
         - A: a finite-dimensional algebra over a finite field F_p.
@@ -60,28 +63,8 @@ def central_orthogonal_idempotents_magma(A):
     return idempotents
 
 
+
+## Minimal Ideals from Magma
+
 def minimal_ideals_magma(A):
-    basis_A = list(A.basis())
-    F = A.base_ring()
-    dim_A = dimension(A)
-
-    CentralIdempotents = central_orthogonal_idempotents_magma(A)
-    
-    MinIdealsList =  []
-    for e in CentralIdempotents :
-        SetGeneratorsIdeal = [a*e for a in basis_A]
-
-        ## Write vector of SetGeneratorsIdeal in each row of a matrix
-        rows = []
-        for x in SetGeneratorsIdeal:
-            rows.append(get_coefficients(x,A))
-        M = Matrix(F,rows)
-        ## Extract free family of SetGeneratorsIdeal
-
-        basis_Ai = []
-        independent_vectors = M.row_space().basis_matrix()
-        for v in independent_vectors:
-            basis_Ai.append(sum(v[i] * basis_A[i] for i in range(dim_A)))
-    
-        MinIdealsList.append(basis_Ai)
-    return MinIdealsList
+    return idempotents_to_ideals(A,central_idempotents_magma(A))
