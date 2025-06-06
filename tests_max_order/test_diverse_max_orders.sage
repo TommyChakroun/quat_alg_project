@@ -122,7 +122,7 @@ def test_10(n):
     print()
 
 
-def test_11():
+def test_11(parallel = False):
     random_basis = [
     Matrix(QQ, [
         [2, -2, -1, 0],
@@ -244,7 +244,7 @@ def test_11():
     print(" START COMPUTING A MAXIMAL ORDER CONTAINING O ")
     print("==========================================\n")
     print()
-    Zbasis_L = max_order_containing_order_printers(B,Zbasis_O)
+    Zbasis_L = max_order_containing_order(B,Zbasis_O,parallel=parallel,printers = True)
     print("Done.")
     print()
     print(" Check dicriminant L is +-1 :")

@@ -1,0 +1,125 @@
+Quaternion Algebra Project - Examples
+=====================================
+
+This file contains examples of SageMath sessions demonstrating the quaternion algebra project functionality.
+Make sure to load all files first with: load("load_all_files.sage").
+In these examples we use sometime some global variable from "global_variables.sage", these variable are already load with load("load_all_files.sage")
+
+
+Example 1: Basic Maximal Order Computation
+==========================================
+
+sage: A = MixedM4Q_example_1
+sage: A
+Finite-dimensional algebra of degree 16 over Rational Field
+sage: # A is secretely isomorphic to M4(Q)
+sage: # A.table() give the horrible structure constants of A
+
+sage: I = A.basis()  # the canonical lattice of A
+sage: O = left_order(A,I)
+sage: d=discriminant(A,O)
+sage: factor(d)
+2^88 * 3^90 * 5^30 * 13^30 * 438091^30
+
+sage: %time L1 = max_order(A)
+CPU times: user 12.2 s, sys: 93.4 ms, total: 12.3 s
+Wall time: 12.2 s
+
+sage: %time L2 = max_order(A,parallel = True)
+CPU times: user 14.8 s, sys: 16.5 ms, total: 14.8 s
+Wall time: 14.9 s
+
+sage: %time L3 = max_order(A,lattice_format = "hermite")
+CPU times: user 10.8 s, sys: 49.3 ms, total: 10.8 s
+Wall time: 10.6 s
+
+sage: %time L4 = max_order(A,parallel = True,lattice_format = "hermite")
+CPU times: user 15.9 s, sys: 6.86 ms, total: 15.9 s
+Wall time: 16 s
+
+sage: discriminant(A,L1),discriminant(A,L2),discriminant(A,L3),discriminant(A,L4)
+(1, 1, 1, 1)
+sage: are_equals_lattices(A,L1,L3)
+True
+sage: are_equals_lattices(A,L2,L4)
+True
+sage: are_equals_lattices(A,L1,L2)
+True
+
+sage: L1
+sage: ... an horrible Z basis of L1 which is only LLL reduced form
+
+sage: L2,L3,L4
+sage: ... the same Z basis pretty nice in hermite form 
+
+
+Rq: L2 is at the end in hermite form because the algorihtm paralle return a final result in hermite form
+    However all the lattices used during the computation of L2 = max_order(A,parallel = True) are handle in LLL reduced form.
+
+
+Example 2: Maximal Order Computation in a tensor product of quaternion algebras
+=================================================================================
+
+sage: A = QuaternionAlgebra(QQ, -1, -1)
+sage: A
+Quaternion Algebra (-1, -1) with base ring Rational Field
+
+sage: B = QuaternionAlgebra(QQ, -1, -2)
+sage: B
+Quaternion Algebra (-1, -2) with base ring Rational Field
+
+sage: C = tensor(A, opposite(B))
+sage: C
+16-dimensional algebra over Rational Field
+
+sage: %time Zbasis_L = max_order(C)  # takes a few seconds
+CPU times: user 4.28 s, sys: 70.5 ms, total: 4.35 s
+Wall time: 4.06 s
+
+sage: discriminant(C, Zbasis_L)
+1
+
+sage: is_order(C, Zbasis_L)
+True
+
+sage: len(Zbasis_L)
+16
+
+sage: Zbasis_L[0]
+1/4*e1 - 1/8*e2 + 1/8*e3 + 1/4*e5 + 1/8*e6 - 1/8*e7 + 1/4*e8 + 1/8*e10 + 1/8*e11 + 1/4*e12 - 1/8*e14 - 1/8*e15
+
+sage: Zbasis_L[1]
+-1/4*e0 - 1/4*e1 + 1/4*e7 - 1/4*e10 - 1/4*e12 + 1/4*e13
+
+
+
+
+
+Example 3: Quaternion Algebra Identification
+============================================
+
+sage: A = MatrixSpace(QQ,2)
+sage: e0,e1,e2,e3 = A.basis()
+sage: e0,e1,e2,e3
+(
+[1 0]  [0 1]  [0 0]  [0 0]
+[0 0], [0 0], [1 0], [0 1]
+)
+sage: B = finite_dimensional_algebra_format(A,[e0+e3,e1,e2,e3])
+sage: is_isomorphic_to_quaternion_algebra(B)
+True
+
+sage: quaternion_structure(B)
+(1/2*e1 + 1/2*e2, -1/2*e1 + 1/2*e2, 1/4, -1/4)
+
+sage: 1/2*e1+1/2*e2
+[  0 1/2]
+[1/2   0]
+
+sage: -1/2*e1+1/2*e2
+[   0 -1/2]
+[ 1/2    0]
+
+
+
+

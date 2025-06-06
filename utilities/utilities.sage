@@ -197,3 +197,26 @@ def matrix_in_basis(V, W, bv, bw, g):
         rows.append(coords)
     M = Matrix(F, rows).transpose()
     return M
+
+
+def minimal_polynomial(a,A):
+    """
+        -- A -- a finite dimensional algebra over a field F
+        -- a -- an element of A
+        -- basis_field -- a list of element of 
+    """
+
+    # Get basis of the algebra A
+    basis = A.basis()
+    n = len(basis)
+    F = A.base_ring()
+
+    # Multiplication by a as a matrix
+    M = Matrix(F, n)
+    for j, bj in enumerate(basis):
+        prod = a * bj
+        coeffs = get_coefficients(prod,A)
+        M.set_column(j, vector(F, coeffs))
+
+    # Minimal polynomial of the multiplication matrix
+    return M.minimal_polynomial()

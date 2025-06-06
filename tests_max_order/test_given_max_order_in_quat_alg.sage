@@ -130,7 +130,7 @@ def test_max_order_tensor_quat_alg(A,B,Zbasis_O1=None,Zbasis_O2=None):
     print("=" * 80)
     print("Computing maximal order L containing O...")
     print("=" * 80)
-    Zbasis_L = max_order_containing_order_printers(C, Zbasis_O)
+    Zbasis_L = max_order_containing_order(C, Zbasis_O,printers = True)
     print()
     print(f"Zbasis_L = {Zbasis_L}")
     print(f"Zbasis_L has {len(Zbasis_L)} elements")

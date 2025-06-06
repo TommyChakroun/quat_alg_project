@@ -25,7 +25,7 @@ def print_subsection(title, width=50):
     print(f" {title} ")
     print("-" * width)
 
-def test_13(a, b, c, d):
+def test_13(a, b, c, d,parallel = False):
     print_section("QUATERNION ALGEBRA MAXIMAL ORDER COMPUTATION")
     
     # ==================== PREPARATION ====================
@@ -101,6 +101,7 @@ def test_13(a, b, c, d):
     print(f"   Z-basis of L_MAGMA:")
     print(Zbasis_L_Magma)
     print(f"   Z-basis elements: {len(Zbasis_L_Magma)}")
+    print(f"   Is Order: {is_order(C,Zbasis_L_Magma)}")
     print(f"   Discriminant: {discriminant(C, Zbasis_L_Magma)}")
     print(f"   O ⊆ L_MAGMA: {is_sub_lattice(C, Zbasis_O, Zbasis_L_Magma)}")
     print(f"   ⏱️  MAGMA time: {format_time(magma_time)}")
@@ -111,7 +112,7 @@ def test_13(a, b, c, d):
     sage_start = time.time()
     
     print("• Computing maximal order using Sage...")
-    Zbasis_L_SAGE = max_order_parallel(C)
+    Zbasis_L_SAGE = max_order(C,parallel = parallel)
     
     sage_time = time.time() - sage_start
     
@@ -119,6 +120,7 @@ def test_13(a, b, c, d):
     print(f"   Z-basis of L_SAGE:")
     print(Zbasis_L_SAGE)
     print(f"   Z-basis elements: {len(Zbasis_L_SAGE)}")
+    print(f"   Is Order: {is_order(C,Zbasis_L_SAGE)}")
     print(f"   Discriminant: {discriminant(C, Zbasis_L_SAGE)}")
     print(f"   O ⊆ L_SAGE: {is_sub_lattice(C, Zbasis_O, Zbasis_L_SAGE)}")
     print(f"   ⏱️  SAGE time: {format_time(sage_time)}")

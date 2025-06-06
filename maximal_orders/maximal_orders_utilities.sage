@@ -180,7 +180,7 @@ def lattice_LLL(B,Zbasis_I):
         -- B -- a finite dimensional algebra over Q
         -- Zbasis_I -- a list [e1,..,eN] which is a Q-basis of B and representing the lattice I := Ze1⊕... ⊕ZeN 
     OUTPUT : 
-        -- Zbasis_J -- a list [f1,..,fN] which is a Q-basis of B and representing the lattice J := Zf1⊕... ⊕ZfN such that J = I and Zbasis_J is "simpler"
+        -- Zbasis_J -- a list [f1,..,fN] which is a Q-basis of B and representing the lattice J := Zf1⊕... ⊕ZfN such that J = I and Zbasis_J is "simpler" in LLL reduced form
     """
     basis_B = list(B.basis())
     N = dimension(B)
@@ -190,6 +190,29 @@ def lattice_LLL(B,Zbasis_I):
         rows.append(get_coefficients(e,B))
     A = Matrix(QQ,rows)
     M = A.LLL()
+    Zbasis_J = [ sum(M[i][k]*basis_B[k] for k in range(N)) for i in range(N)]
+    return Zbasis_J
+
+def lattice_hermite(B,Zbasis_I): 
+    """
+    INPUT :
+        -- B -- a finite dimensional algebra over Q
+        -- Zbasis_I -- a list [e1,..,eN] which is a Q-basis of B and representing the lattice I := Ze1⊕... ⊕ZeN 
+    OUTPUT : 
+        -- Zbasis_J -- a list [f1,..,fN] which is a Q-basis of B and representing the lattice J := Zf1⊕... ⊕ZfN such that J = I and Zbasis_J is "simpler" in hermite normal form
+    """
+    basis_B = list(B.basis())
+    N = dimension(B)
+
+    rows = []
+    for e in Zbasis_I:
+        rows.append(get_coefficients(e,B))
+    A = Matrix(QQ,rows)
+    d = lcm([a.denominator() for a in A.list()])
+    B = d*A
+    B = Matrix(ZZ,B)
+    H = B.hermite_form()
+    M = 1/d * H
     Zbasis_J = [ sum(M[i][k]*basis_B[k] for k in range(N)) for i in range(N)]
     return Zbasis_J
 
@@ -261,7 +284,7 @@ def are_equals_lattices(B,Zbasis_I,Zbasis_J):
 
 
 
-def left_order(B,Zbasis_I,reduced = True):
+def left_order(B,Zbasis_I,lattice_format = "LLL"):
     """
     INPUT :
         -- B -- a central simple algebra over Q given by structure constant of dimension N
@@ -341,7 +364,9 @@ def left_order(B,Zbasis_I,reduced = True):
 
     Zbasis_OLI = [(1/s) * sum(X[i][k] * Zbasis_I[k] for k in range(N)) for i in range(N)]
 
-    return lattice_LLL(B,Zbasis_OLI)
+    if lattice_format == "LLL":
+        return lattice_LLL(B,Zbasis_OLI)
+    return lattice_hermite(B,Zbasis_OLI)   
         
 
 
@@ -382,7 +407,7 @@ def discriminant(B,Zbasis_I):
         -- d -- in Z the discriminant of I (modulo +-1).
     """
     N = dimension(B)
-    basis_B = B.basis()
+    basis_B = list(B.basis())
     e = Zbasis_I
     trd_basis = []
     for i in range(N):

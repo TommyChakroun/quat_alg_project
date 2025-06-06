@@ -15,10 +15,10 @@ import time
 
 
 
-## Strictly bigger Order
+### --------- Main algo : strictly bigger order at a prime p  ---------- ###
 
 
-def strictly_bigger_order_local(B, Zbasis_O, p):
+def strictly_bigger_order_local(B, Zbasis_O, p,lattice_format = "LLL"):
     """
     INPUT :
         -- B -- a central simple algebra over Q of dimension N
@@ -37,9 +37,13 @@ def strictly_bigger_order_local(B, Zbasis_O, p):
 
     Zbasis_I_vect = kernel_Z_mod_map(C, phi, N)
     Zbasis_I = [sum(Zbasis_I_vect[k][i] * Zbasis_O[i] for i in range(N)) for k in range(N)]
-    Zbasis_I = lattice_LLL(B,Zbasis_I)
 
-    Zbasis_Gamma = left_order(B, Zbasis_I)
+    if lattice_format == "LLL":
+        Zbasis_I = lattice_LLL(B,Zbasis_I)
+    else :
+        Zbasis_I = lattice_hermite(B,Zbasis_I)
+
+    Zbasis_Gamma = left_order(B, Zbasis_I,lattice_format)
 
     if not are_equals_lattices(B, Zbasis_O, Zbasis_Gamma):
         return Zbasis_Gamma
@@ -57,130 +61,143 @@ def strictly_bigger_order_local(B, Zbasis_O, p):
         Zbasis_I = [sum(Zbasis_I_vect[k][i] * Zbasis_O[i] for i in range(N)) for k in range(N)]
         Zbasis_I = lattice_LLL(B,Zbasis_I)
       
-        Zbasis_Gamma = left_order(B, Zbasis_I)
+        Zbasis_Gamma = left_order(B, Zbasis_I,lattice_format)
 
         if not are_equals_lattices(B, Zbasis_O, Zbasis_Gamma):
             return Zbasis_Gamma
     return "Maximal loc"
 
-
-def strictly_bigger_order(B, Zbasis_O, primes_disc=None):
+def strictly_bigger_order_local_printers(B, Zbasis_O, p,lattice_format = "LLL"):
     """
     INPUT :
         -- B -- a central simple algebra over Q of dimension N
         -- Zbasis_O -- a list e1,..,eN of elements of B representing the lattice O := Ze1⊕...⊕ZeN; assumed to be a Z-order.
         -- primes_disc -- the list of prime factors of disc(O)
     OUTPUT :
-        -- Zbasis_Gamma -- a list f1,..,fN of elements of B representing the lattice Gamma = Zf1⊕...⊕ZfN, a strictly bigger order than O if possible; "Maximal" otherwise.
-    """
-    
-    if primes_disc is None:
-        disc = discriminant(B, Zbasis_O)
-        factor_disc = factor(disc)
-        primes_disc = [p for p, _ in factor_disc]
-
-    for p in primes_disc.copy():
-        Zbasis_Gamma = strictly_bigger_order_local(B, Zbasis_O, p)
-        if Zbasis_Gamma != "Maximal loc":
-            return Zbasis_Gamma
-        primes_disc.remove(p)
-
-    return "Maximal"
-
-
-def strictly_bigger_order_printers(B, Zbasis_O, primes_disc=None):
-    """
-    INPUT :
-        -- B -- a central simple algebra over Q of dimension N
-        -- Zbasis_O -- a list e1,..,eN of elements of B representing the lattice O := Ze1⊕...⊕ZeN; assumed to be a Z-order.
-        -- primes_disc -- the list of prime factors of disc(O)
-    OUTPUT :
-        -- Zbasis_Gamma -- a list f1,..,fN of elements of B representing the lattice Gamma = Zf1⊕...⊕ZfN, a strictly bigger order than O if possible; "Maximal" otherwise.
+        -- Zbasis_Gamma -- a list f1,..,fN of elements of B representing the lattice Gamma = Zf1⊕...⊕ZfN, a strictly bigger order than O at p if possible; "Maximal loc" otherwise.
     """
     start_total = time.time()
-    
+
+    print(f"[Info] Working at prime p = {p}")
+
     N = dimension(B)
-    start_disc = time.time()
-    disc = discriminant(B, Zbasis_O)
-    time_compute_disc = time.time() - start_disc
-
-    t0=time.time()
-    if primes_disc is None:
-        factor_disc = factor(disc)
-        primes_disc = [p for p, _ in factor_disc]
-    time_factor_disc = time.time() -t0
         
-    print("discriminant = " + str(factor(disc)))
-    print(f"[Timing] Discriminant computed in {time_compute_disc} s")
-    print(f"[Timing] Factorization discriminant computed in {time_factor_disc} s")
-    print(f"[Info] Prime divisors of discriminant: {primes_disc}")
+    t0 = time.time()
+    A, pi_1 = finite_algebra_from_order(B, Zbasis_O, p)
+    print(f"[Timing] Finite algebra and projection computed in {time.time() - t0:.4f} s")
 
-    for p in primes_disc:
-        print(f"[Info] Working at prime p = {p}")
+    t0 = time.time()
+    basis_rad_A = A.radical_basis()
+    C, pi_2 = quotient_algebra_ideal(A, basis_rad_A)
+    phi = lambda i: pi_2(pi_1(i))
+    print(f"[Timing] Radical and quotient A/Rad(A) computed in {time.time() - t0:.4f} s")
+
+    
+    t0 = time.time()
+    Zbasis_I_vect = kernel_Z_mod_map(C, phi, N)
+    Zbasis_I = [sum(Zbasis_I_vect[k][i] * Zbasis_O[i] for i in range(N)) for k in range(N)]
+    if lattice_format == "LLL":
+        Zbasis_I = lattice_LLL(B,Zbasis_I)
+    else :
+        Zbasis_I = lattice_hermite(B,Zbasis_I)
+    print(f"[Timing] Zero ideal kernel computed in {time.time() - t0:.4f} s")
+
+    t0 = time.time()
+    Zbasis_Gamma = left_order(B, Zbasis_I,lattice_format)
+    print(f"[Timing] Left order computed in {time.time() - t0:.4f} s")
+
+    if not are_equals_lattices(B, Zbasis_O, Zbasis_Gamma):
+        print(f"[Result] Found strictly bigger order at prime {p} (zero ideal case).")
+        print(f"[Total Time] {time.time() - start_total:.4f} s")
+        print()
+        return Zbasis_Gamma
+
+    # Test minimal non-zero ideals in A/Rad A
+    t0 = time.time()
+    MinIdealsList = minimal_ideals_perso(C)
+    print(f"[Timing] Minimal ideals list at p={p} computed in {time.time() - t0:.4f} s")
+    print(f"[INFO] Number of minimal ideals : {len(MinIdealsList)}")
         
+    for basis_K in MinIdealsList:
         t0 = time.time()
-        A, pi_1 = finite_algebra_from_order(B, Zbasis_O, p)
-        print(f"[Timing] Finite algebra and projection computed in {time.time() - t0:.4f} s")
+        D, pi_3 = quotient_algebra_ideal(C, basis_K)
+        psi = lambda i: pi_3(pi_2(pi_1(i)))
+        print(f"[Timing] Quotient by ideal computed in {time.time() - t0:.4f} s")
+
 
         t0 = time.time()
-        basis_rad_A = A.radical_basis()
-        C, pi_2 = quotient_algebra_ideal(A, basis_rad_A)
-        print(f"[Timing] Radical and quotient A/Rad(A) computed in {time.time() - t0:.4f} s")
-
-        t0 = time.time()
-        phi = lambda i: pi_2(pi_1(i))
-        Zbasis_I_vect = kernel_Z_mod_map(C, phi, N)
-        print(f"[Timing] Zero ideal kernel computed in {time.time() - t0:.4f} s")
-
+        Zbasis_I_vect = kernel_Z_mod_map(D, psi, N)
         Zbasis_I = [sum(Zbasis_I_vect[k][i] * Zbasis_O[i] for i in range(N)) for k in range(N)]
         Zbasis_I = lattice_LLL(B,Zbasis_I)
+        print(f"[Timing] Zero ideal kernel computed in {time.time() - t0:.4f} s")
 
         t0 = time.time()
-        Zbasis_Gamma = left_order(B, Zbasis_I)
+        Zbasis_Gamma = left_order(B, Zbasis_I,lattice_format)
         print(f"[Timing] Left order computed in {time.time() - t0:.4f} s")
 
         if not are_equals_lattices(B, Zbasis_O, Zbasis_Gamma):
-            print(f"[Result] Found strictly bigger order at prime {p} (zero ideal case).")
+            print(f"[Result] Found strictly bigger order at prime {p} (minimal ideal case).")
             print(f"[Total Time] {time.time() - start_total:.4f} s")
             print()
             return Zbasis_Gamma
 
-        # Test minimal non-zero ideals in A/Rad A
-        t0 = time.time()
-        MinIdealsList = minimal_ideals_perso(C)
-        print(f"[Timing] Minimal ideals list at p={p} computed in {time.time() - t0:.4f} s")
-        print(f"[INFO] Number of minimal ideals : {len(MinIdealsList)}")
-        
-        for basis_K in MinIdealsList:
-            t0 = time.time()
-            D, pi_3 = quotient_algebra_ideal(C, basis_K)
-            psi = lambda i: pi_3(pi_2(pi_1(i)))
-            Zbasis_I_vect = kernel_Z_mod_map(D, psi, N)
-            print(f"[Timing] Zero ideal kernel computed in {time.time() - t0:.4f} s")
-            Zbasis_I = [sum(Zbasis_I_vect[k][i] * Zbasis_O[i] for i in range(N)) for k in range(N)]
-            Zbasis_I = lattice_LLL(B,Zbasis_I)
-            t0 = time.time()
-            Zbasis_Gamma = left_order(B, Zbasis_I)
-            print(f"[Timing] Left order computed in {time.time() - t0:.4f} s")
-            if not are_equals_lattices(B, Zbasis_O, Zbasis_Gamma):
-                print(f"[Result] Found strictly bigger order at prime {p} (minimal ideal case).")
-                print(f"[Total Time] {time.time() - start_total:.4f} s")
-                print()
-                return Zbasis_Gamma
-        print(f"[Timing] All minimal ideals processed at p={p} in {time.time() - t0:.4f} s")
-
-    print(f"[Result] Order is already maximal.")
+    print(f"[Result] Order already maximal at prime {p}.")
     print(f"[Total Time] {time.time() - start_total:.4f} s")
+    return "Maximal loc"
+
+
+
+### --------- The followings algortihme are easily deduced  ---------- ###
+
+
+
+
+## Strictly bigger order global
+
+
+def strictly_bigger_order(B, Zbasis_O, primes_disc=None, printers = False,lattice_format = "LLL"):
+    """
+    INPUT :
+        -- B -- a central simple algebra over Q of dimension N
+        -- Zbasis_O -- a list e1,..,eN of elements of B representing the lattice O := Ze1⊕...⊕ZeN; assumed to be a Z-order.
+        -- primes_disc -- the list of prime factors of disc(O)
+    OUTPUT :
+        -- Zbasis_Gamma -- a list f1,..,fN of elements of B representing the lattice Gamma = Zf1⊕...⊕ZfN, a strictly bigger order than O if possible; "Maximal" otherwise.
+    """
+    
+    t0 = time.time()
+    disc = discriminant(B, Zbasis_O)
+    t1 = time.time()
+    factor_disc = factor(disc)
+    primes_disc = [p for p, _ in factor_disc]
+    t2 = time.time()
+
+    if printers :
+        print(f"[INFO] discriminant : {factor_disc}")
+        print(f"[INFO] list of primes divisor of the discriminant : {primes_disc}")
+        print(f"[TIMING] Compute discriminant : {t1 - t0:.4f} s")
+        print(f"[Timing] Factor the discriminant : {t2 - t1:.4f}s")
+
+    for p in primes_disc:
+        if printers:
+            Zbasis_Gamma = strictly_bigger_order_local_printers(B, Zbasis_O, p,lattice_format)
+        else :
+            Zbasis_Gamma = strictly_bigger_order_local(B, Zbasis_O, p,lattice_format)
+
+        if Zbasis_Gamma != "Maximal loc":
+            return Zbasis_Gamma
+
+        #primes_disc.remove(p)
+
     return "Maximal"
 
 
 
-
-## Is maximal Order
-
+## Is maximal Order global
 
 
-def is_maximal_order(B,Zbasis_O,primes_disc = None):
+
+def is_maximal_order(B,Zbasis_O,primes_disc = None,lattice_format = "LLL"):
     """
     INPUT :
         -- B -- a central simple algebra over Q of dimension N
@@ -189,17 +206,16 @@ def is_maximal_order(B,Zbasis_O,primes_disc = None):
     OUTPUT :
         -- boolean -- True if O is a maximal order, False otherwise
     """
-    return strictly_bigger_order(B,Zbasis_O,primes_disc) == "Maximal"
+    return strictly_bigger_order(B,Zbasis_O,primes_disc,lattice_format) == "Maximal"
 
 
 
 
-## Maximal Order Containing a given order
+
+## Maximal Order at a prime p containing a given order 
 
 
-
-
-def max_order_containing_order_loc(B,Zbasis_O,p):
+def max_order_containing_order_local(B,Zbasis_O,p,printers = False,lattice_format = "LLL"):
     """
     INPUT :
         -- B -- a central simple algebra over Q of dimension N
@@ -211,16 +227,33 @@ def max_order_containing_order_loc(B,Zbasis_O,p):
     """
     Zbasis_max_O = Zbasis_O
     go = True
+    if printers:
+        print()
+        print(f" --- Compute an overorder which maximal at the prime {p}... --- ")
+        print()
     while go:
         previous = Zbasis_max_O
-        Zbasis_max_O = strictly_bigger_order_local(B,Zbasis_max_O,p)
+        if printers:
+            Zbasis_max_O = strictly_bigger_order_local_printers(B,Zbasis_max_O,p,lattice_format)
+        else :
+            Zbasis_max_O = strictly_bigger_order_local(B,Zbasis_max_O,p,lattice_format)
         if Zbasis_max_O == "Maximal loc":
             go = False
+    if printers:
+        print()
+        print(f"Overorder which maximal at the prime {p} succesfully compute.")
     return previous
 
 
 
-def max_order_containing_order(B,Zbasis_O,primes_disc = None):
+
+
+
+
+## Maximal Order global containing a given order : itterative and parallel method
+
+
+def max_order_containing_order(B,Zbasis_O,primes_disc = None,parallel = False, printers = False,lattice_format = "LLL"):
     """
     INPUT :
         -- B -- a central simple algebra over Q of dimension N
@@ -229,102 +262,69 @@ def max_order_containing_order(B,Zbasis_O,primes_disc = None):
     OUTPUT :
         -- Zbasis_Gamma -- a list f1,..,fN of element of B representing the lattice Gamma = Zf1⊕... ⊕ZfN which is a maximal order containing O 
     """
-    Zbasis_max_O = Zbasis_O
-    if primes_disc is None :
-        disc = discriminant(B, Zbasis_O)
-        factor_disc = factor(disc)
-        primes_disc = [p for p, _ in factor_disc]
-    go = True
-    while go:
-        previous = Zbasis_max_O
-        Zbasis_max_O = strictly_bigger_order(B,Zbasis_max_O,primes_disc)
-        if Zbasis_max_O == "Maximal":
-            go = False
-    return previous
-
-
-
-def max_order_containing_order_parallel(B,Zbasis_O,primes_disc = None):
-    """
-    INPUT :
-        -- B -- a central simple algebra over Q of dimension N
-        -- Zbasis_O -- a list e1,..,eN of element of B representing the lattice O := Ze1⊕... ⊕ZeN assume it is an Z-order.
-        -- prime_disc -- the list of prime factors of disc(O)
-    OUTPUT :
-        -- Zbasis_Gamma -- a list f1,..,fN of element of B representing the lattice Gamma = Zf1⊕... ⊕ZfN which is a maximal order containing O 
     
-    ALGORITHM : 
-        For each prime p divinding disc(O) compute Op a Z order containing O which is maximal at p.
-        Then let the Z lattice L = sum Op. 
-        One can prove (it is not trivial) that L is well an order and since it contains each Op it is maximal at p.
-        So L is maximal order containing O.
-        To compute a Z-basis of L we use the inner function of SageMath to compute a Z-submodule generate by some vectors.
-    """
-    Zbasis_max_O = Zbasis_O
-    if primes_disc is None :
-        disc = discriminant(B, Zbasis_O)
-        factor_disc = factor(disc)
-        primes_disc = [p for p, _ in factor_disc]
-    go = True
+    disc = discriminant(B, Zbasis_O)
+    factor_disc = factor(disc)
+    primes_disc = [p for p, _ in factor_disc]
 
-    list_Zbasis_max_loc = []
-    for p in primes_disc :
-        list_Zbasis_max_loc.append(max_order_containing_order_loc(B,Zbasis_O,p))
-
-    rows = []
-    for Zbasis_L in list_Zbasis_max_loc:
-        for e in Zbasis_L:
-            rows.append(get_coefficients(e,B))
-    M = Matrix(QQ,rows)
-
-    vectors = Z_mod_span_by_rows(M)
-    basis_B = B.basis()
-    N = dimension(B)
-    Zbasis_L = [ sum (x[i]*basis_B[i] for i in range(N)) for x in vectors]
-    
-    return Zbasis_L
+    if printers:
+        print(" --- Start computing a maximal over order --- ")
+        print()
+        print(f"starting discriminant  : {disc} = {factor_disc}")
+        print()
 
 
-def max_order_containing_order_printers(B,Zbasis_O,primes_disc = None):
-    """
-    INPUT :
-        -- B -- a central simple algebra over Q of dimension N
-        -- Zbasis_O -- a list e1,..,eN of element of B representing the lattice O := Ze1⊕... ⊕ZeN assume it is an Z-order.
-        -- prime_disc -- the list of prime factors of disc(O)
-    OUTPUT :
-        -- Zbasis_Gamma -- a list f1,..,fN of element of B representing the lattice Gamma = Zf1⊕... ⊕ZfN which is a maximal order containing O 
-    """
-    Zbasis_max_O = Zbasis_O
-    go = True
-    while go:
-        previous = Zbasis_max_O
-        Zbasis_max_O = strictly_bigger_order_printers(B,Zbasis_max_O)
-        if Zbasis_max_O == "Maximal":
-            go = False
-    return previous
+    if parallel:
+        if printers:
+            print("We use the parallel algorithm.")
+            print()
+        list_Zbasis_max_loc = []
+        for p in primes_disc :
+            list_Zbasis_max_loc.append(max_order_containing_order_local(B,Zbasis_O,p,printers,lattice_format))
+
+        if printers :
+            print()
+            print(" --- Compute the sum of each locally maximal orders... ---")
+        t0 = time.time()
+        rows = []
+        for Zbasis_L in list_Zbasis_max_loc:
+            for e in Zbasis_L:
+                rows.append(get_coefficients(e,B))
+        M = Matrix(QQ,rows)
+
+        vectors = Z_mod_span_by_rows(M)
+        basis_B = B.basis()
+        N = dimension(B)
+        Zbasis_L = [ sum (x[i]*basis_B[i] for i in range(N)) for x in vectors]
+
+        if printers :
+            print(f"Sum of each locally maximal orders successfully compute in {time.time() - t0:.4f} s.")
+            print()
+        
+        return Zbasis_L
+    else :
+        if printers:
+            print("We use the iterrative algorithm.")
+            print()
+        Zbasis_max_O = Zbasis_O
+        go = True
+        while go:
+            previous = Zbasis_max_O
+            Zbasis_max_O = strictly_bigger_order(B,Zbasis_max_O,primes_disc,printers,lattice_format)
+            if Zbasis_max_O == "Maximal":
+                go = False
+        return previous
 
 
 
 
 
 
-## Maximal Order (start from the left order of the canonicla lattice of  B)
 
-def max_order(B):
-    """
-    INPUT :
-        -- B -- a central simple algebra over Q of dimension N
-    OUTPUT :
-        -- Zbasis_Gamma -- a list f1,..,fN of element of B representing the lattice Gamma = Zf1⊕... ⊕ZfN which is a maximal order of B
-
-    Rq : Start from the lattice I := Ze1⊕... ⊕ZeN where (ei) basis of B, compute the left order O of I and then compute a maximal order containing O.
-    """
-    Zbasis_I = list(B.basis())
-    Zbasis_O = left_order(B,Zbasis_I)
-    return max_order_containing_order(B,Zbasis_O)
+## Maximal Order in an algebra : start from the left order of the canonical lattice of  B
 
 
-def max_order_parallel(B):
+def max_order(B,parallel = False, printers = False,lattice_format = "LLL"):
     """
     INPUT :
         -- B -- a central simple algebra over Q of dimension N
@@ -334,21 +334,12 @@ def max_order_parallel(B):
     Rq : Start from the lattice I := Ze1⊕... ⊕ZeN where (ei) basis of B, compute the left order O of I and then compute a maximal order containing O.
     """
     Zbasis_I = list(B.basis())
-    Zbasis_O = left_order(B,Zbasis_I)
-    return max_order_containing_order_parallel(B,Zbasis_O)
+    Zbasis_O = left_order(B,Zbasis_I,lattice_format)
+    return max_order_containing_order(B,Zbasis_O,parallel=parallel,printers=printers,lattice_format=lattice_format)
 
-def max_order_printers(B):
-    """
-    INPUT :
-        -- B -- a central simple algebra over Q of dimension N
-    OUTPUT :
-        -- Zbasis_Gamma -- a list f1,..,fN of element of B representing the lattice Gamma = Zf1⊕... ⊕ZfN which is a maximal order of B
 
-    Rq : Start from the lattice I := Ze1⊕... ⊕ZeN where (ei) basis of B, compute the left order O of I and then compute a maximal order containing O.
-    """
-    Zbasis_I = list(B.basis())
-    Zbasis_O = left_order(B,Zbasis_I)
-    return max_order_containing_order_printers(B,Zbasis_O)
+
+
 
 
 
