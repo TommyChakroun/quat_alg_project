@@ -13,59 +13,6 @@ load("minimal_ideals/idempotent_to_ideals.sage")
 
 
 
-
-
-
-
-
-## Utilities to fix type issue on the original Sage code
-
-def structure_constants_subspace(A, basis_B):
-    """
-    INPUT: 
-        -- A -- an algebra
-        -- basis_B -- a list of element of A which is a basis of a subspace of B which is a subalgebra
-    OUTPUT:
-        -- table -- the table associate to basis_F
-    """
-    F = A.base_ring()
-    n = dimension(A)
-
-    mat_new_basis = change_matrix(A,basis_B)  # matrix of basis_A in the natural basis A.basis() of A
-    table = []
-    for e in basis_B:
-        rows = []
-        for f in basis_B:
-            product = f*e
-            rhs = vector(F, get_coefficients(product,A))
-            coords = mat_new_basis.solve_left(rhs)
-            rows.append(coords)
-        row_matrix = Matrix(F, rows)
-        table.append(row_matrix)
-
-    return table
-
-def subalgebra_from_subspace(A,basis_B):
-    """
-    INPUT :
-        -- A -- an algebra given by structure constants
-        -- Basis_B -- a basis of a subspace of A which is assume to be also a subalgebra
-    OUTPUT :
-        -- B -- the algebra F given by structure constant in the basis basis_B
-        -- lift -- a function from F to A to lift element
-    """
-    F = A.base_ring()
-    cat = Algebras(F).Semisimple().WithBasis().FiniteDimensional().Commutative()
-    table = structure_constants_subspace(A,basis_B)
-    B = FiniteDimensionalAlgebra(F,table, category = cat)
-    dim_B = dimension(B)
-    lift = lambda b: sum(c * v for c, v in zip(get_coefficients(b, B), basis_B))
-    return B,lift
-
-
-
-
-
 ## Correcttion of the copy of the original Sage Code
 
 def orthogonal_decomposition_sage(A, generators=None):

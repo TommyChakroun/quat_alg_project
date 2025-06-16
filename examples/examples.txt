@@ -94,8 +94,52 @@ sage: Zbasis_L[1]
 
 
 
+Example 3: Explicit isomrophism quaternion algebra
+==================================================
 
-Example 3: Quaternion Algebra Identification
+sage: A = QuaternionAlgebra(QQ,-1,-1)
+sage: B = QuaternionAlgebra(QQ,-1,-2)
+sage: C = tensor(A,opposite(B))
+sage: x=rank_one_from_zero_divisor(C)  # random algo for zero divisor for the moment, works only because the algebra C has good structure constants
+sage: isom_list = matrix_ring_iso_from_rank_one(C, x)
+sage: is_linear_iso(isom_list,C,MatrixSpace(QQ,4,4))
+True
+sage: is_algebra_homomorphism(isom_list,C,MatrixSpace(QQ,4,4))
+True
+sage: isom_dict = {(i, j): isom_list[4 * i + j] for i in range(4) for j in range(4)}
+sage: isom_list_A_to_B = quat_alg_iso_from_matrix_ring_iso(A,B,isom_dict)
+sage: isom_list_A_to_B
+{0: 1, 1: 2/3*i + 1/2*j + 1/6*k, 2: 1/3*i - 2/3*k, 3: -2/3*i + 1/2*j - 1/6*k}
+sage: is_linear_iso(isom_list_A_to_B,A,B)
+True
+sage: is_algebra_homomorphism(isom_list_A_to_B,A,B)
+True
+sage: one,I,J,K = isom_list_A_to_B.values()
+sage: I in B
+True
+sage: I
+2/3*i + 1/2*j + 1/6*k
+sage: J
+1/3*i - 2/3*k
+sage: K
+-2/3*i + 1/2*j - 1/6*k
+sage: I**2
+-1
+sage: J**2
+-1
+sage: I*J ==K
+True
+sage: I*J
+-2/3*i + 1/2*j - 1/6*k
+sage: K
+-2/3*i + 1/2*j - 1/6*k
+sage: 
+
+
+
+
+
+Example 4: Quaternion Algebra Identification
 ============================================
 
 sage: A = MatrixSpace(QQ,2)
@@ -121,5 +165,93 @@ sage: -1/2*e1+1/2*e2
 [ 1/2    0]
 
 
+
+Example 5: Formal expression of the equation e^2=e in C = (a,b|Q) ⊗ (c,d |Q)
+=============================================================================
+
+sage: R.<a,b,c, d> = PolynomialRing(QQ)
+sage: K = R.fraction_field()
+sage: A = QuaternionAlgebra(K, a,b)
+sage: B = QuaternionAlgebra(K,c,d)
+sage: C = tensor(A,opposite(B))
+sage: c = C.table()
+sage: expressions_finales = []
+....: print("Génération des expressions formelles :")
+....: 
+....: # Boucle sur k de 1 à 16 pour créer chaque expression
+....: for k in range(1, 17):
+....:     # Initialise la somme pour le k actuel
+....:     somme_k = 0
+....: 
+....:     # Boucles sur i et j pour calculer la somme(si*sj*cijk)
+....:     # C'est ici que la nature creuse est exploitée.
+....:     for i in range(1, 17):
+....:         for j in range(1, 17):
+....:             # Récupère cijk. S'il n'est pas dans le dictionnaire, sa valeur est 0.
+....:             c_val = c[j-1][i-1][k-1]
+....: 
+....:             # On ajoute le terme seulement si c_val n'est pas nul
+....:             if c_val != 0:
+....:                 # S est un tuple indexé à partir de 0, donc s_i est S[i-1]
+....:                 somme_k += S[i-1] * S[j-1] * c_val
+....: 
+....:     # Expression finale pour k : sum(si*sj*cijk) - sk
+....:     expr_k = somme_k - S[k-1]
+....:     expressions_finales.append(expr_k)
+....: 
+....:     # Afficher le résultat pour ce k
+....:     print(f"\nExpression pour k={k}:")
+....:     print(expr_k)
+....: 
+Génération des expressions formelles :
+
+Expression pour k=1:
+a*b*c*d*s16^2 - b*c*d*s12^2 - a*b*c*s14^2 - a*b*d*s15^2 - a*c*d*s8^2 + b*c*s10^2 + b*d*s11^2 - a*b*s13^2 - c*d*s4^2 + a*c*s6^2 + a*d*s7^2 + c*s2^2 + d*s3^2 + a*s5^2 + b*s9^2 + s1^2 - s1
+
+Expression pour k=2:
+-2*a*b*s13*s14 + 2*a*s5*s6 + 2*b*s10*s9 + 2*s1*s2 - s2
+
+Expression pour k=3:
+-2*a*b*s13*s15 + 2*a*s5*s7 + 2*b*s11*s9 + 2*s1*s3 - s3
+
+Expression pour k=4:
+-2*a*b*s13*s16 + 2*a*s5*s8 + 2*b*s12*s9 + 2*s1*s4 - s4
+
+Expression pour k=5:
+-2*c*d*s4*s8 + 2*c*s2*s6 + 2*d*s3*s7 + 2*s1*s5 - s5
+
+Expression pour k=6:
+2*b*d*s12*s15 - 2*b*d*s11*s16 + 2*s2*s5 + 2*s1*s6 - s6
+
+Expression pour k=7:
+-2*b*c*s12*s14 + 2*b*c*s10*s16 + 2*s3*s5 + 2*s1*s7 - s7
+
+Expression pour k=8:
+-2*b*s11*s14 + 2*b*s10*s15 + 2*s4*s5 + 2*s1*s8 - s8
+
+Expression pour k=9:
+-2*c*d*s12*s4 + 2*c*s10*s2 + 2*d*s11*s3 + 2*s1*s9 - s9
+
+Expression pour k=10:
+2*a*d*s16*s7 - 2*a*d*s15*s8 + 2*s1*s10 + 2*s2*s9 - s10
+
+Expression pour k=11:
+-2*a*c*s16*s6 + 2*a*c*s14*s8 + 2*s1*s11 + 2*s3*s9 - s11
+
+Expression pour k=12:
+-2*a*s15*s6 + 2*a*s14*s7 + 2*s1*s12 + 2*s4*s9 - s12
+
+Expression pour k=13:
+-2*c*d*s16*s4 + 2*c*s14*s2 + 2*d*s15*s3 + 2*s1*s13 - s13
+
+Expression pour k=14:
+2*d*s12*s7 - 2*d*s11*s8 + 2*s1*s14 + 2*s13*s2 - s14
+
+Expression pour k=15:
+-2*c*s12*s6 + 2*c*s10*s8 + 2*s1*s15 + 2*s13*s3 - s15
+
+Expression pour k=16:
+2*s1*s16 + 2*s13*s4 - 2*s11*s6 + 2*s10*s7 - s16
+sage: 
 
 

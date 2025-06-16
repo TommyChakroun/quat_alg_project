@@ -1,6 +1,6 @@
 load("utilities/utilities.sage")
 load("utilities/algebra_type.sage")
-load("core/rank_one.sage")
+
 
 #------------------------------------------------------------------------------------------
 #
@@ -104,5 +104,7 @@ def matrix_ring_iso_from_rank_one(A, x):
         isom_dict[i] = M
 
     return isom_dict
+
+
 
 
