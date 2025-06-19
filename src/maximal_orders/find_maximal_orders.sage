@@ -1,8 +1,6 @@
 load("utilities/utilities.sage")
-load("maximal_orders/maximal_orders_utilities.sage")
-load("minimal_ideals/minimal_ideals_from_magma.sage")
-load("minimal_ideals/minimal_ideals_from_sage.sage")
-load("minimal_ideals/minimal_ideals_manually.sage")
+load("src/maximal_orders/maximal_orders_utilities.sage")
+load("src/minimal_ideals/minimal_ideals_manually.sage")
 
 
 #------------------------------------------------------------------------------------------
@@ -50,7 +48,7 @@ def strictly_bigger_order_local(B, Zbasis_O, p,lattice_format = "LLL"):
 
     # Test minimal non-zero ideals in A/Rad A
         
-    MinIdealsList = minimal_ideals_magma(C)
+    MinIdealsList = minimal_ideals_perso(C)
 
     for basis_K in MinIdealsList:
         D, pi_3 = quotient_algebra_ideal(C, basis_K)
@@ -347,7 +345,7 @@ def max_order(B,parallel = False, printers = False,lattice_format = "LLL"):
 ## Maximal Order in A⊗Bop where A and B are quaternion algebra
 
 
-def max_order_tensor_quat_alg(A,B,Zbasis_O1=None,Zbasis_O2=None):
+def max_order_tensor_quat_alg(A,B,Zbasis_O1=None,Zbasis_O2=None,printers=False):
     """
     INPUT :
         -- A -- quaternion algebra (such that A.basis() = 1,i,j,k)
@@ -385,20 +383,21 @@ def max_order_tensor_quat_alg(A,B,Zbasis_O1=None,Zbasis_O2=None):
     BC = C.basis()
 
     if Zbasis_O1 is None:
-        Zbasis_O1 = max_order(A)
+        Zbasis_O1 = list(A.maximal_order(A).basis())  # for quaternion algebra the inner sage function maximal_order is way faster than our general function
 
     if Zbasis_O2 is None:
-        Zbasis_O2 = max_order(B)
+        Zbasis_O2 = list(B.maximal_order(B).basis())
 
     Zbasis_O = []
     for e in Zbasis_O1:
-        for f in Zbasis_O2 :
-            s = get_coefficients(e,A)
-            r = get_coefficients(f,B)
-            e_tensor_f = sum( sum (s[k]*r[l]*BC[4*k+l]) for k in range(4) for l in range(4))
+        s = get_coefficients(e, A)
+        for f in Zbasis_O2:
+            r = get_coefficients(f, B)
+            e_tensor_f = sum(sum(s[k]*r[l]*BC[4*k+l] for k in range(4)) for l in range(4))
             Zbasis_O.append(e_tensor_f)
 
-    Zbasis_Gamma = max_order_containing_order(B,Zbasis_O)
+
+    Zbasis_Gamma = max_order_containing_order(C,Zbasis_O,printers=printers)
 
     return Zbasis_Gamma
 

@@ -1,6 +1,6 @@
 load("utilities/utilities.sage")
 load("utilities/algebra_type.sage")
-load("core/normalize_quadratic.sage")
+load("src/quaternion_recognition/normalize_quadratic.sage")
 
 #------------------------------------------------------------------------------------------
 #

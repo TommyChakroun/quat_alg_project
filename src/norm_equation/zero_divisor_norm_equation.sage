@@ -1,10 +1,5 @@
 load("utilities/utilities.sage")
 load("utilities/algebra_type.sage")
-load("core/rank_one.sage")
-load("maximal_orders/maximal_orders_utilities.sage")
-load("maximal_orders/find_maximal_orders.sage")
-load("explicit_embeding_real_number/explicit_embedding.sage")
-load("core/identify_quaternion_algebra.sage")
 
 
 #------------------------------------------------------------------------------------------

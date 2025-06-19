@@ -1,9 +1,8 @@
+load("utilities/utilities.sage")
 load("utilities/algebra_type.sage")
-load("maximal_orders/maximal_orders_utilities.sage")
-load("minimal_ideals/minimal_ideals_from_sage.sage")
-load("minimal_ideals/minimal_ideals_from_magma.sage")
-load("minimal_ideals/minimal_ideals_manually.sage")
-load("tests_max_order/test_diverse_max_orders.sage")
+load("src/minimal_ideals/minimal_ideals_manually.sage")
+load("src/minimal_ideals/minimal_ideals_from_sage.sage")
+load("src/minimal_ideals/minimal_ideals_from_magma.sage")
 
 #------------------------------------------------------------------------------------------
 # DEBUGGING SAGE'S CENTRAL ORTHOGONAL IDEMPOTENTS FUNCTION

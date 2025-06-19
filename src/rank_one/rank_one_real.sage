@@ -1,11 +1,11 @@
 load("utilities/utilities.sage")
-load("minimal_ideals/minimal_ideals_manually.sage")
-load("core/explicit_iso_matrix_ring.sage")
 load("utilities/algebra_type.sage")
+load("src/isomorphism/explicit_iso_matrix_ring.sage")
+
 
 #------------------------------------------------------------------------------------------
 #
-#            EXPLICIT EMBEDING  A ->  A⊗R -> Mn(R)
+#            RANK ONE ELEMENT IN A⊗R
 #
 #------------------------------------------------------------------------------------------
 
@@ -15,6 +15,40 @@ Suppose that A is isomrophic to Mn(Q).
 Then there exist alpha in R such that if K = Q(alpha) we can compute an explicit 
 isomorphism
 """
+
+
+def approx_number_field_element(E,x, precision=1e-10):
+    """
+    Approximates a list of matrices with entries in a real number field by matrices with rational entries.
+
+    INPUT:
+        - E -- a real number field, defined as a quotient of Q[x] by an irreducible polynomial g.
+        - Zbasis_J -- a list of matrices with entries in E.
+        - precision -- a positive real number specifying the desired approximation accuracy.
+
+    OUTPUT:
+        - Zbasis_J_approx -- a list of matrices with rational entries that approximate the input matrices.
+    """
+
+    # Get the defining polynomial of the number field
+    g = E.defining_polynomial()
+
+    # Find the real roots of the polynomial g
+    real_roots = g.real_roots()
+    
+    if not real_roots:
+        raise ValueError("The defining polynomial of E has no real roots.")
+        
+    # Choose one of the real roots for the embedding
+    gamma_real = real_roots[0]
+
+    poly_rep = x.polynomial()
+            
+    # Substitute the abstract root gamma with its real numerical value
+    real_val = poly_rep(gamma_real)
+                
+    # Approximate the real number by a rational number
+    return (QQ(real_val.n(digits=int(-log(precision, 10)))))
 
 
 def real_splitting_element(A,nb_ite = 10):
@@ -144,3 +178,47 @@ def approx_lattice(E, Zbasis_J, precision=1e-10):
         Zbasis_J_approx.append(approx_vect)
 
     return Zbasis_J_approx
+
+
+def zero_divisor_real_matrix_ring(A):
+    """
+    INPUT : 
+        -- A -- a Q-algebra given by structure constant assumed to be isomorphic to Mn(Q)
+    OUTPUT :
+        -- embedding_dict -- A dictionnary with key 0,.., N-1 where N = dim_A and value matrices in Mn(E)
+                            for E some number field E = Q(gamma) representing an emmeding i : A -> Mn(E)
+                            which map the i th element of the basis of A onto the matrix embedding_dict[i]
+    """
+
+    N = dimension(A)
+    BA = list(A.basis())
+    n = int(sqrt(N))
+    H = 2*n*(n-1)
+
+    n_ite = 100
+
+    for ite in range(100):
+        t = [randint(1,H) for l in range(N)]
+        a = sum( t[i]*BA[i] for i in range(N))
+        pi = minimal_polynomial(a,A)
+        if pi.degree()==n and gcd(pi,pi.derivative())==1:
+            fact = [g for g,_ in pi.factor()]
+            for g in fact:
+                if len(g.real_roots()) >0:
+                    E = NumberField(g, 'gamma')
+                    gamma = E.gen()
+
+                    R = PolynomialRing(E, 't')
+                    t = R.gen()
+
+                    B = FiniteDimensionalAlgebra(E,A.table()) # B = A⊗E over Q
+
+                    pi_E = R(pi)
+                    Q = pi_E // (t-gamma)
+
+                    a_in_B = sum(c*b for c,b in zip(get_coefficients(a,A),B.basis()))
+                    
+                    b = Q(a_in_B)
+
+                    return B,b
+    return "Not found"

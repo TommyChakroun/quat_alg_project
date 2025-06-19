@@ -1,6 +1,6 @@
-load("maximal_orders/maximal_orders_utilities.sage")
 load("utilities/algebra_type.sage")
 load("utilities/utilities.sage")
+load("src/maximal_orders/maximal_orders_utilities.sage")
 
 
 #------------------------------------------------------------------------------------------

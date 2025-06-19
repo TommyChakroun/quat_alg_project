@@ -62,7 +62,6 @@ def finite_dimensional_algebra_format(A, basis_A,semisimple = False):
         cat = cat = AlgebrasWithBasis(F).Associative().FiniteDimensional().Semisimple()
     return  FiniteDimensionalAlgebra(F, structure_constants(A, basis_A),category =cat )
 
-## Utilities to fix type issue on the original Sage code
 
 def structure_constants_subspace(A, basis_B):
     """

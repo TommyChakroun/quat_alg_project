@@ -85,7 +85,7 @@ def matrix_ring_iso_from_rank_one(A, x):
     """
     F = A.base_ring()
     N = dimension(A)
-    n = right_rank(A, x)
+    n = right_rank(x, A)
     basis_Ax = basis_of_translated(A, x)
     basis_A = A.basis()
 

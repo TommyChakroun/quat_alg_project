@@ -1,7 +1,7 @@
 load("utilities/utilities.sage")
 load("utilities/algebra_type.sage")
-load("core/rank_one.sage")
-load("core/explicit_iso_matrix_ring.sage")
+load("src/rank_one/rank_one_MnQ.sage")
+load("src/isomorphism/explicit_iso_matrix_ring.sage")
 
 #------------------------------------------------------------------------------------------
 #
@@ -74,7 +74,7 @@ def explicit_iso_quat_alg(A,B):
     Return an explicit isomorphism between A and B.
     """
     C = tensor(A,opposite(B))
-    x = rank_one(C)
+    x = rank_one_MnQ(C)
     if x == "not found":
         return "rank one element in  A ⊗ B^op not found"
 

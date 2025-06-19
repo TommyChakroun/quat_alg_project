@@ -1,59 +1,49 @@
-# load_all_files.sage
-# Loads all functions from the quaternion algebra project
-print("Loading all quaternion algebra project files...")
+# File: load_project.sage
 
-# Load utilities first (dependencies for other modules)
-print("- Loading utilities...")
-load("utilities/algebra_type.sage")
-load("utilities/utilities.sage")
+print("============================================")
+print("---   Start loading quat_alg_project   ---")
+print("============================================")
 
-# Load core functions
-print("- Loading core algorithms...")
-load("core/explicit_iso_matrix_ring.sage")
-load("core/explicit_iso_quat_alg.sage")
-load("core/identify_quaternion_algebra.sage")
-load("core/identify_standard_involution.sage")
-load("core/normalize_quadratic.sage")
-load("core/rank_one.sage")
-
-# Load database functions
-print("- Loading database functions...")
-load("database/generate_data_base.sage")
-
-
-# Load minimal ideals function
-print("- Loading minimal ideals algorithms...")
-load("minimal_ideals/idempotent_to_ideals.sage")
-load("minimal_ideals/minimal_ideals_manually.sage")
-load("minimal_ideals/minimal_ideals_from_sage.sage")
-load("minimal_ideals/minimal_ideals_from_magma.sage")
-
-# Load maximal order functions
-print("- Loading maximal order algorithms...")
-load("maximal_orders/maximal_orders_utilities.sage")
-load("maximal_orders/find_maximal_orders.sage")
-
-print("- Loading general test scripts...")
-load("tests/test_central_idempotents.sage")
-load("tests/test_id_quat_alg.sage")
-load("tests/test_iso_matrix_ring.sage")
-load("tests/test_iso_quat_alg.sage")
-
-print("-Loading maximal order test scripts...")
-load("tests_max_order/test_diverse_max_orders.sage")
-load("tests_max_order/test_sage_vs_magma.sage")
-load("tests_max_order/test_given_max_order_in_quat_alg.sage")
-
-
-print("-Loading the global variables...")
+# --- Loading Source Code ---
+print("\n--> Loading Source Code...")
 load("global_variables.sage")
+load("utilities/utilities.sage")
+load("utilities/algebra_type.sage")
+load("src/quaternion_recognition/identify_standard_involution.sage")
+load("src/quaternion_recognition/normalize_quadratic.sage")
+load("src/quaternion_recognition/identify_quaternion_algebra.sage")
+load("src/minimal_ideals/idempotent_to_ideals.sage")
+load("src/minimal_ideals/minimal_ideals_from_sage.sage")
+load("src/minimal_ideals/minimal_ideals_manually.sage")
+load("src/minimal_ideals/minimal_ideals_from_magma.sage")
+load("src/maximal_orders/maximal_orders_utilities.sage")
+load("src/maximal_orders/find_maximal_orders.sage")
+load("src/rank_one/rank_one_MnFp.sage")
+load("src/rank_one/rank_one_MnQ.sage")
+load("src/rank_one/rank_one_real.sage")
+load("src/norm_equation/zero_divisor_norm_equation.sage")
+load("src/isomorphism/explicit_iso_matrix_ring.sage")
+load("src/isomorphism/explicit_iso_quat_alg.sage")
+
+# --- Loading Test Function Definitions ---
+print("\n--> Loading Test Functions...")
+# Isomorphism Tests
+load("tests/tests_iso/test_central_idempotents.sage")
+load("tests/tests_iso/test_id_quat_alg.sage")
+load("tests/tests_iso/test_iso_matrix_ring.sage")
+load("tests/tests_iso/test_iso_quat_alg.sage")
+load("tests/tests_iso/test_normalize_quadratic.sage")
+load("tests/tests_iso/test_randomization.sage")
+# Maximal Order Tests
+load("tests/tests_max_order/test_diverse_max_orders.sage")
+load("tests/tests_max_order/test_given_max_order_in_quat_alg.sage")
+load("tests/tests_max_order/test_sage_vs_magma.sage")
 
 
-print("✓ All files loaded successfully!")
-print("You can now use all quaternion algebra functions.")
-print("See examples in the examples/ folder.")
-print("Use list_function() to list all the functions of the project.")
-print("Use list_global_variable() to list all global variable you may use.")
+print("\n============================================")
+print("---  All project and test files loaded.  ---")
+print("---   Environment is ready to use.       ---")
+print("============================================")
 
 
 def list_function():

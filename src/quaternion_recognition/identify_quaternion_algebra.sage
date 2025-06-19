@@ -1,6 +1,6 @@
 load("utilities/utilities.sage")
 load("utilities/algebra_type.sage")
-load("core/identify_standard_involution.sage")
+load("src/quaternion_recognition/identify_standard_involution.sage")
 
 #------------------------------------------------------------------------------------------
 #

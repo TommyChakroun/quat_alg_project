@@ -1,7 +1,7 @@
-load("maximal_orders/maximal_orders_utilities.sage")
 load("utilities/algebra_type.sage")
 load("utilities/utilities.sage")
-load("minimal_ideals/idempotent_to_ideals.sage")
+load("src/maximal_orders/maximal_orders_utilities.sage")
+load("src/minimal_ideals/idempotent_to_ideals.sage")
 
 
 #------------------------------------------------------------------------------------------

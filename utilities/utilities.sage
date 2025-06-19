@@ -22,16 +22,16 @@ def get_coefficients(x, B):
     Return the coefficients of x in the natural basis of B for SageMath
     """
     # Handle QuaternionAlgebra elements
-    if hasattr(x, 'coefficient_tuple'):
-        return list(x.coefficient_tuple())
+    if hasattr(B(x), 'coefficient_tuple'):
+        return list(B(x).coefficient_tuple())
 
     # Handle FiniteDimensionalAlgebra and other modules
-    if hasattr(x, 'vector'):
-        return list(x.vector())
+    if hasattr(B(x), 'vector'):
+        return list(B(x).vector())
 
     # Handle MatrixSpace elements
-    if hasattr(x, 'list'):
-        return x.list()
+    if hasattr(B(x), 'list'):
+        return B(x).list()
 
     raise TypeError(f"Don't know how to extract coefficients from object of type " + str(x)+str(B))
 
@@ -222,7 +222,6 @@ def minimal_polynomial(a,A):
     return M.minimal_polynomial()
 
 
-
 def extract_basis_from_generators(A, generators):
     """
     Given an algebra A over QQ and a list of elements (generators),
@@ -257,3 +256,64 @@ def extract_basis_from_generators(A, generators):
         result_basis.append(a)
 
     return result_basis
+
+
+def right_rank(x,A):
+    """
+    INPUT :
+        -- A -- an algebra
+        -- x -- an element of A
+    OUTPUT :
+        -- r -- the rank of A ->A,a ->ax i.e the dimension of Ax over F
+    """
+    F = A.base_ring()
+    basis_A = list(A.basis())
+
+    rows = []
+
+    for e in basis_A:
+        y = e * x
+        coords = coordinate(y, A, basis_A)
+        rows.append(coords)
+    
+    M = Matrix(F, rows)
+    r = M.rank()
+    return r
+
+
+def solve_xax_eq_x(x,A):
+    """
+    Optimized version to solve x * a * x = x in algebra A given structure constants.
+    Assumes A is defined over QQ and has basis e_1,...,e_n.
+    """
+
+    # Basis and structure constants
+    BA = list(A.basis())
+    n = len(BA)
+    F = A.base_ring()
+    C = structure_constants(A,BA)  # table: C[j][i][k] = c_{i j k}
+
+    # lambda_i from x = sum lambda_i e_i
+    lambda_vec = vector(F, get_coefficients(x,A))
+
+    # Precompute v^(k)[s] = sum_i lambda_i * c_{i k s}
+    V = [vector(F, [
+        sum(lambda_vec[i] * C[k][i][s] for i in range(n))
+        for s in range(n)
+    ]) for k in range(n)]
+
+    # Precompute w^(t)[s] = sum_j lambda_j * c_{s j t}
+    W = [vector(F, [
+        sum(lambda_vec[j] * C[j][s][t] for j in range(n))
+        for s in range(n)
+    ]) for t in range(n)]
+
+    # Build M[t,k] = dot_product(V[k], W[t])
+    M = Matrix(F, n, n, lambda t, k: V[k].dot_product(W[t]))
+
+
+    # Solve M * mu = lambda
+    mu = M.solve_right(lambda_vec)
+
+    # Return a = sum mu_i * e_i
+    return sum(mu[i] * BA[i] for i in range(n))

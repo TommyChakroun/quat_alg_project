@@ -1,6 +1,7 @@
 load("utilities/utilities.sage")
 load("utilities/algebra_type.sage")
-load("maximal_orders/find_maximal_orders.sage")
+load("src/maximal_orders/maximal_orders_utilities.sage")
+load("src/maximal_orders/find_maximal_orders.sage")
 
 #------------------------------------------------------------------------------------------
 #
@@ -70,7 +71,7 @@ def test_max_order_tensor_quat_alg(A,B,Zbasis_O1=None,Zbasis_O2=None):
         print("Zbasis_O1 is None, computing a maximal order in A...")
         print("=" * 80)
         print()
-        Zbasis_O1 = max_order(A)
+        Zbasis_O1 = A.maximal_order().basis()
         print(f"Computed Zbasis_O1: {Zbasis_O1}")
     else:
         print(f"Using provided Zbasis_O1: {Zbasis_O1}")
@@ -81,7 +82,7 @@ def test_max_order_tensor_quat_alg(A,B,Zbasis_O1=None,Zbasis_O2=None):
         print("=" * 80)
         print("Zbasis_O2 is None, computing a maximal order in B...")
         print("=" * 80)
-        Zbasis_O2 = max_order(B)
+        Zbasis_O2 = B.maximal_order().basis()
         print(f"Computed Zbasis_O2: {Zbasis_O2}")
     else:
         print(f"Using provided Zbasis_O2: {Zbasis_O2}")

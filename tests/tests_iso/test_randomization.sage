@@ -1,6 +1,6 @@
 load("utilities/utilities.sage")
 load("utilities/algebra_type.sage")
-load("core/explicit_iso_quat_alg.sage")
+load("src/isomorphism/explicit_iso_quat_alg.sage")
 
 #------------------------------------------------------------------------------------------
 #
