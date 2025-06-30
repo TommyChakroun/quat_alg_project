@@ -345,7 +345,7 @@ def max_order(B,parallel = False, printers = False,lattice_format = "LLL"):
 ## Maximal Order in A⊗Bop where A and B are quaternion algebra
 
 
-def max_order_tensor_quat_alg(A,B,Zbasis_O1=None,Zbasis_O2=None,printers=False):
+def max_order_tensor_quat_alg(A,B,C = None,Zbasis_O1=None,Zbasis_O2=None,printers=False):
     """
     INPUT :
         -- A -- quaternion algebra (such that A.basis() = 1,i,j,k)
@@ -379,7 +379,8 @@ def max_order_tensor_quat_alg(A,B,Zbasis_O1=None,Zbasis_O2=None,printers=False):
                         = sum_k sum_l sk*rl*c_{4*k+l}
 
     """
-    C = tensor(A,opposite(B))
+    if C == None:
+        C = tensor(A,opposite(B))
     BC = C.basis()
 
     if Zbasis_O1 is None:

@@ -28,7 +28,6 @@ load("src/isomorphism/explicit_iso_quat_alg.sage")
 # --- Loading Test Function Definitions ---
 print("\n--> Loading Test Functions...")
 # Isomorphism Tests
-load("tests/tests_iso/test_central_idempotents.sage")
 load("tests/tests_iso/test_id_quat_alg.sage")
 load("tests/tests_iso/test_iso_matrix_ring.sage")
 load("tests/tests_iso/test_iso_quat_alg.sage")
@@ -38,6 +37,9 @@ load("tests/tests_iso/test_randomization.sage")
 load("tests/tests_max_order/test_diverse_max_orders.sage")
 load("tests/tests_max_order/test_given_max_order_in_quat_alg.sage")
 load("tests/tests_max_order/test_sage_vs_magma.sage")
+load("tests/tests_max_order/test_central_idempotents.sage")
+## Rank One Tests
+load("tests/test_rank_one/test_rank_one_MnZ.sage")
 
 
 print("\n============================================")

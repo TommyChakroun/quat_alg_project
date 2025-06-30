@@ -129,3 +129,7 @@ def structure_constants_from_new_basis(new_basis):
 MixedM4Q_example_1 = FiniteDimensionalAlgebra(QQ,structure_constants_from_new_basis(RandomBasisM4Q_example_1))
 MixedM4Q_example_2 = FiniteDimensionalAlgebra(QQ,structure_constants_from_new_basis(RandomBasisM4Q_example_2))
 MixedM4Q_example_3 = FiniteDimensionalAlgebra(QQ,structure_constants_from_new_basis(RandomBasisM4Q_example_3))
+
+
+
+

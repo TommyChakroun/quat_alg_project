@@ -1,0 +1,149 @@
+sage: A = QuaternionAlgebra(QQ,-2156,-3111)
+sage: A.ramified_places()
+([11, 17, 61],
+ [Ring morphism:
+    From: Rational Field
+    To:   Real Field with 53 bits of precision
+    Defn: 1 |--> 1.00000000000000])
+sage: B = QuaternionAlgebra(QQ, [11,17,61],[1/2])
+sage: B
+Quaternion Algebra (-11, -1037) with base ring Rational Field
+sage: A.is_isomorphic(B)
+True
+sage: A
+Quaternion Algebra (-2156, -3111) with base ring Rational Field
+sage: 
+sage: A
+Quaternion Algebra (-2156, -3111) with base ring Rational Field
+sage: B
+Quaternion Algebra (-11, -1037) with base ring Rational Field
+sage: test_19(-2156,-3111,-11,-1037,3,6,nb_tries = 1000)
+
+========================================
+EXPLANATION
+========================================
+
+We consider two quaternion algebras over Q:
+A = (-2156, -3111 | Q),   B = (-11, -1037 | Q)
+We are going to search for an explicit isomorphism A -> B.
+
+Basic invariants:
+ - Ramified primes of A: [11, 17, 61]
+ - Ramified primes of B: [11, 17, 61]
+ - Are A and B isomorphic? True
+
+========================================
+STEP 1 - Compute maximal order in A
+========================================
+
+We compute a Z-basis of a maximal order in A.
+Done.
+Time: 0.04 seconds
+
+========================================
+STEP 2 - Compute maximal order in B
+========================================
+
+We compute a Z-basis of a maximal order in B.
+Done.
+Time: 0.05 seconds
+
+========================================
+STEP 3 - Tensor product A ⊗ B^op
+========================================
+
+We form the algebra C = A ⊗ B^op.
+Done.
+Time: 0.46 seconds
+
+========================================
+STEP 4 - Maximal order in A ⊗ B^op
+========================================
+
+We use the known maximal orders of A and B to deduce one in A ⊗ B^op.
+Done.
+Time: 5.94 seconds
+
+========================================
+STEP 5 - Format C with new basis
+========================================
+
+We rewrite C in terms of the basis of its maximal order.
+Done.
+Time: 0.07 seconds
+
+========================================
+STEP 6 - Compute F_p algebra
+========================================
+
+We compute a reduction modulo p=3 of the maximal order in C.
+Done.
+Time: 0.14 seconds
+
+========================================
+STEP 7 - Heuristic zero divisor search
+========================================
+
+We start 1000 heuristic tries, working with p = 3 and precision p^(2^6).
+Done.
+Time: 323.20 seconds
+
+On 1000 heuristic tries we found:
+ - 0 element(s) of rank 0
+ - 193 element(s) of rank 1
+ - 343 element(s) of rank 2
+ - 20 element(s) of rank 3
+ - 444 element(s) of rank 4
+ - 556 element(s) with reducible minimal polynomial
+
+========================================
+STEP 8 - Deduce rank one element in C
+========================================
+
+We use the last zero divisor found, with if possible rank 1 or 3, which has rank 1.
+Done.
+Time: 0.11 seconds
+
+========================================
+STEP 9 - Write element in original basis
+========================================
+
+We express the rank one element in the original basis of C.
+Done.
+Time: 0.00 seconds
+
+========================================
+STEP 10 - Isomorphism C -> M4(Q)
+========================================
+
+We compute an isomorphism from C to M4(Q) using this rank one element.
+Done.
+Time: 0.18 seconds
+
+========================================
+STEP 11 - Recover isomorphism A -> B
+========================================
+
+We recover an isomorphism A -> B from the matrix ring isomorphism.
+Done.
+Time: 0.01 seconds
+
+
+========================================
+STEP 11 - Check
+========================================
+
+Check that A -> B is indeed an algebra isomorphism.
+Check passed.
+Time: 0.00 seconds
+
+
+========================================
+STEP 12 - Conclusion
+========================================
+
+The isomorphism A -> B is given by:
+i -> -6942798219/1931805938*i + 7605846325/5795417814*j - 409515148/2897708907*k
+j -> 11131564504/4829514845*i - 7494821792/14488544535*j - 7146212267/14488544535*k
+k -> -7216006982779/9659029690*i - 668855778283/28977089070*j - 16890896204/14488544535*k
+sage: 

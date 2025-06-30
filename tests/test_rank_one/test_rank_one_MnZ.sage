@@ -60,3 +60,91 @@ def test_17(a,b,c,d):
         print(f"  - Rank of element 'e': {rank_e} (full rank)")
 
     return None
+
+
+
+def test_stat(A,ite,p,n):
+    cpt = 0
+    Op,_ = finite_algebra_from_order(A, A.basis(), p)
+    dico = {0:0,4:0,8:0,12:0,16:0}
+    for _ in range(ite):
+        e = heuristic_zero_divisor_MnZ(A,primes=[p],n_lifting_steps = n,Op=Op)
+        r = right_rank(e,A)
+        dico[r] = dico[r]+1
+    return dico
+
+import time
+
+def big_test_stat(A, ite, primes, n_values):
+    """
+    Repeats the test_stat function with different values of p and n,
+    and prints the execution time for each combination.
+
+    Args:
+        A: The algebra object to be tested.
+        ite (int): The number of iterations for each call to test_stat.
+        primes (list): A list of prime numbers to be used as 'p'.
+        n_values (list): A list of integer values for 'n' (n_lifting_steps).
+    """
+    print("Starting the comprehensive test.")
+    print("-" * 40)
+
+    for p in primes:
+        print(f"Working with prime p = {p}")
+        print("-" * 40)
+        
+        # It's generally more efficient to compute Op once for each prime
+        try:
+            Op, _ = finite_algebra_from_order(A, A.basis(), p)
+        except Exception as e:
+            print(f"Could not create finite algebra for p = {p}. Error: {e}")
+            continue
+
+        for n in n_values:
+            print(f"  Testing with n = {n}")
+            
+            start_time = time.time()
+            
+            # Since test_stat is provided, we will call it.
+            # We pass the pre-computed Op to avoid redundant calculations.
+            # We modify the call to test_stat to accept Op.
+            
+            def test_stat_modified(A, ite, p, n, Op):
+                cpt = 0
+                for _ in range(ite):
+                    e = heuristic_zero_divisor_MnZ(A, [p], n_lifting_steps=n, Op=Op)
+                    r = right_rank(e, A)
+                    if r < 16:
+                        cpt = cpt + 1
+                return cpt, ite, cpt / ite
+
+    
+            cpt, total_ite, ratio = test_stat_modified(A, ite, p, n, Op)
+                
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+                
+            print(f"    - test_stat run time: {elapsed_time:.4f} seconds")
+            print(f"    - Results: Found {cpt} elements with rank < 16 out of {total_ite} iterations.")
+            print(f"    - Ratio: {ratio}")
+
+            
+            print("-" * 20)
+            
+    print("Comprehensive test finished.")
+
+
+def test_18(A,k,l = [-3,-2,-1,0,1,2,3]):
+    dim_A = dimension(A)
+    BA = A.basis()
+    n = len(l)
+    cpt = 0
+    for _ in range(k):
+        x = A.sum(l[randint(0,n-1)]*BA[i] for i in range(dim_A))
+        pi = minimal_polynomial(x,A)
+        if not pi.is_irreducible():
+            cpt = cpt +1
+    return cpt
+
+
+

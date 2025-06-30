@@ -196,3 +196,16 @@ def quat_alg_mixed_with_table(F,a,b,transformation = False):
     if transformation:
         return B,P
     return B
+
+
+def max_structure_constants(A):
+    """
+    INPUT :
+        -- A -- an algbera given by structure constants
+    OUTPUT :
+        -- Max -- the maximum of the numerator of the structure constant if A
+    """
+    c = A.table()
+    N = dimension(A)
+    return max(abs(c[i][j][k].numerator()) for i in range(N) for j in range(N) for k in range(N))
+    

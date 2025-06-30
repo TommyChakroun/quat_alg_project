@@ -6,61 +6,87 @@ A SageMath implementation for working with quaternion algebras, including algori
 
 ```
 .
-├── core/
-│   ├── explicit_iso_matrix_ring.sage
-│   ├── explicit_iso_quat_alg.sage
-│   ├── identify_quaternion_algebra.sage
-│   ├── identify_standard_involution.sage
-│   ├── normalize_quadratic.sage
-│   └── rank_one.sage
-├── database/
-│   ├── database_utilities.sage
+├── benchmarks
+│   ├── iso_quat_alg
+│   │   ├── iso_quat_alg_0.txt
+│   │   ├── iso_quat_alg_1.txt
+│   │   ├── iso_quat_alg_2.txt
+│   │   ├── iso_quat_alg_3.txt
+│   │   ├── iso_quat_alg_4.txt
+│   │   ├── iso_quat_alg_5.txt
+│   │   ├── iso_quat_alg_6.txt
+│   │   ├── iso_quat_alg_7.txt
+│   │   └── iso_quat_alg_8.txt
+│   └── maximal_order
+│       ├── maximal_order_tensor_Bp_inf.txt
+│       ├── max_order_from_inseparable.txt
+│       ├── sage_vs_magma_may_29.txt
+│       ├── sage_vs_magma_may_31.txt
+│       ├── standard_test_M4Q_june_1.txt
+│       ├── standard_test_M4Q_june_2.txt
+│       ├── standard_test_M4Q_june_3.txt
+│       ├── standard_test_M4Q_may_28.txt
+│       ├── standard_test_M4Q_may_30.txt
+│       ├── standard_test_M4Q_may_31.txt
+│       └── starting_order_M4Q.txt
+├── database
 │   ├── db_iso_matrix_ring.txt
-│   ├── db_iso_quat_alg_from_tensor_iso.txt
 │   ├── db_iso_quat_alg.txt
-│   ├── generate_iso_matrix_ring.sage
-│   ├── generate_iso_quat_alg.sage
-│   ├── max_order_M4Q.txt
+│   ├── generate_data_base.sage
 │   └── read_data_base.txt
-├── examples/
-│   ├── bug_central_idp_sag.txt
-│   ├── estimate_randomization.txt
-│   ├── ex_1.txt
-│   ├── maximal_order_tensor_Bp_inf.txt
-│   ├── sage_vs_magma_may_29.txt
-│   ├── sage_vs_magma_may_31.txt
-│   ├── standard_test_M4Q_june_1.txt
-│   ├── standard_test_M4Q_june_2.txt
-│   ├── standard_test_M4Q_may_28.txt
-│   ├── standard_test_M4Q_may_30.txt
-│   ├── standard_test_M4Q_may_31.txt
-│   └── starting_order_M4Q.txt
-├── maximal_orders/
-│   ├── find_maximal_orders.sage
-│   └── maximal_orders_utilities.sage
-├── minimal_ideals/
-│   ├── idempotent_to_ideals.sage
-│   ├── minimal_ideals_from_magma.sage
-│   ├── minimal_ideals_from_sage.sage
-│   └── minimal_ideals_manually.sage
-├── tests/
-│   ├── test_central_idempotents.sage
-│   ├── test_id_quat_alg.sage
-│   ├── test_iso_matrix_ring.sage
-│   ├── test_iso_quat_alg.sage
-│   ├── test_normalize_quadratic.sage
-│   └── test_randomization.sage
-├── tests_max_order/
-│   ├── comments.pdf
-│   ├── test_diverse_max_orders.sage
-│   ├── test_given_max_order_in_quat_alg.sage
-│   ├── test_max_order_structure_constants.sage
-│   └── test_sage_vs_magma.sage
-├── utilities/
-│   ├── algebra_type.sage
-│   └── utilities.sage
-├── load_all_files.sage
-└── README.md
+├── docs
+│   ├── report.pdf
+│   └── sage_bugs
+│       └── bug_central_idp_sag.txt
+├── examples
+│   └── examples.txt
+├── global_variables.sage
+├── load_project.sage
+├── README.md
+├── src
+│   ├── count_matrices_MnFp
+│   │   └── nb_irreducible_matrices_MnFp.sage
+│   ├── isomorphism
+│   │   ├── explicit_iso_matrix_ring.sage
+│   │   └── explicit_iso_quat_alg.sage
+│   ├── maximal_orders
+│   │   ├── find_maximal_orders.sage
+│   │   └── maximal_orders_utilities.sage
+│   ├── minimal_ideals
+│   │   ├── idempotent_to_ideals.sage
+│   │   ├── minimal_ideals_from_magma.sage
+│   │   ├── minimal_ideals_from_sage.sage
+│   │   └── minimal_ideals_manually.sage
+│   ├── norm_equation
+│   │   └── zero_divisor_norm_equation.sage
+│   ├── quaternion_recognition
+│   │   ├── identify_quaternion_algebra.sage
+│   │   ├── identify_standard_involution.sage
+│   │   └── normalize_quadratic.sage
+│   └── rank_one
+│       ├── rank_one_MnFp.sage
+│       ├── rank_one_MnQ.sage
+│       └── rank_one_real.sage
+├── tests
+│   ├── test_formal
+│   │   └── formal_expression.sage
+│   ├── test_rank_one
+│   │   ├── test_rank_one_MnZ.sage
+│   │   └── variables.sage
+│   ├── tests_iso
+│   │   ├── test_id_quat_alg.sage
+│   │   ├── test_iso_matrix_ring.sage
+│   │   ├── test_iso_quat_alg.sage
+│   │   ├── test_normalize_quadratic.sage
+│   │   └── test_randomization.sage
+│   └── tests_max_order
+│       ├── test_central_idempotents.sage
+│       ├── test_diverse_max_orders.sage
+│       ├── test_given_max_order_in_quat_alg.sage
+│       └── test_sage_vs_magma.sage
+└── utilities
+    ├── algebra_type.sage
+    └── utilities.sage
 ```
 
 ## Requirements
@@ -86,21 +112,19 @@ This loading process may take a few seconds. Upon successful completion, all pro
 │ SageMath version 10.6, Release Date: 2025-03-31                    │
 │ Using Python 3.13.3. Type "help()" for help.                       │
 └────────────────────────────────────────────────────────────────────┘
-sage: load("load_all_files.sage")
-Loading all quaternion algebra project files...
-- Loading utilities...
-- Loading core algorithms...
-- Loading database functions...
-- Loading minimal ideals algorithms...
-- Loading maximal order algorithms...
-- Loading general test scripts (except those with global constants)...
-- Loading maximal order test scripts...
-- Loading the global variables...
-✓ All files loaded successfully!
-You can now use all quaternion algebra functions.
-See examples in the examples/ folder.
-Use list_function() to list all the functions of the project.
-Use list_global_variable() to list all global variables you may use.
+sage: load("load_project.sage")
+============================================
+---   Start loading quat_alg_project   ---
+============================================
+
+--> Loading Source Code...
+
+--> Loading Test Functions...
+
+============================================
+---  All project and test files loaded.  ---
+---   Environment is ready to use.       ---
+============================================
 sage: 
 ```
 

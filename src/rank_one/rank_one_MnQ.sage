@@ -42,7 +42,7 @@ load("src/rank_one/rank_one_MnFp.sage")
 #
 # ------------------------------------------------------------------------------------------
 
-def rank_one_idempotent_mod_p(A, p=5):
+def rank_one_idempotent_mod_p(A, p=5,Op = None):
     """
     Finds a rank-one idempotent in the algebra modulo a prime p.
 
@@ -58,7 +58,8 @@ def rank_one_idempotent_mod_p(A, p=5):
     dim_A = dimension(A)
     BA = list(A.basis())
 
-    Op, _ = finite_algebra_from_order(A, BA, p)
+    if Op == None :
+        Op, _ = finite_algebra_from_order(A, BA, p)
 
     e_mod_p = rank_one_idempotent_MnFp(Op)
 
@@ -69,7 +70,7 @@ def rank_one_idempotent_mod_p(A, p=5):
     return e0
 
 
-def improve_idempotent_mod_p(A, p=5, n=4):
+def improve_idempotent_mod_p(A, p=5, n=4,Op = None):
     """
     Improves an approximate idempotent using Hensel's Lemma.
 
@@ -86,7 +87,7 @@ def improve_idempotent_mod_p(A, p=5, n=4):
         Starts from e0, a rank-one idempotent modulo p, and improves the solution
         using the iterative formula: e_{k+1} = 3*e_k^2 - 2*e_k^3.
     """
-    e0 = rank_one_idempotent_mod_p(A, p)
+    e0 = rank_one_idempotent_mod_p(A, p,Op)
     ek = e0
     for _ in range(n):
         ek_squared = ek**2
@@ -96,7 +97,7 @@ def improve_idempotent_mod_p(A, p=5, n=4):
     return ek
 
 
-def idempotent_mod_several_primes(A, primes, n):
+def idempotent_mod_several_primes(A, primes, n,Op):
     """
     Constructs an element that is an approximate idempotent modulo several primes.
 
@@ -121,7 +122,7 @@ def idempotent_mod_several_primes(A, primes, n):
     list_coords = []
 
     for p in primes:
-        e = improve_idempotent_mod_p(A, p, n)
+        e = improve_idempotent_mod_p(A, p, n,Op)
         list_coords.append(get_coefficients(e, A))
 
     crt_coords = []
@@ -139,7 +140,7 @@ def idempotent_mod_several_primes(A, primes, n):
 #
 # ------------------------------------------------------------------------------------------
 
-def probable_zero_divisor_MnZ(A,primes,n_lifting_steps = 4):
+def heuristic_zero_divisor_MnZ(A,primes,n_lifting_steps = 4,Op=None):
     """
     Constructs an exact zero divisor in an order isomorphic to Mn(Z).
     This function implements the Hensel lifting and LLL method.
@@ -150,7 +151,10 @@ def probable_zero_divisor_MnZ(A,primes,n_lifting_steps = 4):
     # --- Step 1: Find an approximate idempotent ---
 
     # The result 'e' is a vector of N integer coefficients (x'_1, ..., x'_N).
-    e = idempotent_mod_several_primes(A, primes = primes, n=n_lifting_steps)
+    if len(primes)>1:
+        e = idempotent_mod_several_primes(A, primes = primes, n=n_lifting_steps,Op=Op)
+    else:
+        e = improve_idempotent_mod_p(A,primes[0],n=n_lifting_steps,Op=Op)
     
     # This is the modulus K = p^(2^n) from our discussion.
     modulus_K = prod(p**(2**n_lifting_steps) for p in primes)
@@ -186,13 +190,15 @@ def probable_zero_divisor_MnZ(A,primes,n_lifting_steps = 4):
     raise ValueError("LLL returned a zero denominator. Try increasing precision (n_lifting_steps).")
 
 
-def zero_divisor_MnZ(A):
-    primes = [5]
-    n = 4
+def zero_divisor_MnZ(A,primes = [5],n=4):
     dim_A = dimension(A)
+    BA = A.basis()
+
+    p = primes[0]
+    Op,_ = finite_algebra_from_order(A, BA, p)
 
     for ite in range(100):
-        e = probable_zero_divisor_MnZ(A,primes=primes,n_lifting_steps=n)
+        e = heuristic_zero_divisor_MnZ(A,primes=primes,n_lifting_steps=n,Op=Op)
         if right_rank(e,A)<dim_A:
             return e
     raise ValueError("Not found")
@@ -237,7 +243,7 @@ def zero_divisor_MnQ(A, BO=None):
 #
 # ------------------------------------------------------------------------------------------
 
-def rank_one_MnQ(A):
+def rank_one_MnQ(A,zero_divisor = None):
     """
     Computes a rank-one element in an algebra isomorphic to Mn(Q).
 
@@ -258,7 +264,10 @@ def rank_one_MnQ(A):
     BA = list(A.basis())
     F = A.base_ring()
 
-    x = zero_divisor_MnQ(A)
+    if zero_divisor == None:
+        x = zero_divisor_MnQ(A)
+    else:
+        x = zero_divisor
 
     # Let pi(t) be the minimal polynomial of (right multiplication by) x.
     # Since x is a zero divisor, pi(t) = t * Q(t). Let y = Q(x). Then xy=0.
@@ -274,7 +283,7 @@ def rank_one_MnQ(A):
         return x
 
     # Find an idempotent e=ax such that rank(e)=rank(x)
-    a = solve_xax_eq_x(A, x)
+    a = solve_xax_eq_x(x, A)
     e = a * x
 
     # Construct the Peirce subalgebra B = eAe

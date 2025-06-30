@@ -68,13 +68,12 @@ def zero_divisor_MnFp(A):
         - For a deterministic method, see:
           Lajos Ronyai, "Simple Algebras Are Difficult" (1987), Section 5.
     """
-    BA = list(A.basis())
     F = A.base_ring()
     ite_max = 100
 
     for _ in range(ite_max):
         # Pick a random element in the algebra
-        c = sum(F.random_element() * b for b in BA)
+        c = A.random_element()
         pi = minimal_polynomial(c, A)
 
         if not pi.is_irreducible():
@@ -83,7 +82,7 @@ def zero_divisor_MnFp(A):
             g = factors[0][0]  # Take the first factor
             return g(c)
 
-    raise ValueError("Zero divisor not found. The probability is low, try increasing ite_max.")
+    raise ValueError("Zero divisor not found in Mn(Fp). The probability is low, try increasing ite_max.")
 
 
 #--------------------------------------------------------------------

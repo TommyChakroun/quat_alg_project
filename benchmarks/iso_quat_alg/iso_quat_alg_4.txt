@@ -1,0 +1,139 @@
+sage: A = QuaternionAlgebra(QQ,-257,-364)
+sage: A.ramified_places()
+([257],
+ [Ring morphism:
+    From: Rational Field
+    To:   Real Field with 53 bits of precision
+    Defn: 1 |--> 1.00000000000000])
+sage: B = QuaternionAlgebra(QQ, [257],[1/2])
+sage: B
+Quaternion Algebra (-3, -257) with base ring Rational Field
+sage: test_19(-257,-364,-3,-257,3,6)
+
+========================================
+EXPLANATION
+========================================
+
+We consider two quaternion algebras over Q:
+A = (-257, -364 | Q),   B = (-3, -257 | Q)
+We are going to search for an explicit isomorphism A -> B.
+
+Basic invariants:
+ - Ramified primes of A: [257]
+ - Ramified primes of B: [257]
+ - Are A and B isomorphic? True
+
+========================================
+STEP 1 - Compute maximal order in A
+========================================
+
+We compute a Z-basis of a maximal order in A.
+Done.
+Time: 0.02 seconds
+
+========================================
+STEP 2 - Compute maximal order in B
+========================================
+
+We compute a Z-basis of a maximal order in B.
+Done.
+Time: 0.00 seconds
+
+========================================
+STEP 3 - Tensor product A ⊗ B^op
+========================================
+
+We form the algebra C = A ⊗ B^op.
+Done.
+Time: 0.22 seconds
+
+========================================
+STEP 4 - Maximal order in A ⊗ B^op
+========================================
+
+We use the known maximal orders of A and B to deduce one in A ⊗ B^op.
+Done.
+Time: 0.94 seconds
+
+========================================
+STEP 5 - Format C with new basis
+========================================
+
+We rewrite C in terms of the basis of its maximal order.
+Done.
+Time: 0.04 seconds
+
+========================================
+STEP 6 - Compute F_p algebra
+========================================
+
+We compute a reduction modulo p=3 of the maximal order in C.
+Done.
+Time: 0.07 seconds
+
+========================================
+STEP 7 - Heuristic zero divisor search
+========================================
+
+We start 100 heuristic tries, working with p = 3 and precision p^(2^6).
+Done.
+Time: 24.65 seconds
+
+On 100 heuristic tries we found:
+ - 0 element(s) of rank 0
+ - 5 element(s) of rank 1
+ - 5 element(s) of rank 2
+ - 2 element(s) of rank 3
+ - 88 element(s) of rank 4
+ - 12 element(s) with reducible minimal polynomial
+
+========================================
+STEP 8 - Deduce rank one element in C
+========================================
+
+We use the last zero divisor found, with if possible rank 1 or 3, which has rank 3.
+Done.
+Time: 0.12 seconds
+
+========================================
+STEP 9 - Write element in original basis
+========================================
+
+We express the rank one element in the original basis of C.
+Done.
+Time: 0.00 seconds
+
+========================================
+STEP 10 - Isomorphism C -> M4(Q)
+========================================
+
+We compute an isomorphism from C to M4(Q) using this rank one element.
+Done.
+Time: 0.16 seconds
+
+========================================
+STEP 11 - Recover isomorphism A -> B
+========================================
+
+We recover an isomorphism A -> B from the matrix ring isomorphism.
+Done.
+Time: 0.01 seconds
+
+
+========================================
+STEP 11 - Check
+========================================
+
+Check that A -> B is indeed an algebra isomorphism.
+Check passed.
+Time: 0.00 seconds
+
+
+========================================
+STEP 12 - Conclusion
+========================================
+
+The isomorphism A -> B is given by:
+i -> -76466192194376/9027820228701*i - 1717347708003/6018546819134*j + 2969133609863/18055640457402*k
+j -> -120029683290656/27083460686103*i + 6458151261569/9027820228701*j - 12849912466865/27083460686103*k
+k -> 123520184738954/27083460686103*i - 128577655556504/9027820228701*j - 198352394446984/27083460686103*k
