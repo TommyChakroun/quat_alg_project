@@ -10,9 +10,6 @@ load("src/isomorphism/explicit_iso_matrix_ring.sage")
 #------------------------------------------------------------------------------------------
 
 
-##---List of functions---##
-
-# quat_alg_iso_from_matrix_ring_iso(A,B,isom_dict)
 
 ##--- When know phi : A ⊗ B^op -> M_n²(F) ---#
 

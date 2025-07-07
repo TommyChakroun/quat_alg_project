@@ -16,7 +16,8 @@ A SageMath implementation for working with quaternion algebras, including algori
 │   │   ├── iso_quat_alg_5.txt
 │   │   ├── iso_quat_alg_6.txt
 │   │   ├── iso_quat_alg_7.txt
-│   │   └── iso_quat_alg_8.txt
+│   │   ├── iso_quat_alg_8.txt
+│   │   └── iso_quat_alg_9.txt
 │   └── maximal_order
 │       ├── maximal_order_tensor_Bp_inf.txt
 │       ├── max_order_from_inseparable.txt
@@ -48,6 +49,7 @@ A SageMath implementation for working with quaternion algebras, including algori
 │   │   └── nb_irreducible_matrices_MnFp.sage
 │   ├── isomorphism
 │   │   ├── explicit_iso_matrix_ring.sage
+│   │   ├── explicit_iso_quat_alg_equations.sage
 │   │   └── explicit_iso_quat_alg.sage
 │   ├── maximal_orders
 │   │   ├── find_maximal_orders.sage
@@ -57,8 +59,6 @@ A SageMath implementation for working with quaternion algebras, including algori
 │   │   ├── minimal_ideals_from_magma.sage
 │   │   ├── minimal_ideals_from_sage.sage
 │   │   └── minimal_ideals_manually.sage
-│   ├── norm_equation
-│   │   └── zero_divisor_norm_equation.sage
 │   ├── quaternion_recognition
 │   │   ├── identify_quaternion_algebra.sage
 │   │   ├── identify_standard_involution.sage
@@ -66,24 +66,27 @@ A SageMath implementation for working with quaternion algebras, including algori
 │   └── rank_one
 │       ├── rank_one_MnFp.sage
 │       ├── rank_one_MnQ.sage
+│       ├── rank_one_norm_equation.sage
 │       └── rank_one_real.sage
 ├── tests
 │   ├── test_formal
 │   │   └── formal_expression.sage
-│   ├── test_rank_one
-│   │   ├── test_rank_one_MnZ.sage
-│   │   └── variables.sage
 │   ├── tests_iso
 │   │   ├── test_id_quat_alg.sage
 │   │   ├── test_iso_matrix_ring.sage
 │   │   ├── test_iso_quat_alg.sage
 │   │   ├── test_normalize_quadratic.sage
 │   │   └── test_randomization.sage
-│   └── tests_max_order
-│       ├── test_central_idempotents.sage
-│       ├── test_diverse_max_orders.sage
-│       ├── test_given_max_order_in_quat_alg.sage
-│       └── test_sage_vs_magma.sage
+│   ├── tests_magma
+│   │   └── norm_equation.m
+│   ├── tests_max_order
+│   │   ├── test_central_idempotents.sage
+│   │   ├── test_diverse_max_orders.sage
+│   │   ├── test_given_max_order_in_quat_alg.sage
+│   │   └── test_sage_vs_magma.sage
+│   └── tests_rank_one
+│       ├── test_rank_one_MnZ.sage
+│       └── variables.sage
 └── utilities
     ├── algebra_type.sage
     └── utilities.sage

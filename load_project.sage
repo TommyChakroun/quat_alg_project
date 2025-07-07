@@ -21,6 +21,7 @@ load("src/maximal_orders/find_maximal_orders.sage")
 load("src/rank_one/rank_one_MnFp.sage")
 load("src/rank_one/rank_one_MnQ.sage")
 load("src/rank_one/rank_one_real.sage")
+load("src/rank_one/rank_one_norm_equation.sage")
 load("src/norm_equation/zero_divisor_norm_equation.sage")
 load("src/isomorphism/explicit_iso_matrix_ring.sage")
 load("src/isomorphism/explicit_iso_quat_alg.sage")
@@ -39,7 +40,7 @@ load("tests/tests_max_order/test_given_max_order_in_quat_alg.sage")
 load("tests/tests_max_order/test_sage_vs_magma.sage")
 load("tests/tests_max_order/test_central_idempotents.sage")
 ## Rank One Tests
-load("tests/test_rank_one/test_rank_one_MnZ.sage")
+load("tests/tests_rank_one/test_rank_one_MnZ.sage")
 
 
 print("\n============================================")

@@ -151,3 +151,51 @@ def rank_one_idempotent_MnFp(A):
     # The element e = ax is then a rank-one idempotent.
     a = solve_xax_eq_x(x, A)
     return a * x
+
+
+
+#--------------------------------------------------------------------
+#  Step 4: Find a Rank-One Idempotent
+#--------------------------------------------------------------------
+
+def nilpotent_element(A):
+    """
+    Finds a non-zero nilpotent element in a matrix algebra A.
+
+    The function starts with a zero divisor, computes its minimal polynomial,
+    and uses its factorization to construct the nilpotent part of that element,
+    which is itself a nilpotent element.
+
+    INPUT:
+        - A: A matrix algebra, e.g., MatrixAlgebra(Fp, n).
+
+    OUTPUT:
+        - A non-zero nilpotent element n in A, such that n^k = 0 for some k.
+    """
+    a = A.zero()  # Initialize 'a' to None
+
+    for k in range(200): # Increased attempts for better odds
+        print(k)
+        candidate = A.random_element()
+        pi = minimal_polynomial(candidate, A)
+        x = pi.parent().gen()
+        if pi % (x**2) == 0:
+            a = candidate
+            break
+
+    F = A.base_ring()
+    P, x = PolynomialRing(F, 'x').objgen()
+
+    pi = minimal_polynomial(a, A)
+
+    k = pi.valuation(x)
+
+    x_k = x^k
+    Q = pi // x_k
+
+    g, U, V = xgcd(x_k, Q)
+    V = V / g
+
+    nilpotent_elem = a * V(a) * Q(a)
+
+    return nilpotent_elem

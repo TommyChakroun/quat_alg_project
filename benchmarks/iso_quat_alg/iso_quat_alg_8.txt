@@ -1,17 +1,23 @@
-sage: test_19(-65537,13 * 65537 * 10789453 * 2007220759,-3,-65537,3,6,nb_tries = 1000)
+sage: A
+Quaternion Algebra (-8198, -6563) with base ring Rational Field
+sage: B
+Quaternion Algebra (-1, -26901737) with base ring Rational Field
+sage: A.is_isomorphic(B)
+True
+sage: test_19(-8198,-6563,-1,-26901737,3,6,nb_tries=1000)
 
 ========================================
 EXPLANATION
 ========================================
 
 We consider two quaternion algebras over Q:
-A = (-65537, 18451194082489555362287 | Q),   B = (-3, -65537 | Q)
+A = (-8198, -6563 | Q),   B = (-1, -26901737 | Q)
 We are going to search for an explicit isomorphism A -> B.
 
 Basic invariants:
- - Ramified primes of A: [2, 65537]
- - Ramified primes of B: [65537]
- - Are A and B isomorphic? False
+ - Ramified primes of A: [2, 4099, 6563]
+ - Ramified primes of B: [2, 4099, 6563]
+ - Are A and B isomorphic? True
 
 ========================================
 STEP 1 - Compute maximal order in A
@@ -19,7 +25,7 @@ STEP 1 - Compute maximal order in A
 
 We compute a Z-basis of a maximal order in A.
 Done.
-Time: 0.02 seconds
+Time: 0.04 seconds
 
 ========================================
 STEP 2 - Compute maximal order in B
@@ -27,7 +33,7 @@ STEP 2 - Compute maximal order in B
 
 We compute a Z-basis of a maximal order in B.
 Done.
-Time: 0.00 seconds
+Time: 0.01 seconds
 
 ========================================
 STEP 3 - Tensor product A ⊗ B^op
@@ -35,7 +41,7 @@ STEP 3 - Tensor product A ⊗ B^op
 
 We form the algebra C = A ⊗ B^op.
 Done.
-Time: 0.21 seconds
+Time: 0.32 seconds
 
 ========================================
 STEP 4 - Maximal order in A ⊗ B^op
@@ -43,7 +49,7 @@ STEP 4 - Maximal order in A ⊗ B^op
 
 We use the known maximal orders of A and B to deduce one in A ⊗ B^op.
 Done.
-Time: 4.91 seconds
+Time: 6.85 seconds
 
 ========================================
 STEP 5 - Format C with new basis
@@ -51,7 +57,7 @@ STEP 5 - Format C with new basis
 
 We rewrite C in terms of the basis of its maximal order.
 Done.
-Time: 0.08 seconds
+Time: 0.07 seconds
 
 ========================================
 STEP 6 - Compute F_p algebra
@@ -59,7 +65,7 @@ STEP 6 - Compute F_p algebra
 
 We compute a reduction modulo p=3 of the maximal order in C.
 Done.
-Time: 0.12 seconds
+Time: 0.11 seconds
 
 ========================================
 STEP 7 - Heuristic zero divisor search
@@ -67,229 +73,64 @@ STEP 7 - Heuristic zero divisor search
 
 We start 1000 heuristic tries, working with p = 3 and precision p^(2^6).
 Done.
-Time: 353.65 seconds
+Time: 263.30 seconds
 
 On 1000 heuristic tries we found:
  - 0 element(s) of rank 0
- - 0 element(s) of rank 1
- - 0 element(s) of rank 2
- - 0 element(s) of rank 3
- - 1000 element(s) of rank 4
- - 0 element(s) with reducible minimal polynomial
-We haven't found any zero divisor.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-sage: test_19(-65537,13 * 65537 * 10789453 * 2007220759,-3,-65537,3,7,nb_tries = 1000)
+ - 29 element(s) of rank 1
+ - 30 element(s) of rank 2
+ - 72 element(s) of rank 3
+ - 869 element(s) of rank 4
+ - 131 element(s) with reducible minimal polynomial
 
 ========================================
-EXPLANATION
+STEP 8 - Deduce rank one element in C
 ========================================
 
-We consider two quaternion algebras over Q:
-A = (-65537, 18451194082489555362287 | Q),   B = (-3, -65537 | Q)
-We are going to search for an explicit isomorphism A -> B.
-
-Basic invariants:
- - Ramified primes of A: [2, 65537]
- - Ramified primes of B: [65537]
- - Are A and B isomorphic? False
-
-========================================
-STEP 1 - Compute maximal order in A
-========================================
-
-We compute a Z-basis of a maximal order in A.
-Done.
-Time: 0.00 seconds
-
-========================================
-STEP 2 - Compute maximal order in B
-========================================
-
-We compute a Z-basis of a maximal order in B.
-Done.
-Time: 0.00 seconds
-
-========================================
-STEP 3 - Tensor product A ⊗ B^op
-========================================
-
-We form the algebra C = A ⊗ B^op.
-Done.
-Time: 0.29 seconds
-
-========================================
-STEP 4 - Maximal order in A ⊗ B^op
-========================================
-
-We use the known maximal orders of A and B to deduce one in A ⊗ B^op.
-Done.
-Time: 5.56 seconds
-
-========================================
-STEP 5 - Format C with new basis
-========================================
-
-We rewrite C in terms of the basis of its maximal order.
+We use the last zero divisor found, with if possible rank 1 or 3, which has rank 3.
 Done.
 Time: 0.12 seconds
 
 ========================================
-STEP 6 - Compute F_p algebra
+STEP 9 - Write element in original basis
 ========================================
 
-We compute a reduction modulo p=3 of the maximal order in C.
-Done.
-Time: 0.15 seconds
-
-========================================
-STEP 7 - Heuristic zero divisor search
-========================================
-
-We start 1000 heuristic tries, working with p = 3 and precision p^(2^7).
-Done.
-Time: 405.83 seconds
-
-On 1000 heuristic tries we found:
- - 0 element(s) of rank 0
- - 0 element(s) of rank 1
- - 0 element(s) of rank 2
- - 0 element(s) of rank 3
- - 1000 element(s) of rank 4
- - 0 element(s) with reducible minimal polynomial
-We haven't found any zero divisor.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-sage: test_19(-65537,13 * 65537 * 10789453 * 2007220759,-3,-65537,5,6,nb_tries = 1000)
-
-========================================
-EXPLANATION
-========================================
-
-We consider two quaternion algebras over Q:
-A = (-65537, 18451194082489555362287 | Q),   B = (-3, -65537 | Q)
-We are going to search for an explicit isomorphism A -> B.
-
-Basic invariants:
- - Ramified primes of A: [2, 65537]
- - Ramified primes of B: [65537]
- - Are A and B isomorphic? False
-
-========================================
-STEP 1 - Compute maximal order in A
-========================================
-
-We compute a Z-basis of a maximal order in A.
+We express the rank one element in the original basis of C.
 Done.
 Time: 0.00 seconds
 
 ========================================
-STEP 2 - Compute maximal order in B
+STEP 10 - Isomorphism C -> M4(Q)
 ========================================
 
-We compute a Z-basis of a maximal order in B.
+We compute an isomorphism from C to M4(Q) using this rank one element.
 Done.
+Time: 0.18 seconds
+
+========================================
+STEP 11 - Recover isomorphism A -> B
+========================================
+
+We recover an isomorphism A -> B from the matrix ring isomorphism.
+Done.
+Time: 0.01 seconds
+
+
+========================================
+STEP 11 - Check
+========================================
+
+Check that A -> B is indeed an algebra isomorphism.
+Check passed.
 Time: 0.00 seconds
 
-========================================
-STEP 3 - Tensor product A ⊗ B^op
-========================================
-
-We form the algebra C = A ⊗ B^op.
-Done.
-Time: 0.43 seconds
 
 ========================================
-STEP 4 - Maximal order in A ⊗ B^op
+STEP 12 - Conclusion
 ========================================
 
-We use the known maximal orders of A and B to deduce one in A ⊗ B^op.
-Done.
-Time: 6.14 seconds
-
-========================================
-STEP 5 - Format C with new basis
-========================================
-
-We rewrite C in terms of the basis of its maximal order.
-Done.
-Time: 0.12 seconds
-
-========================================
-STEP 6 - Compute F_p algebra
-========================================
-
-We compute a reduction modulo p=5 of the maximal order in C.
-Done.
-Time: 0.13 seconds
-
-========================================
-STEP 7 - Heuristic zero divisor search
-========================================
-
-We start 1000 heuristic tries, working with p = 5 and precision p^(2^6).
-Done.
-Time: 375.54 seconds
-
-On 1000 heuristic tries we found:
- - 0 element(s) of rank 0
- - 0 element(s) of rank 1
- - 0 element(s) of rank 2
- - 0 element(s) of rank 3
- - 1000 element(s) of rank 4
- - 0 element(s) with reducible minimal polynomial
-We haven't found any zero divisor.
+The isomorphism A -> B is given by:
+i -> 478081964288087695/62064148001172577*i + 1050784975281110/62064148001172577*j - 247377254775179/62064148001172577*k
+j -> 141646498914065237/62064148001172577*i + 219785305945553/62064148001172577*j + 943758375726475/62064148001172577*k
+k -> 453413949908559778197/62064148001172577*i - 7834377749314124/62064148001172577*j - 705151419643055/62064148001172577*k
 sage: 
