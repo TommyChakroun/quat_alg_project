@@ -24,6 +24,7 @@ load("src/rank_one/rank_one_real.sage")
 load("src/rank_one/rank_one_norm_equation.sage")
 load("src/isomorphism/explicit_iso_matrix_ring.sage")
 load("src/isomorphism/explicit_iso_quat_alg.sage")
+load("src/isomorphism/explicit_iso_quat_alg_equations.sage")
 
 # --- Loading Test Function Definitions ---
 print("\n--> Loading Test Functions...")

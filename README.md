@@ -17,7 +17,8 @@ A SageMath implementation for working with quaternion algebras, including algori
 │   │   ├── iso_quat_alg_6.txt
 │   │   ├── iso_quat_alg_7.txt
 │   │   ├── iso_quat_alg_8.txt
-│   │   └── iso_quat_alg_9.txt
+│   │   ├── iso_quat_alg_9.txt
+│   │   └── iso_quat_alg_magma.txt
 │   └── maximal_order
 │       ├── maximal_order_tensor_Bp_inf.txt
 │       ├── max_order_from_inseparable.txt
@@ -50,6 +51,7 @@ A SageMath implementation for working with quaternion algebras, including algori
 │   ├── isomorphism
 │   │   ├── explicit_iso_matrix_ring.sage
 │   │   ├── explicit_iso_quat_alg_equations.sage
+│   │   ├── explicit_iso_quat_alg_magma.m
 │   │   └── explicit_iso_quat_alg.sage
 │   ├── maximal_orders
 │   │   ├── find_maximal_orders.sage
@@ -71,6 +73,9 @@ A SageMath implementation for working with quaternion algebras, including algori
 ├── tests
 │   ├── test_formal
 │   │   └── formal_expression.sage
+│   ├── tests_equations
+│   │   ├── test_factorization.m
+│   │   └── test_solving_quadratics.sage
 │   ├── tests_iso
 │   │   ├── test_id_quat_alg.sage
 │   │   ├── test_iso_matrix_ring.sage
@@ -103,7 +108,7 @@ To run this project:
 
 1. Open your terminal and navigate to the `quat_alg_project` directory
 2. Start SageMath by typing `sage` and pressing Enter
-3. Load all project files at the `sage:` prompt by typing `load("load_all_files.sage")` and pressing Enter
+3. Load all project files at the `sage:` prompt by typing `load("load_project.sage")` and pressing Enter
 
 This loading process may take a few seconds. Upon successful completion, all project functions and variables will be available in your SageMath environment.
 
@@ -148,19 +153,40 @@ sage: is_order(C, Zbasis_L)
 True
 sage: len(Zbasis_L)
 16
+
+
+sage: A = QuaternionAlgebra(QQ,-69565111111111111116,-465656533333333336635)
+sage: A.ramified_places()
+([3, 151, 6389, 134917, 1097729, 238505243, 5280987012817],
+ [Ring morphism:
+    From: Rational Field
+    To:   Real Field with 53 bits of precision
+    Defn: 1 |--> 1.00000000000000])
+sage: B = QuaternionAlgebra(QQ,[3, 151, 6389, 134917, 1097729, 238505243, 5280987012817],[1/2])
+sage: B
+Quaternion Algebra (-97, -539890808015802473001758328641975308911) with base ring Rational Field
+sage: %time iso_quat_alg(A,B)
+CPU times: user 2.97 s, sys: 2.74 ms, total: 2.97 s
+Wall time: 3 s
+(True,
+ [1,
+  3051505944662292589324023606525881581992/6109654102414479896365283261459*i - 14460173029262124110/62986124767159586560466837747*j + 109794820220326674708/6109654102414479896365283261459*k,
+  -52374902494206141125821144016205699232545333865409583914094504623068977/43844931822703108744970588984500902943970259414258312936269794*i + 28352834537936478837330486790463326599054296301417/226004803209809838891600974146911870845207522753908829568401*j + 81414424032369471418810813441/1043561314078444167871600909789049455618*k,
+  -238669359081341878828146709616831594349687739020095350981201942644203269418757063/21922465911351554372485294492250451471985129707129156468134897*i - 1324828360187091476869435344670327065963284786643000885454794/226004803209809838891600974146911870845207522753908829568401*j - 110399940432773669468529148179629866821/521780657039222083935800454894524727809*k])
+sage: 
 ```
 
 For more examples, see the files in the `examples/` directory.
 
 ## Project Organization
 
-- **`core/`**: Main mathematical algorithms and core functionality
+- **`src/`**: Main mathematical algorithms and core functionality
 - **`utilities/`**: Helper functions used across multiple modules
 - **`database/`**: Functions for generating and managing algebraic databases
-- **`maximal_orders/`**: Specialized algorithms for computing maximal orders
-- **`minimal_ideals/`**: Algorithms for working with minimal ideals
 - **`tests/`**: Comprehensive test suites for validating functionality
 - **`examples/`**: Demonstration scripts showing library usage
+- **`benchmarks/`**: This directory contains time comparisons of the different algorithms.
+- **`docs/`**: This directory holds the mathematical report associated with the project and notes on some SageMath bugs encountered during the implementation
 
 ## Mathematical and Implementation Conventions
 
@@ -175,11 +201,6 @@ For more examples, see the files in the `examples/` directory.
 
 - **Orders**: Orders are represented as lattices with the assumption that they are stable under multiplication and contain the identity element
 
-## Available Functions
-
-After loading the project, use these helper functions:
-- `list_function()`: Display all available project functions
-- `list_global_variable()`: Display all global variables
 
 ## Author
 
