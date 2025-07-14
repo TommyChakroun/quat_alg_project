@@ -1,0 +1,28 @@
+> time iso := IsoQuatAlg(A0,B0);
+Time: 0.060
+> time iso := IsoQuatAlg(A1,B1);
+Time: 0.010
+> time iso := IsoQuatAlg(A2,B2);
+Time: 0.060
+> time iso := IsoQuatAlg(A3,B3);
+Time: 0.020
+> time iso := IsoQuatAlg(A4,B4);
+Time: 0.040
+> time iso := IsoQuatAlg(A5,B5);
+Time: 0.140
+> time v,iso := IsIsomorphic(A0,B0:Isomorphism);
+Time: 0.120
+> time v,iso := IsIsomorphic(A1,B1:Isomorphism);
+Time: 0.080
+> time v,iso := IsIsomorphic(A2,B2:Isomorphism);
+Time: 0.080
+> time v,iso := IsIsomorphic(A3,B3:Isomorphism);
+Time: 0.080
+> time v,iso := IsIsomorphic(A4,B4:Isomorphism);
+Time: 0.090
+> time v,iso := IsIsomorphic(A5,B5:Isomorphism);
+Time: 87.000
+> time iso := IsoQuatAlg(B5,A5);                                                                                                                                                                        
+Time: 0.050
+> time v,iso := IsIsomorphic(B5,A5:Isomorphism);    
+// more than 15 minutes

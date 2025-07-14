@@ -22,7 +22,6 @@ load("src/rank_one/rank_one_MnFp.sage")
 load("src/rank_one/rank_one_MnQ.sage")
 load("src/rank_one/rank_one_real.sage")
 load("src/rank_one/rank_one_norm_equation.sage")
-load("src/norm_equation/zero_divisor_norm_equation.sage")
 load("src/isomorphism/explicit_iso_matrix_ring.sage")
 load("src/isomorphism/explicit_iso_quat_alg.sage")
 
