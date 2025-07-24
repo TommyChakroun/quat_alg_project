@@ -166,12 +166,12 @@ def strictly_bigger_order(B, Zbasis_O, primes_disc=None, printers = False,lattic
     t0 = time.time()
     disc = discriminant(B, Zbasis_O)
     t1 = time.time()
-    factor_disc = factor(disc)
+    factor_disc = MyFactor(disc,primes=primes_disc)
     primes_disc = [p for p, _ in factor_disc]
     t2 = time.time()
 
     if printers :
-        print(f"[INFO] discriminant : {factor_disc}")
+        print(f"[INFO] discriminant :{disc}={factor_disc}")
         print(f"[INFO] list of primes divisor of the discriminant : {primes_disc}")
         print(f"[TIMING] Compute discriminant : {t1 - t0:.4f} s")
         print(f"[Timing] Factor the discriminant : {t2 - t1:.4f}s")
@@ -185,7 +185,7 @@ def strictly_bigger_order(B, Zbasis_O, primes_disc=None, printers = False,lattic
         if Zbasis_Gamma != "Maximal loc":
             return Zbasis_Gamma
 
-        #primes_disc.remove(p)
+        primes_disc.remove(p)
 
     return "Maximal"
 
@@ -260,16 +260,26 @@ def max_order_containing_order(B,Zbasis_O,primes_disc = None,parallel = False, p
     OUTPUT :
         -- Zbasis_Gamma -- a list f1,..,fN of element of B representing the lattice Gamma = Zf1⊕... ⊕ZfN which is a maximal order containing O 
     """
+
     
     disc = discriminant(B, Zbasis_O)
-    factor_disc = factor(disc)
-    primes_disc = [p for p, _ in factor_disc]
-
     if printers:
         print(" --- Start computing a maximal over order --- ")
         print()
-        print(f"starting discriminant  : {disc} = {factor_disc}")
+        print(f"starting discriminant  : {disc}")
         print()
+        print("start factoring the discriminant...")
+
+    t0 = time.time()
+    factor_disc = MyFactor(disc,primes=primes_disc)
+    primes_disc = [p for p, _ in factor_disc]
+    t1=time.time()
+
+    if printers:
+        print(f"done in {t1 - t0:.4f} s")
+        print(f"disc =  {factor_disc}")
+
+    
 
 
     if parallel:
@@ -398,7 +408,8 @@ def max_order_tensor_quat_alg(A,B,C = None,Zbasis_O1=None,Zbasis_O2=None,printer
             Zbasis_O.append(e_tensor_f)
 
 
-    Zbasis_Gamma = max_order_containing_order(C,Zbasis_O,printers=printers)
+    primes_disc = A.ramified_primes()+B.ramified_primes()
+    Zbasis_Gamma = max_order_containing_order(C,Zbasis_O,primes_disc = primes_disc,printers=printers)
 
     return Zbasis_Gamma
 

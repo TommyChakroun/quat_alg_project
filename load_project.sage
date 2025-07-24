@@ -33,7 +33,7 @@ load("tests/tests_iso/test_id_quat_alg.sage")
 load("tests/tests_iso/test_iso_matrix_ring.sage")
 load("tests/tests_iso/test_iso_quat_alg.sage")
 load("tests/tests_iso/test_normalize_quadratic.sage")
-load("tests/tests_iso/test_randomization.sage")
+load("tests/tests_equations/test_solving_quadratics.sage")
 # Maximal Order Tests
 load("tests/tests_max_order/test_diverse_max_orders.sage")
 load("tests/tests_max_order/test_given_max_order_in_quat_alg.sage")

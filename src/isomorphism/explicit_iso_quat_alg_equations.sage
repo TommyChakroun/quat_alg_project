@@ -115,7 +115,7 @@ def matrix_ring(A, e=None):
 
 
 
-def quadratic_complement(B, mu):
+def quaternionic_complement(B, mu):
     """
     Finds an element nu in B that anticommutes with a given pure quaternion mu.
 
@@ -133,24 +133,43 @@ def quadratic_complement(B, mu):
     if mu.reduced_trace() != 0:
         raise ValueError("Input element mu must be a pure quaternion.")
 
-    K, (i, j, k), (c, d) = B.base_ring(), B.gens(), B.invariants()
-    mu_coords = mu.coefficient_tuple()
-    m1, m2, m3 = mu_coords[1], mu_coords[2], mu_coords[3]
-
-    if c*m1 != 0:
-        n1, n2, n3 = -d*m2 / (c*m1), 1, 0
-    elif d*m2 != 0:
-        n1, n2, n3 = 1, -c*m1 / (d*m2), 0
-    elif c*d*m3 != 0:
-        n1, n2, n3 = 1, 0, c*m1 / (c*d*m3)
-    else:
-        return j
-
-    return n1*i + n2*j + n3*k
+    (i, j, k), (a, b) = B.gens(), B.invariants()
+    x0,x1,x2,x3 = mu.coefficient_tuple()
 
 
+    if x1 != 0:
+        v1 = (b*x2,-a*x1,0)
+        v2 = (b*x3,0,x1)
+    elif x2 != 0:
+        v1 = (b*x2,-a*x1,0)
+        v2 = (0,a*x3,x2)
+    elif x3!=0 :
+        v1 = (1,0,0)
+        v2 = (0,1,0)
+
+    M = Matrix(QQ,[v1,v2])
+    N = M.LLL()
+
+    return N[0][0]*i + N[0][1]*j + N[0][2]*k
 
 
+
+def complement_with_prime_norm(B,mu):
+    (i, j, k), (a, b) = B.gens(), B.invariants()
+    N = quaternionic_complement_basis(B,mu)
+
+    nu1 = N[0][0]*i + N[0][1]*j + N[0][2]*k
+    nu2 = N[1][0]*i + N[1][1]*j + N[1][2]*k
+
+    nb_ite = int(10000*log(max(abs(nu1.reduced_norm()),abs(nu2.reduced_norm()))))
+ 
+    for ite in range(nb_ite):
+        nu = randint(-50,50)*nu1+randint(-50,50)*nu2
+        gamma = abs(nu.reduced_norm())
+        if is_pseudoprime(gamma):
+            return nu
+
+    return nu1
 
 
 
@@ -165,20 +184,50 @@ def quadratic_complement(B, mu):
 ## is more efficient than solving a quadratic equation of dimension 3 over a quadratic numver field : a U^2 + bV^2+ c W^2=0
 
 
+def diagonal_qfsolve(a,factors = None):
+    """
+    Solves x^T G x = 0 for a diagonal integer matrix G = diag(a),
+    optimized by precomputing the factorization of the determinant of G.
+    INPUT :
+        -- a = [a1,..,an] -- a list of integers
+        -- factors = [F1,..,Fn] -- the list of their factorization if given
+    OUTPUT :
+        -- x1,..,xn -- a solution to x^T G x =0
+    """
+    if factors == None :
+        factors = [factor(abs(e)) for e in a]
+    
+    fact_det = product(f for f in factors)
+    combined_factors =dict(fact_det)
+
+    # Format the factors and matrix into PARI strings.
+    pari_F_str = f"[{'; '.join(f'{p},{e}' for p, e in sorted(combined_factors.items()))}]"
+
+    # Call PARI and return the raw result.
+    sol = pari(f"qfsolve([matdiagonal({a}), {pari_F_str}])")
+    try :
+        return [QQ(e) for e in sol]
+    except:
+        print("Pari was unable to solve the digonal quadratic :")
+        print(a)
+        print(f"sol : {sol}")
+
+
+
 def iso_quat_alg(A, B):
     """
     Finds an explicit isomorphism between two quaternion algebras A and B.
 
     ALGORITHM:
     1. Handle the case where A and B are matrix rings.
-    2. To embed A = (a,b | K) into B = (c,d | K), we first find an element
-       `mu` in B such that `mu^2 = a`. This is the image of `i_A`. This step
-       requires finding a rational point on the conic `c*Y^2 + d*Z^2 - c*d*W^2 + a = 0`.
+    2. To embed A = (alpha,beta | K) into B = (a,b | K), we first find an element
+       `mu` in B such that `mu^2 = alpha`. This is the image of `i_A`. This step
+       requires finding a rational point on the conic `a*Y^2 + b*Z^2 - a*b*W^2 + alpha = 0`.
     3. We then find an element `nu_0` in B that anticommutes with `mu`.
     4. We find the image of `j_A`, which will be of the form `j' = (x + y*mu)*nu_0`.
-       We solve for `x, y` such that `(j')^2 = b`. This reduces to solving the
-       norm equation `x^2 - a*y^2 = b / nu_0^2`, which is done by finding a point
-       on the conic `X^2 - a*Y^2 - (b/nu_0^2)*Z^2 = 0`.
+       We solve for `x, y` such that `(j')^2 = beta`. This reduces to solving the
+       norm equation `x^2 - alpha*y^2 = beta / nu_0^2`, which is done by finding a point
+       on the conic `X^2 - alpha*Y^2 - (beta/nu_0^2)*Z^2 = 0`.
     5. The isomorphism is then defined by `i_A -> mu` and `j_A -> j'`.
 
     INPUT:
@@ -190,40 +239,46 @@ def iso_quat_alg(A, B):
             - ``isom_map`` is a list of four elements in B which are the images
               of the basis elements 1, i, j, k of A.
     """
-    if A.base_ring() != B.base_ring():
-        raise ValueError("Algebras must be over the same base field.")
-    if not A.is_isomorphic(B):
-        return False, []
+    if A.base_ring()!=QQ or B.base_ring()!=QQ:
+        raise ValueError("Algebras must be over rational field")
+    ram_A = A.ramified_primes()
+    ram_B = B.ramified_primes()
+    if ram_A != ram_B:
+        return False,[]
+    if ram_A ==[]:
+        raise ValueError("A,B are split, use the other function")
 
-    K = A.base_ring()
-    a, b = A.invariants()
-    c, d = B.invariants()
+    alpha, beta = A.invariants()
+    a, b = B.invariants()
     i_A, j_A, k_A = A.gens()
     i_B, j_B, k_B = B.gens()
 
-    if A.is_matrix_ring():
-        # This case requires a more complex implementation of the inverse map
-        # from M_2(K) to B. We focus on the non-split case here.
-        print("Did'n implement for matrix ring case yet.")
-        return False, [] # Placeholder for matrix ring implementation
+    
+    # We will need all this factorization
+    Falpha = factor(abs(alpha))
+    Fbeta = factor(abs(beta))
+    Fa = factor(abs(a))
+    Fb = factor(abs(b))
 
 
-    # Step 2: Find mu in B such that mu^2 = a
-    # We have to solve c x^2+dy^2-cdz^2 = a
-    # we solve the homogenous  c x^2+dy^2-cdz^2 -a w^2
-    from sage.quadratic_forms.qfsolve import qfsolve
-    D = diagonal_matrix(QQ,[c,d,-c*d,-a])
-    sol = qfsolve(D)
+    # Step 2: Find mu in B such that mu^2 = alpha
+    # We have to solve a x^2+by^2-abz^2 = alpha
+    # we solve the homogenous  a x^2+by^2-abz^2 -alpha w^2
+    sol = diagonal_qfsolve([a,b,-a*b,-alpha],factors =[Fa,Fb,Fa*Fb,Falpha])
     mu = sol[0]/sol[3]*i_B+sol[1]/sol[3]*j_B+sol[2]/sol[3]*k_B
 
-
     # Step 3: Find an element nu that anticommutes with mu
-    nu = quadratic_complement(B, mu)
-    beta = -nu.reduced_norm()
+    nu0 = quaternionic_complement(B, mu)
+    gamma0 = -nu0.reduced_norm() 
+    nu = gamma0.denominator()*nu0
+    gamma = -nu.reduced_norm() 
 
-    # Step 3: Find j' = (x + y*mu)*nu_0 such that (j')^2 = b
-    D = diagonal_matrix(QQ,[1,-a,-b/beta])
-    sol2 = qfsolve(D)
+    # We will need this other factorization
+
+    Fgamma = factor(gamma)
+
+    # Step 4: Find j' = (x + y*mu)*nu_0 such that (j')^2 = beta
+    sol2 = diagonal_qfsolve([gamma,-alpha*gamma,-beta],factors = [Fgamma,Falpha*Fgamma,Fbeta])
     x = sol2[0] / sol2[2]
     y = sol2[1] / sol2[2]
 
@@ -237,9 +292,13 @@ def iso_quat_alg(A, B):
 
 
 
+
 #------------------------------------------------------------------------------------------
 #           GENERAL EXPLICIT ISOMORPHISM FOR QUATERNION ALGEBRAS
 #------------------------------------------------------------------------------------------
+
+
+
 
 
 
@@ -319,7 +378,7 @@ def iso_quat_alg_old(A, B):
     mu = numerator/denominator 
 
     # Step 3: Find an element nu that anticommutes with mu
-    nu = quadratic_complement(B, mu)
+    nu = quaternionic_complement(B, mu)
     beta = -nu.reduced_norm()
 
     # Step 3: Find j' = (x + y*mu)*nu_0 such that (j')^2 = b

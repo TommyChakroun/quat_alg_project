@@ -1,0 +1,307 @@
+sage: mean_times(65)
+Running benchmark for t = 65 bits (100 iterations)...
+/tmp/sage_7ty9tb_w/time_statisticsvaiftcuj.sage.py:65: RuntimeWarning: cypari2 leaked 1120856 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (65 bits): -30565268159166215582
+beta (65 bits): -26604749426617900190
+a (2 bits): -3
+b (112 bits): -4868999236773403920956317574675465
+gamma (576 bits): -229199826523327231165516962172849144145744795239721576779094143391183698853890332670083324989591874128818211351620842331180966551759608772197504059403358301524302391017646780
+/tmp/sage_7ty9tb_w/time_statisticsvaiftcuj.sage.py:65: RuntimeWarning: cypari2 leaked 752344 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (65 bits): -34918117033135832483
+beta (65 bits): -30506233088408915765
+a (8 bits): -227
+b (111 bits): -1837020498326644903762240506451865
+gamma (559 bits): -1379797207744711492914828418131688671437204803270816248714631030086293135137765903211988215127282053142114980153642215219792326841932402880688073084423578447779695029615
+/tmp/sage_7ty9tb_w/time_statisticsvaiftcuj.sage.py:65: RuntimeWarning: cypari2 leaked 1221336 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (65 bits): -29681463287902289027
+beta (65 bits): -32983930984496411782
+a (9 bits): -394
+b (129 bits): -489505668303516525742651833452886058057
+gamma (633 bits): -22303455856114721558617309868792509310541747408907962992715862987652869148158804292473979108689823868440108734152743554875836849562674143190356944202670700138551481415960562352050105276212254
+/tmp/sage_7ty9tb_w/time_statisticsvaiftcuj.sage.py:65: RuntimeWarning: cypari2 leaked 1201232 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (65 bits): -28201957150475748498
+beta (65 bits): -28591914898869695441
+a (7 bits): -106
+b (127 bits): -134391326471328715804785572108962199603
+gamma (629 bits): -2127343455177925686454292844453847232401062293309726476398715691746834598541096498477903507604752036352344157128925988358264054495844320277080805049771160341868276417664614396869615946971250
+/tmp/sage_7ty9tb_w/time_statisticsvaiftcuj.sage.py:65: RuntimeWarning: cypari2 leaked 937024 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (65 bits): -33854620979842680086
+beta (65 bits): -22026019801173959184
+a (5 bits): -23
+b (92 bits): -3758736767311958698883039789
+gamma (492 bits): -7450244151662014691479459604333631084132807262205234161091032162627533711126316195939549834843584406951467945699663504394233272121964073116506296775
+/tmp/sage_7ty9tb_w/time_statisticsvaiftcuj.sage.py:65: RuntimeWarning: cypari2 leaked 639896 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (65 bits): -33602631182375072971
+beta (65 bits): -28642101532237021658
+a (2 bits): -2
+b (91 bits): -1241096014108485889771163953
+gamma (430 bits): -2548504561801428161591403019513237120518473074249707392437126540672461818217547152372657685292741314180228632829262348216995905686
+/tmp/sage_7ty9tb_w/time_statisticsvaiftcuj.sage.py:65: RuntimeWarning: cypari2 leaked 650432 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (65 bits): -23856077142307983025
+beta (65 bits): -31263824878259643461
+a (6 bits): -42
+b (96 bits): -45780281940331079461522998683
+gamma (455 bits): -74162486378413415876451567197578832926557032655443741330333259059825678350856513140666125507414252359661472568509130340084201325323983650
+/tmp/sage_7ty9tb_w/time_statisticsvaiftcuj.sage.py:65: RuntimeWarning: cypari2 leaked 1167784 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (65 bits): -25531934581335814219
+beta (65 bits): -24754823396160364595
+a (8 bits): -179
+b (102 bits): -3053752805727851777507534833333
+gamma (531 bits): -4806462336195601091071314103590542903932381180881383316790759356616425908446407912496433236499648932378632175026291686806348505424697585868949893056898045706771
+--> Finished. Mean times: CoeffFact=0.0019s, GammaFact=1.1425s, Solve=0.0096s
+(0.0018678804347818873, 1.142481630434783, 0.009636586956520525)
+sage: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sage: coeff,gamma,solve = time_dictionaries([10,20,30,40,50,60,65,70,75,80,85,90,95,100])
+
+Starting full benchmark run...
+------------------------------------------------------------
+Running benchmark for t = 10 bits (100 iterations)...
+--> Finished. Mean times: CoeffFact=0.0005s, GammaFact=0.0002s, Solve=0.0036s
+------------------------------------------------------------
+Running benchmark for t = 20 bits (100 iterations)...
+--> Finished. Mean times: CoeffFact=0.0006s, GammaFact=0.0003s, Solve=0.0046s
+------------------------------------------------------------
+Running benchmark for t = 30 bits (100 iterations)...
+--> Finished. Mean times: CoeffFact=0.0006s, GammaFact=0.0007s, Solve=0.0058s
+------------------------------------------------------------
+Running benchmark for t = 40 bits (100 iterations)...
+--> Finished. Mean times: CoeffFact=0.0007s, GammaFact=0.0017s, Solve=0.0054s
+------------------------------------------------------------
+Running benchmark for t = 50 bits (100 iterations)...
+--> Finished. Mean times: CoeffFact=0.0009s, GammaFact=0.0029s, Solve=0.0057s
+------------------------------------------------------------
+Running benchmark for t = 60 bits (100 iterations)...
+--> Finished. Mean times: CoeffFact=0.0017s, GammaFact=0.0401s, Solve=0.0064s
+------------------------------------------------------------
+Running benchmark for t = 65 bits (100 iterations)...
+--> Finished. Mean times: CoeffFact=0.0025s, GammaFact=0.0564s, Solve=0.0064s
+------------------------------------------------------------
+Running benchmark for t = 70 bits (100 iterations)...
+--> Finished. Mean times: CoeffFact=0.0037s, GammaFact=0.1845s, Solve=0.0067s
+------------------------------------------------------------
+Running benchmark for t = 75 bits (100 iterations)...
+/tmp/sage_7ty9tb_w/time_statistics7e_v1ilz.sage.py:65: RuntimeWarning: cypari2 leaked 724224 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (7 bits): -93
+beta (133 bits): -8206022864178597556466298861635497133073
+a (75 bits): -34445176171834718542299
+b (75 bits): -26144309922184387041034
+gamma (333 bits): -9715746654118731196282576366704905307393730395226393025267449519478194524364796170061892914558154078
+--> Finished. Mean times: CoeffFact=0.0062s, GammaFact=0.3010s, Solve=0.0068s
+------------------------------------------------------------
+Running benchmark for t = 80 bits (100 iterations)...
+--> Finished. Mean times: CoeffFact=0.0063s, GammaFact=0.3766s, Solve=0.0071s
+------------------------------------------------------------
+Running benchmark for t = 85 bits (100 iterations)...
+/tmp/sage_7ty9tb_w/time_statistics7e_v1ilz.sage.py:65: RuntimeWarning: cypari2 leaked 2210024 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (10 bits): -562
+beta (155 bits): -38908065673212816184836864517919396064109355473
+a (85 bits): -27601631949649096788675877
+b (85 bits): -26474245535249947369257769
+gamma (396 bits): -114847300712260051778628811303936074414600640457231290838629412010611935177870106265821964664353746263222610307596836897
+/tmp/sage_7ty9tb_w/time_statistics7e_v1ilz.sage.py:65: RuntimeWarning: cypari2 leaked 203072 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (7 bits): -85
+beta (163 bits): -10390939347306948469038069985819321061911397603941
+a (85 bits): -25650545547258285379400798
+b (85 bits): -37268853334560746573744314
+gamma (413 bits): -10917629340394596111501702806347058872520014381456840764470555822780416167320897600498221937237780017880760693162567275345025
+/tmp/sage_7ty9tb_w/time_statistics7e_v1ilz.sage.py:65: RuntimeWarning: cypari2 leaked 5608216 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (1 bits): -1
+beta (133 bits): -9801110031150488476004436504758897788583
+a (85 bits): -37322446702418273633858404
+b (85 bits): -22322736025636701265236971
+gamma (341 bits): -3789788481414886822303375304627678807848783749426879361406714804090526712787273250365619273005819426752
+/tmp/sage_7ty9tb_w/time_statistics7e_v1ilz.sage.py:65: RuntimeWarning: cypari2 leaked 2403136 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (6 bits): -43
+beta (153 bits): -10964454816628650576577039886324297447359154369
+a (85 bits): -19884779088124956150549165
+b (85 bits): -30776356271194318280277059
+gamma (386 bits): -97832088066748754058164155254264824881818020251331836911946019454379138541209112140939606762226592732739562698687761
+--> Finished. Mean times: CoeffFact=0.0094s, GammaFact=0.3770s, Solve=0.0074s
+------------------------------------------------------------
+Running benchmark for t = 90 bits (100 iterations)...
+/tmp/sage_7ty9tb_w/time_statistics7e_v1ilz.sage.py:65: RuntimeWarning: cypari2 leaked 106368 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (4 bits): -13
+beta (171 bits): -2797639333678093976523118125010176963319213496052827
+a (90 bits): -928334379837836637495426076
+b (90 bits): -1109009099688174026275006636
+gamma (423 bits): -18728545413481317698465119466448842644376493211075877630444480367752662253615368305575685792701008326553271523584711379867022188
+/tmp/sage_7ty9tb_w/time_statistics7e_v1ilz.sage.py:65: RuntimeWarning: cypari2 leaked 5128552 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (8 bits): -133
+beta (131 bits): -1411214446236518118280612702569372823795
+a (90 bits): -835497271660588694271055620
+b (90 bits): -1154849003411013227469711487
+gamma (347 bits): -270405666501998863641188739645156355808167910992338472113934196838156282459941338612050864147613494420555
+/tmp/sage_7ty9tb_w/time_statistics7e_v1ilz.sage.py:65: RuntimeWarning: cypari2 leaked 108872 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (4 bits): -10
+beta (153 bits): -8133180465261107748510835013839843036121951229
+a (90 bits): -1026702479034828064306447575
+b (90 bits): -796252644763451415223105677
+gamma (394 bits): -23295933157799533202608192362654826085098735831457533359811589737178579748934126886835039816182674153066637014191103836
+--> Finished. Mean times: CoeffFact=0.0102s, GammaFact=0.5394s, Solve=0.0076s
+------------------------------------------------------------
+Running benchmark for t = 95 bits (100 iterations)...
+/tmp/sage_7ty9tb_w/time_statistics7e_v1ilz.sage.py:65: RuntimeWarning: cypari2 leaked 849608 bytes on the PARI stack
+  Fgamma = factor(gamma)
+Factorization timed out after 10 seconds. Algorithm information:
+alpha (3 bits): -7
+beta (148 bits): -226979834925121579176013085141304985497156133
+a (95 bits): -28780189831081917256577035421
+b (95 bits): -28992743489124947885982708395
+gamma (385 bits): -71227117964045687634479129956359305036126917480969827763797654458306428580449107742663282154893384107534695303199524
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Cell In[18], line 1
+----> 1 coeff,gamma,solve = time_dictionaries([Integer(10),Integer(20),Integer(30),Integer(40),Integer(50),Integer(60),Integer(65),Integer(70),Integer(75),Integer(80),Integer(85),Integer(90),Integer(95),Integer(100)])
+
+File /tmp/sage_7ty9tb_w/time_statistics7e_v1ilz.sage.py:168, in time_dictionaries(list_t)
+    164 dict_solve = {}
+    166 for t in list_t:
+    167     # Get the three mean times for the current bit length
+--> 168     m_coeff, m_gamma, m_solve = mean_times(t)
+    170     # Populate the dictionaries
+    171     dict_fact_coeff[t] = m_coeff
+
+File /tmp/sage_7ty9tb_w/time_statistics7e_v1ilz.sage.py:130, in mean_times(t, iterations)
+    127 times_solve = []
+    129 for _ in range(iterations):
+--> 130     OneRandomTime = one_random_time(t)
+    132     if OneRandomTime is not None:
+    133         t_coeff, t_gamma, t_solve,_,_,_,_,_ = OneRandomTime
+
+File /tmp/sage_7ty9tb_w/time_statistics7e_v1ilz.sage.py:105, in one_random_time(t)
+    102 A = QuaternionAlgebra(QQ, -a, -b)
+    103 B = QuaternionAlgebra(QQ,A.ramified_primes(),[_sage_const_1 /_sage_const_2 ])
+--> 105 return iso_quat_alg_timer(B, A)
+
+File /tmp/sage_7ty9tb_w/time_statistics7e_v1ilz.sage.py:42, in iso_quat_alg_timer(A, B)
+     38 time_fact_coeff = time_fact_coeff_end - time_fact_coeff_start
+     40 # --- Step 2: Find mu in B such that mu^2 = alpha ---
+     41 # This involves solving a norm equation on a conic.
+---> 42 sol = diagonal_qfsolve([a, b, -a * b, -alpha], factors=[Fa, Fb, Fa * Fb, Falpha])
+     43 mu = sol[_sage_const_0 ]/sol[_sage_const_3 ] * i_B + sol[_sage_const_1 ]/sol[_sage_const_3 ] * j_B + sol[_sage_const_2 ]/sol[_sage_const_3 ] * k_B
+     45 # --- Step 3: Find an element nu that anticommutes with mu ---
+
+File <string>:210, in diagonal_qfsolve(a, factors)
+
+File /usr/lib/python3.13/site-packages/cypari2/gen.pyx:406, in cypari2.gen.Gen.__iter__()
+    404     v = self.Vecrev()
+    405 elif is_scalar_t(t):
+--> 406     raise TypeError(f"PARI object of type {self.type()} is not iterable")
+    407 elif t == t_VECSMALL:
+    408     # Special case: items of type int
+
+TypeError: PARI object of type t_INT is not iterable
+sage: 
+
+
+
+
+
+
+
+
+
+
+
+
+sage: coeff
+{10: 0.0005326499999999613,
+ 20: 0.0005099799999999987,
+ 30: 0.0005408299999999144,
+ 40: 0.0006247900000001038,
+ 50: 0.0009616399999999104,
+ 60: 0.0016213199999999973,
+ 65: 0.0026252000000000207,
+ 70: 0.0065087899999995355,
+ 75: 0.0041342299999995195,
+ 80: 0.007687569999999084,
+ 85: 0.01758924242424493,  
+ 90: 0.023355955555558063}     
+sage: gamma
+{10: 0.00019212000000013774,
+ 20: 0.00023649000000006026,
+ 30: 0.000508420000000136,
+ 40: 0.001862520000000174,
+ 50: 0.011741500000000293,
+ 60: 0.029523099999999792,
+ 65: 0.1475480700000002,
+ 70: 0.1308528400000013,
+ 75: 0.30440104000000207,
+ 80: 0.4265830100000011,
+ 85: 0.6564694545454557,
+ 90: 0.6378343444444429}    # 10 times more than 10 second over 100 try
+sage: solve
+{10: 0.0035192799999999025,
+ 20: 0.004526799999999724,
+ 30: 0.0051664699999997765,
+ 40: 0.005411849999999774,
+ 50: 0.005778210000000037,
+ 60: 0.0064136400000005265,
+ 65: 0.006468860000000234,
+ 70: 0.006713649999999802,
+ 75: 0.006997489999997271,
+ 80: 0.007296380000001079,
+ 85: 0.0073013535353469924,
+ 90: 0.007637922222216452}   
+sage: 
+
+
+
+
+
+
+
+
+sage: x,y = mean_gamma(50),mean_gamma(50,LLL=False)
+sage: x,y
+(189.13, 237.07)
+
+sage: x,y = mean_gamma(80),mean_gamma(80,LLL=False)
+sage: x,y
+(306.44, 382.89)

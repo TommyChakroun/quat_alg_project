@@ -515,3 +515,66 @@ def kernel_Z_mod_map(C, phi,N):
     return basis_Ker
 
 
+
+
+# Factorization when given primes set
+
+from sage.structure.factorization import Factorization
+
+def MyFactor(N, primes=None):
+    """
+    Factors an integer N, including negative integers.
+    
+    If `primes` is None, returns the complete prime factorization.
+    If `primes` is a list, attempts to factor N using only those primes.
+    
+    Args:
+        N (Integer): The integer to factor.
+        primes (list, optional): A list of primes to use for factoring.
+
+    Returns:
+        Factorization: A SageMath Factorization object.
+        
+    Raises:
+        ValueError: If N=0, or if a prime list is given but N cannot be 
+                    fully factored using only those primes.
+    """
+    # Standard factor() handles all cases automatically
+    if primes is None:
+        return factor(N)
+    
+    # Custom factorization logic
+    else:
+        if N == 0:
+            raise ValueError("Factorization of 0 is not defined.")
+
+        # 1. Handle the sign and work with a positive number
+        unit = 1
+        if N < 0:
+            unit = -1
+            n_rem = -N 
+        else:
+            n_rem = N
+
+        factors_dict = {}
+        for p in primes:
+            if not is_prime(p):
+                continue
+            
+            exponent = 0
+            while n_rem % p == 0:
+                exponent += 1
+                n_rem //= p
+            
+            if exponent > 0:
+                factors_dict[p] = exponent
+        
+        # 2. Check if the absolute value was fully factored
+        if n_rem != 1:
+            raise ValueError("The integer cannot be factored with the given primes.")
+        
+        factor_list = sorted(list(factors_dict.items()))
+        
+        # 3. Construct the final object with the correct unit (-1 or 1)
+        return Factorization(factor_list, unit=unit)
+
