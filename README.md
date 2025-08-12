@@ -4,7 +4,7 @@ A SageMath implementation for working with quaternion algebras, including algori
 
 ## Project Structure
 
-src
+.
 ├── iso_isotropicsubspcae
 │   └── quadratic_equivalence.m
 ├── iso_solving_quadratics
@@ -29,6 +29,7 @@ src
     ├── identify_quaternion_algebra.sage
     ├── identify_standard_involution.sage
     └── normalize_quadratic.sage
+
 
 ## Requirements
 
