@@ -1,7 +1,7 @@
 load("utilities/utilities.sage")
 load("utilities/algebra_type.sage")
 load("src/quaternion_recognition/identify_quaternion_algebra.sage")
-load("src/isomorphism/explicit_iso_matrix_ring.sage")
+load("src/iso_splitting_algebra/explicit_iso_matrix_ring.sage")
 
 #------------------------------------------------------------------------------------------
 #

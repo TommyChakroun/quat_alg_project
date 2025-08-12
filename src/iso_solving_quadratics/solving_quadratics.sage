@@ -1,7 +1,7 @@
 # SageMath requires these external files for utility functions and type definitions.
 load("utilities/utilities.sage")
 load("utilities/algebra_type.sage")
-load("src/isomorphism/explicit_iso_matrix_ring.sage")
+load("src/iso_splitting_algebra/explicit_iso_matrix_ring.sage")
 
 #------------------------------------------------------------------------------------------
 #
@@ -37,9 +37,6 @@ load("src/isomorphism/explicit_iso_matrix_ring.sage")
 # 1. The conic is used to find a non-zero element e in A such e^2=0. This is solved over K.
 
 # This is why we sepparate the split case and the general case.
-
-
-
 
 
 
@@ -154,26 +151,6 @@ def quaternionic_complement(B, mu):
 
 
 
-def complement_with_prime_norm(B,mu):
-    (i, j, k), (a, b) = B.gens(), B.invariants()
-    N = quaternionic_complement_basis(B,mu)
-
-    nu1 = N[0][0]*i + N[0][1]*j + N[0][2]*k
-    nu2 = N[1][0]*i + N[1][1]*j + N[1][2]*k
-
-    nb_ite = int(10000*log(max(abs(nu1.reduced_norm()),abs(nu2.reduced_norm()))))
- 
-    for ite in range(nb_ite):
-        nu = randint(-50,50)*nu1+randint(-50,50)*nu2
-        gamma = abs(nu.reduced_norm())
-        if is_pseudoprime(gamma):
-            return nu
-
-    return nu1
-
-
-
-
 
 #------------------------------------------------------------------------------------------
 #           GENERAL EXPLICIT ISOMORPHISM FOR QUATERNION ALGEBRAS
@@ -279,112 +256,6 @@ def iso_quat_alg(A, B):
 
     # Step 4: Find j' = (x + y*mu)*nu_0 such that (j')^2 = beta
     sol2 = diagonal_qfsolve([gamma,-alpha*gamma,-beta],factors = [Fgamma,Falpha*Fgamma,Fbeta])
-    x = sol2[0] / sol2[2]
-    y = sol2[1] / sol2[2]
-
-    # Step 5: Construct the isomorphism map
-    isom_i = mu
-    isom_j = (x + y*mu) * nu
-    isom_map = [B.one(), isom_i, isom_j, isom_i * isom_j]
-
-    return True, isom_map
-
-
-
-
-
-#------------------------------------------------------------------------------------------
-#           GENERAL EXPLICIT ISOMORPHISM FOR QUATERNION ALGEBRAS
-#------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-def iso_quat_alg_old(A, B):
-    """
-    Finds an explicit isomorphism between two quaternion algebras A and B.
-
-    ALGORITHM:
-    1. Handle the case where A and B are matrix rings.
-    2. To embed A = (a,b | K) into B = (c,d | K), we first find an element
-       `mu` in B such that `mu^2 = a`. This is the image of `i_A`. This step
-       requires finding a rational point on the conic `c*Y^2 + d*Z^2 - c*d*W^2 + a = 0`.
-    3. We then find an element `nu_0` in B that anticommutes with `mu`.
-    4. We find the image of `j_A`, which will be of the form `j' = (x + y*mu)*nu_0`.
-       We solve for `x, y` such that `(j')^2 = b`. This reduces to solving the
-       norm equation `x^2 - a*y^2 = b / nu_0^2`, which is done by finding a point
-       on the conic `X^2 - a*Y^2 - (b/nu_0^2)*Z^2 = 0`.
-    5. The isomorphism is then defined by `i_A -> mu` and `j_A -> j'`.
-
-    INPUT:
-        - ``A``, ``B`` -- Two quaternion algebras over the same number field K.
-
-    OUTPUT:
-        - A tuple ``(is_isomorphic, isom_map)`` where:
-            - ``is_isomorphic`` is `True` if an isomorphism exists, `False` otherwise.
-            - ``isom_map`` is a list of four elements in B which are the images
-              of the basis elements 1, i, j, k of A.
-    """
-    if A.base_ring() != B.base_ring():
-        raise ValueError("Algebras must be over the same base field.")
-    if not A.is_isomorphic(B):
-        return False, []
-
-    K = A.base_ring()
-    a, b = A.invariants()
-    c, d = B.invariants()
-    i_A, j_A, k_A = A.gens()
-    i_B, j_B, k_B = B.gens()
-
-    if A.is_matrix_ring():
-        # This case requires a more complex implementation of the inverse map
-        # from M_2(K) to B. We focus on the non-split case here.
-        print("Did'n implement for matrix ring case yet.")
-        return False, [] # Placeholder for matrix ring implementation
-
-
-    # Step 2: Find mu in B such that mu^2 = a
-    x = K['x'].gen()
-    L = K.extension(x**2 - a, 't')
-
-    is_c_square, r = L(c).is_square(root=True)
-
-    if is_c_square:
-        if K.characteristic() == 2:
-            raise NotImplementedError("Special case for characteristic 2 not implemented.")
-        # Since c=r^2, we solve (U-rV)(U+rV) = d by setting up a
-        # simple linear system. This forces a solution where W=1.
-        U_prime = (L(d) + 1) / 2
-        V_prime = (1 - L(d)) / (2 * r)
-
-    else :
-        # General case: we solve the conic c*Y^2 + d*Z^2 - c*d*W^2 + a = 0
-        P_L, (U, V, W) = L['U, V, W'].objgens()
-        C = Conic(U**2 - c*V**2 - d*W**2)
-        has_sol_L, sol_L = C.has_rational_point(point=True)
-
-        U_prime = sol_L[0] / sol_L[2]
-        V_prime = sol_L[1] / sol_L[2]
-    
-    u1,u2 = U_prime.vector()
-    v1,v2 = V_prime.vector()
-
-    numerator = u1 + v1*i_B + j_B
-    denominator = u2 + v2*i_B 
-
-    mu = numerator/denominator 
-
-    # Step 3: Find an element nu that anticommutes with mu
-    nu = quaternionic_complement(B, mu)
-    beta = -nu.reduced_norm()
-
-    # Step 3: Find j' = (x + y*mu)*nu_0 such that (j')^2 = b
-    P2, (X, Y, Z) = K['X, Y, Z'].objgens()
-    C = Conic(X**2 - a*Y**2 - b/beta*Z**2)
-    has_sol, sol2 = C.has_rational_point(point=True)
     x = sol2[0] / sol2[2]
     y = sol2[1] / sol2[2]
 

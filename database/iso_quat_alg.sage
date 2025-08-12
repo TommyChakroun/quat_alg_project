@@ -1,4 +1,4 @@
-load("src/isomorphism/explicit_iso_quat_alg_equations.sage")
+load("src/iso_solving_quadratics/solving_quadratics.sage")
 
 
 

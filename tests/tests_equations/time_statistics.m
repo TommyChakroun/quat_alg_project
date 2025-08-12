@@ -191,6 +191,7 @@ function MeanTimeEquivalence(t)
         printf "all fact done.\n";
         res := Equivalence(S1,S2:FAC := fact);
 
+
         end_time := Cputime();
         time_taken := end_time - start_time;
 

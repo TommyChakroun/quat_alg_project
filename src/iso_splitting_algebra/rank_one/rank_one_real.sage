@@ -17,7 +17,7 @@
 
 load("utilities/utilities.sage")
 load("utilities/algebra_type.sage")
-load("src/isomorphism/explicit_iso_matrix_ring.sage")
+load("src/iso_splitting_algebra/explicit_iso_matrix_ring.sage")
 
 
 # =========================================================================================

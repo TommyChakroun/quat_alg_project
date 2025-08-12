@@ -1,4 +1,4 @@
-load("src/maximal_orders/maximal_orders_utilities.sage")
+load("src/iso_splitting_algebra/maximal_orders/maximal_orders_utilities.sage")
 load("database/generate_data_base.sage")
 
 #------------------------------------------------------------------------------------------

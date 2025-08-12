@@ -1,8 +1,8 @@
 load("utilities/utilities.sage")
 load("utilities/algebra_type.sage")
-load("src/maximal_orders/maximal_orders_utilities.sage")
-load("src/maximal_orders/find_maximal_orders.sage")
-load("src/rank_one/rank_one_MnFp.sage")
+load("src/iso_splitting_algebra/maximal_orders/maximal_orders_utilities.sage")
+load("src/iso_splitting_algebra/maximal_orders/find_maximal_orders.sage")
+load("src/iso_splitting_algebra/rank_one/rank_one_MnFp.sage")
 
 
 # =========================================================================================

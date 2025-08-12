@@ -1,6 +1,6 @@
 load("utilities/algebra_type.sage")
 load("utilities/utilities.sage")
-load("src/maximal_orders/maximal_orders_utilities.sage")
+load("src/iso_splitting_algebra/maximal_orders/maximal_orders_utilities.sage")
 
 
 #------------------------------------------------------------------------------------------

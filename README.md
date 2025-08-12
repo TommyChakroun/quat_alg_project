@@ -4,55 +4,15 @@ A SageMath implementation for working with quaternion algebras, including algori
 
 ## Project Structure
 
-```
-.
-├── benchmarks
-│   ├── iso_quat_alg
-│   │   ├── iso_quat_alg_0.txt
-│   │   ├── iso_quat_alg_1.txt
-│   │   ├── iso_quat_alg_2.txt
-│   │   ├── iso_quat_alg_3.txt
-│   │   ├── iso_quat_alg_4.txt
-│   │   ├── iso_quat_alg_5.txt
-│   │   ├── iso_quat_alg_6.txt
-│   │   ├── iso_quat_alg_7.txt
-│   │   ├── iso_quat_alg_8.txt
-│   │   ├── iso_quat_alg_9.txt
-│   │   └── iso_quat_alg_magma.txt
-│   └── maximal_order
-│       ├── maximal_order_tensor_Bp_inf.txt
-│       ├── max_order_from_inseparable.txt
-│       ├── sage_vs_magma_may_29.txt
-│       ├── sage_vs_magma_may_31.txt
-│       ├── standard_test_M4Q_june_1.txt
-│       ├── standard_test_M4Q_june_2.txt
-│       ├── standard_test_M4Q_june_3.txt
-│       ├── standard_test_M4Q_may_28.txt
-│       ├── standard_test_M4Q_may_30.txt
-│       ├── standard_test_M4Q_may_31.txt
-│       └── starting_order_M4Q.txt
-├── database
-│   ├── db_iso_matrix_ring.txt
-│   ├── db_iso_quat_alg.txt
-│   ├── generate_data_base.sage
-│   └── read_data_base.txt
-├── docs
-│   ├── report.pdf
-│   └── sage_bugs
-│       └── bug_central_idp_sag.txt
-├── examples
-│   └── examples.txt
-├── global_variables.sage
-├── load_project.sage
-├── README.md
-├── src
-│   ├── count_matrices_MnFp
-│   │   └── nb_irreducible_matrices_MnFp.sage
-│   ├── isomorphism
-│   │   ├── explicit_iso_matrix_ring.sage
-│   │   ├── explicit_iso_quat_alg_equations.sage
-│   │   ├── explicit_iso_quat_alg_magma.m
-│   │   └── explicit_iso_quat_alg.sage
+src
+├── iso_isotropicsubspcae
+│   └── quadratic_equivalence.m
+├── iso_solving_quadratics
+│   ├── solving_quadratics.m
+│   └── solving_quadratics.sage
+├── iso_splitting_algebra
+│   ├── explicit_iso_matrix_ring.sage
+│   ├── explicit_iso_quat_alg.sage
 │   ├── maximal_orders
 │   │   ├── find_maximal_orders.sage
 │   │   └── maximal_orders_utilities.sage
@@ -61,41 +21,14 @@ A SageMath implementation for working with quaternion algebras, including algori
 │   │   ├── minimal_ideals_from_magma.sage
 │   │   ├── minimal_ideals_from_sage.sage
 │   │   └── minimal_ideals_manually.sage
-│   ├── quaternion_recognition
-│   │   ├── identify_quaternion_algebra.sage
-│   │   ├── identify_standard_involution.sage
-│   │   └── normalize_quadratic.sage
 │   └── rank_one
 │       ├── rank_one_MnFp.sage
 │       ├── rank_one_MnQ.sage
-│       ├── rank_one_norm_equation.sage
 │       └── rank_one_real.sage
-├── tests
-│   ├── test_formal
-│   │   └── formal_expression.sage
-│   ├── tests_equations
-│   │   ├── test_factorization.m
-│   │   └── test_solving_quadratics.sage
-│   ├── tests_iso
-│   │   ├── test_id_quat_alg.sage
-│   │   ├── test_iso_matrix_ring.sage
-│   │   ├── test_iso_quat_alg.sage
-│   │   ├── test_normalize_quadratic.sage
-│   │   └── test_randomization.sage
-│   ├── tests_magma
-│   │   └── norm_equation.m
-│   ├── tests_max_order
-│   │   ├── test_central_idempotents.sage
-│   │   ├── test_diverse_max_orders.sage
-│   │   ├── test_given_max_order_in_quat_alg.sage
-│   │   └── test_sage_vs_magma.sage
-│   └── tests_rank_one
-│       ├── test_rank_one_MnZ.sage
-│       └── variables.sage
-└── utilities
-    ├── algebra_type.sage
-    └── utilities.sage
-```
+└── quaternion_recognition
+    ├── identify_quaternion_algebra.sage
+    ├── identify_standard_involution.sage
+    └── normalize_quadratic.sage
 
 ## Requirements
 
